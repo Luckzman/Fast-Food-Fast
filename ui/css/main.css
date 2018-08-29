@@ -1,0 +1,19 @@
+body{
+    /* font-family: 'M PLUS Rounded 1c', sans-serif; */
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+header{
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 10px 20px;
+}
+header img{
+    height: 20px;
+}
+
+header nav a{
+    color: #222;
+    text-transform: uppercase;
+    line-height: 25px;
+    font-weight: 500
+}
