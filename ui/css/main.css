@@ -9,11 +9,72 @@ header{
 }
 header img{
     height: 20px;
+    margin-bottom: 5px;
+}
+
+header nav ul{
+    display: flex;
+    justify-content: center
 }
 
 header nav a{
     color: #222;
     text-transform: uppercase;
     line-height: 25px;
-    font-weight: 500
+    font-weight: 500;
+    margin: 0 10px;
+}
+
+/* ShowCase Section */
+.showcase{
+    height: 60vh;
+    background-image: url('./../images/image-12.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.showcase .dark-overlay{
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 60vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.showcase .showcase-ad{
+    width: 80%;
+    text-align: center;
+}
+.showcase h1{
+    font-family: fantasy;
+    text-transform: uppercase;
+    font-size: 3.5rem;
+    color: #eee;
+    line-height: 4rem;
+}
+.showcase p{
+    color: #eee;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    padding: 10px 0;
+}
+.showcase-input{
+    margin-top: 20px;
+}
+.showcase-input input{
+    border: none;
+    background-color: transparent;
+    color: #eee;
+    font-size: 1.2rem;
+    border-bottom: 1px solid #ccc;
+}
+.showcase-input button{
+    background-color: #00be29;
+    color: #eee;
+    padding: 5px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10px;
+
 }
