@@ -128,6 +128,7 @@ header nav a{
     border-radius: 20px 20px 0 0;
 }
 .top-order .card-content{
+    width: 90%;
     padding: 10px;
     text-align: center;
 }
@@ -138,6 +139,9 @@ header nav a{
 }
 .top-order .star-rating{
     margin-top: 20px;
+}
+.top-order .card-content p{
+    line-height: 1.5rem;
 }
 
 
@@ -165,7 +169,7 @@ header nav a{
 .order-steps .order-steps-img{
     width: 150px;
     height: 150px;
-    margin: 20px auto 100px;
+    margin: 40px auto 80px;
 }
 .order-steps img{
     width:100%;
@@ -197,4 +201,58 @@ header nav a{
 .order-steps p{
     font-size: 1.7rem;
     line-height: 2.2rem;
+}
+
+
+
+/* REVIEWS SECTION */
+.reviews{
+    height: 80vh;
+    background-image: url('./../images/image-4.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.reviews .dark-overlay{
+    height: 80vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+.reviews h1{
+    text-transform: uppercase;
+    text-align: center;
+    color: #ddd;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2.5rem;
+    font-weight: 700;
+    padding: 70px 0;
+}
+.reviews .reviews-msg{
+    max-width: 95%;
+    margin: 10px auto;
+    text-align: center;
+    color: #eee;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    font-style: italic;
+}
+.reviews .reviews-img{
+    width: 100px;
+    height: 100px;
+    margin: 20px auto 20px;
+}
+.reviews img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 100%;
+}
+.reviews .container > p{
+    color: #fca400;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.reviews .container > p span{
+    color: #02d32f;
 }
