@@ -28,7 +28,7 @@ header nav a{
 
 /* SHOWCASE SECTION */
 .showcase{
-    height: 60vh;
+    height: 90vh;
     background-image: url('./../images/image-12.jpg');
     background-position: center;
     background-size: cover;
@@ -36,8 +36,11 @@ header nav a{
 }
 .showcase .dark-overlay{
     background-color: rgba(0, 0, 0, 0.6);
-    height: 60vh;
+    height: 90vh;
     width: 100%;
+}
+.showcase .showcase-container{
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,6 +48,7 @@ header nav a{
 .showcase .showcase-ad{
     width: 80%;
     text-align: center;
+    margin:auto;
 }
 .showcase h1{
     font-family: fantasy;
@@ -218,6 +222,12 @@ header nav a{
     width: 100%;
     background-color: rgba(0, 0, 0, 0.6);
 }
+.reviews .reviews-container{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .reviews h1{
     text-transform: uppercase;
     text-align: center;
@@ -225,7 +235,7 @@ header nav a{
     font-family: 'Courier New', Courier, monospace;
     font-size: 2.5rem;
     font-weight: 700;
-    padding: 70px 0;
+    padding: 40px 0 50px;
 }
 .reviews .reviews-msg{
     max-width: 95%;
@@ -255,4 +265,19 @@ header nav a{
 }
 .reviews .container > p span{
     color: #02d32f;
+}
+
+
+
+/* FOOTER SECTION */
+footer .footer-content{
+    background-color: #111;
+    color: #ddd;
+    text-align: center;
+    font-size: 0.9rem;
+    line-height: 2rem;
+    padding: 5px;
+}
+footer span{
+    padding-left: 10px;
 }
