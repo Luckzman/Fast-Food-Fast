@@ -1,7 +1,9 @@
 body{
-    /* font-family: 'M PLUS Rounded 1c', sans-serif; */
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
 }
+
+
+/* HEADER SECTION */
 header{
     background-color: #f1f1f1;
     text-align: center;
@@ -11,12 +13,10 @@ header img{
     height: 20px;
     margin-bottom: 5px;
 }
-
 header nav ul{
     display: flex;
     justify-content: center
 }
-
 header nav a{
     color: #222;
     text-transform: uppercase;
@@ -25,7 +25,8 @@ header nav a{
     margin: 0 10px;
 }
 
-/* ShowCase Section */
+
+/* SHOWCASE SECTION */
 .showcase{
     height: 60vh;
     background-image: url('./../images/image-12.jpg');
@@ -40,7 +41,6 @@ header nav a{
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 .showcase .showcase-ad{
     width: 80%;
@@ -78,13 +78,15 @@ header nav a{
     margin-left: 10px;
 }
 
-/* Popular Order Section */
-.popular-order{
+
+
+/* POPULAR ORDER SECTION */
+.top-order{
     /* background: #4169e1; */
     background: cornflowerblue;
     padding: 50px 0 20px;
 }
-.popular-order h1{
+.top-order h1{
     font-size: 2.5rem;
     text-align: center;
     text-transform: uppercase;
@@ -93,20 +95,19 @@ header nav a{
     font-weight: 700;
     color: #eee;
 }
-.popular-order p{
+.top-order p{
     font-size: 1.1rem;
     text-align: center;
     color: #222;
     margin: 10px 0;
-
 }
-.popular-order .order-row{
+.top-order .order-row{
     display: flex;
     flex-direction: column;
     margin-top: 30px;
 }
-.popular-order .order-card{
-    width: 300px;
+.top-order .order-card{
+    max-width: 300px;
     background-color: #ccc;
     border-radius: 20px;
     flex: 1;
@@ -116,27 +117,84 @@ header nav a{
     justify-content: center;
     margin: 20px auto;
 }
-.popular-order.order-img{
+.top-order.order-img{
     max-width: 300px;
     max-height: 300px;
 }
-.popular-order .order-card img{
+.top-order .order-card img{
     width:100%;
     height:300px;
-    max-height:100%;
     object-fit: cover;
     border-radius: 20px 20px 0 0;
-    background: cover center no-repeat;
 }
-.popular-order .card-content{
+.top-order .card-content{
     padding: 10px;
     text-align: center;
 }
-.popular-order .card-content h3{
+.top-order .card-content h3{
     font-size: 1.5rem;
     text-transform: uppercase;
     padding: 10px 0;
 }
-.popular-order .star-rating{
+.top-order .star-rating{
     margin-top: 20px;
+}
+
+
+/* HOW TO ORDER SECTION */
+.order-steps{
+    /* background-color: #f1f1f1; */
+    padding: 50px 0;
+}
+.order-steps h1{
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    font-family: 'Courier New', Courier, monospace;
+    color: #333;
+    margin: 50px 0 50px;
+}
+.order-steps .order-steps-card{
+    max-width: 300px;
+    text-align: center;
+    margin: 0 auto;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc
+}
+.order-steps .order-steps-img{
+    width: 150px;
+    height: 150px;
+    margin: 20px auto 100px;
+}
+.order-steps img{
+    width:100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 100%;
+    border: 1px solid #ccc;
+    margin: 20px 0;
+}
+.order-steps .order-steps-count{
+    height: 25px;
+    max-width: 25px;
+    display: block;
+    margin:20px auto;
+    padding: 10px;
+    border-radius: 100%;
+    background-color: #ff1024;
+    color:#fff;
+}
+.order-steps span{
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+.order-steps .order-steps-msg{
+    max-width: 200px;
+    text-align: center;
+    margin: 20px auto 50px;
+}
+.order-steps p{
+    font-size: 1.7rem;
+    line-height: 2.2rem;
 }
