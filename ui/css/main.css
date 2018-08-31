@@ -227,7 +227,7 @@ header nav a{
 }
 
 /* media query of medium and large screen */
-@media only screen and (min-width: 740px){
+@media only screen and (min-width: 760px){
     .order-steps .order-row{
         display: flex;
         flex-direction: row;

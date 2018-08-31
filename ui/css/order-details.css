@@ -46,7 +46,7 @@ main{
     line-height: 2.5rem;
 }
 .order-content .order-input{
-    margin: 0 auto;
+    margin: 0 ;
     text-align: center
 }
 .order-content input{
@@ -59,8 +59,6 @@ main{
 .order-content input[type=number]::-webkit-inner-spin-button, 
 .order-content input[type=number]:focus::-webkit-inner-spin-button{
     opacity: 1;
-    -moz-appearance: spinner-upbutton;
-    -webkit-appearance: scrollbarthumb-vertical;
     width: 20px;
     height: 30px;   
 }
@@ -107,15 +105,23 @@ input:checked + label {
     background-color: #f1f1f1;
     z-index: 99;
 }
-
 .review-img{
     max-width:100px;
     max-height: 100px;
     border-radius: 100%;
     margin: 20px auto;
 }
-.review-img + p{
+.review-info{
+    text-align: center;
+    margin: 0 auto;
+}
+.review-info > p{
+    font-size: 1rem;
+    font-weight: 500;
+}
+.review-info > p:first-child{
     font-size: 1.1rem;
+    font-weight: 600;
 }
 .review-img > img {
     width: 100%;
@@ -127,5 +133,57 @@ input:checked + label {
 #tab2:checked ~ #content2 {
     display: block;
 }
+
+/* Implement Responsive Design Here! */
+@media only screen and (min-width: 760px){
+    .order-row{
+        display: flex;
+    }
+    .order-img{
+        flex: 1;
+        margin-right: 20px;
+    }
+    .order-content{
+        flex: 1;
+        text-align: left;
+        margin-left: 20px;
+    }
+    .order-content > div{
+        max-width: 80%;
+        padding: 10px 0;
+    }
+    .order-content input{
+        width: 50%;
+        height: 40px;
+        font-size: 1.5rem;
+        padding-left: 10px;
+    }
+    .order-content input[type=number]::-webkit-inner-spin-button, 
+    .order-content input[type=number]:focus::-webkit-inner-spin-button{
+    width: 40px;
+    height: 40px;   
+    }
+    .order-content .order-input > button{
+        background-color: #009700;
+        color: #fff;
+        padding: 0 10px;
+        margin-left: 10px;
+        border: none;
+        font-size: 1.2rem;
+    }
+    .flex-row{
+        display: flex;
+    }
+    .review-img{
+        margin: 20px 30px 20px 0;
+    }
+    .review-info{
+        max-width: 90%;
+        flex: 1;
+        text-align: left;
+        margin: 0 auto;
+    }
+}
+
 
   
