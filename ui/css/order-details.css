@@ -160,7 +160,6 @@ input:checked + label {
     }
     .order-content input[type=number]::-webkit-inner-spin-button, 
     .order-content input[type=number]:focus::-webkit-inner-spin-button{
-    width: 40px;
     height: 40px;   
     }
     .order-content .order-input > button{
