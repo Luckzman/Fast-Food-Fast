@@ -3,6 +3,7 @@
     margin:  0 auto;
 }
 table{
+    width: 100%;
     text-align: left;
     margin: 0 auto;
     border: 1px solid #ccc;
@@ -13,6 +14,7 @@ th{
     color: #f1f1f1;
     font-weight: 600;
     line-height: 1.5rem;
+    text-transform: uppercase;
 }
 td, th{
     padding: 10px 20px;
@@ -45,4 +47,24 @@ img{
 }
 .red{
     color: #cc0000;
+}
+.order-calc{
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    text-transform: uppercase;
+}
+.order-calc tr:nth-child(2){
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+.order-checkout{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+button{
+    padding: 5px 10px;
+    margin: 10px 0 30px;
 }
