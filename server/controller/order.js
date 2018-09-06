@@ -39,8 +39,19 @@ const order = {
     });
   },
   updateOrder(req, res) {
-    res.status(200).json({
-      message: 'update order request successful',
+    const orderId = parseInt(req.params.id, 10);
+    for (let i = 0; i < model.length; i += 1) {
+      if (orderId === model[i].id) {
+        model[i].status = req.body.status;
+        return res.status(201).json({
+          success: true,
+          message: 'update order request successful',
+          data: model[i],
+        });
+      }
+    }
+    return res.status(400).json({
+      message: 'update order request not successful',
     });
   },
 };
