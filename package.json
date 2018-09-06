@@ -1,0 +1,38 @@
+{
+  "name": "fast-food-fast",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "startDev": "nodemon --exec babel-node -- index",
+    "babel-node": "babel-node --presets=env",
+    "start": "babel-node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Luckzman/Fast-Food-Fast.git"
+  },
+  "keywords": [],
+  "author": "Oniovosa Lucky Omokarho",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Luckzman/Fast-Food-Fast/issues"
+  },
+  "homepage": "https://github.com/Luckzman/Fast-Food-Fast#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.18.4"
+  }
+}
