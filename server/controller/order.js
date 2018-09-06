@@ -8,8 +8,17 @@ const order = {
     });
   },
   getOrderItem(req, res) {
-    res.status(200).json({
-      message: 'get a order request item successful',
+    const orderId = parseInt(req.params.id, 10);
+    for (let i = 0; i < model.length; i += 1) {
+      if (orderId === model[i].id) {
+        return res.status(200).json({
+          message: 'get a order request item successful',
+          data: model[i],
+        });
+      }
+    }
+    return res.status(404).json({
+      message: 'order id not correct',
     });
   },
   createOrder(req, res) {
