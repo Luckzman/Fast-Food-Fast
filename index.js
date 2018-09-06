@@ -1,8 +1,7 @@
- import app from './server/index';
-//const app = require('./server/index')
+import app from './server/index';
 
 const PORT = 3000 || process.env.PORT;
 
-app.listen(PORT, ()=>{
-    console.log(`server listening on port ${PORT}`)
+app.listen(PORT, () => {
+  console.log(`server listening on port ${PORT}`);
 });
