@@ -42,9 +42,9 @@ Ride-My-Way UI is hosted on gh-pages while the app is hosted on Heroku
 Endpoint | Functionality
 -------- | -------------
 GET  /orders | Get all the orders
-GET /order/:id | Fetch a specific order
+GET /orders/:id | Fetch a specific order
 POST /orders | Place a new order
-PUT /orders/:id/request | Update the status of an order
+PUT /orders/:id | Update the status of an order
 
 ## How to use
 ### Prerequisite
