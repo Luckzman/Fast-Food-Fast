@@ -34,7 +34,8 @@ const order = {
       status: 'delivered',
     };
     model.push(newOrder);
-    res.status(200).json({
+    res.status(201).json({
+      success: true,
       message: 'create order request successful',
     });
   },

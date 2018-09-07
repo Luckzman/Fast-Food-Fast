@@ -1,7 +1,9 @@
 {
     "extends": "airbnb",
     "rules": {
-        "linebreak-style": "off",
-        "import/no-extraneous-dependencies": "off"
+        "linebreak-style": "off"
+    },
+    "env": {
+        "mocha": true
     }
 }
