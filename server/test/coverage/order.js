@@ -16,13 +16,24 @@ const newOrder = {
   sub_total: '6000',
   status: 'pending',
 };
-describe('/POST', () => {
-  it('it should create new post', (done) => {
+describe('/CREATE NEW ORDER', () => {
+  it('it should create new order', (done) => {
     chai.request(app)
       .post('/api/v1/order')
       .send(newOrder)
       .end((err, res) => {
         res.should.have.status(201);
+        res.body.should.have.property('success').equals(true);
+        done();
+      });
+  });
+});
+describe('/GET ALL ORDERS', () => {
+  it('it should be able to get all orders', (done) => {
+    chai.request(app)
+      .get('/api/v1/order')
+      .end((err, res) => {
+        res.should.have.status(200);
         res.body.should.have.property('success').equals(true);
         done();
       });

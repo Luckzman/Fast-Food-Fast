@@ -3,6 +3,7 @@ import model from '../model/order';
 const order = {
   getAllOrder(req, res) {
     res.status(200).json({
+      success: true,
       message: 'get all order request successful',
       data: model,
     });
