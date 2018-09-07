@@ -1,7 +1,7 @@
 {
   "name": "fast-food-fast",
   "version": "1.0.0",
-  "description": "",
+  "description": "Fast-Food-Fast​ is a food delivery service app for a restaurant.",
   "main": "index.js",
   "scripts": {
     "startDev": "nodemon --exec babel-node -- index",
@@ -9,7 +9,7 @@
     "start": "babel-node index",
     "test": "nyc mocha --require babel-register ./server/**/**/order.js --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "coveralls": "npm test && nyc report --reporter=html"
+    "coveralls": "npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
