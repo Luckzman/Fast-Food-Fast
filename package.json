@@ -7,7 +7,9 @@
     "startDev": "nodemon --exec babel-node -- index",
     "babel-node": "babel-node --presets=env",
     "start": "babel-node index",
-    "test": "mocha --require babel-register ./server/**/**/order.js --exit"
+    "test": "nyc mocha --require babel-register ./server/**/**/order.js --exit",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "npm test && nyc report --reporter=html"
   },
   "repository": {
     "type": "git",
@@ -31,12 +33,14 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
+    "coveralls": "^3.0.2",
     "eslint": "^5.5.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
     "mocha": "^5.2.0",
-    "nodemon": "^1.18.4"
+    "nodemon": "^1.18.4",
+    "nyc": "^13.0.1"
   }
 }
