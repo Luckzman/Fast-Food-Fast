@@ -39,3 +39,45 @@ describe('/GET ALL ORDERS', () => {
       });
   });
 });
+describe('/GET SINGLE ORDER', () => {
+  it('it should be able to get an order by its id', (done) => {
+    chai.request(app)
+      .get('/api/v1/order/1')
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('success').equals(true);
+        done();
+      });
+  });
+  it('it should not order if id does not exist', (done) => {
+    chai.request(app)
+      .get('/api/v1/order/5')
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('success').equals(false);
+        done();
+      });
+  });
+});
+describe('/UPDATE ORDER STATUS', () => {
+  it('it should be able to update an order by its id', (done) => {
+    chai.request(app)
+      .put('/api/v1/order/1')
+      .send({ status: 'delivered' })
+      .end((err, res) => {
+        res.should.have.status(201);
+        res.body.should.have.property('success').equals(true);
+        done();
+      });
+  });
+  it('it should not update order if id does not exist', (done) => {
+    chai.request(app)
+      .get('/api/v1/order/5')
+      .send({ status: 'delivered' })
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('success').equals(false);
+        done();
+      });
+  });
+});

@@ -13,12 +13,14 @@ const order = {
     for (let i = 0; i < model.length; i += 1) {
       if (orderId === model[i].id) {
         return res.status(200).json({
+          success: true,
           message: 'get a order request item successful',
           data: model[i],
         });
       }
     }
     return res.status(404).json({
+      success: false,
       message: 'order id not correct',
     });
   },
