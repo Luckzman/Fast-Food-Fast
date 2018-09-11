@@ -28,11 +28,12 @@ header div > div{
     padding: 10px;
 }
 header div > div > a{
+    position: relative;
     line-height: 2rem;
     font-size: 1.5rem;
     font-weight: 700;
     text-shadow: 2px 2px 2px #22a800;
-    color: #dbdbdb; 
+    color: rgb(255, 255, 255); 
 }
 header nav a{
     text-transform: capitalize;
@@ -328,7 +329,10 @@ footer span{
         box-shadow:none;
     }
     header div > div > a{
-        line-height: 2.5rem; 
+        line-height: 2.5rem;
+    }
+    header div > div > a {
+        line-height: 2.5rem;
     }
     header a{
         position: relative;
