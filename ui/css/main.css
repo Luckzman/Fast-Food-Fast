@@ -5,24 +5,42 @@ body{
 
 /* HEADER SECTION */
 header{
-    background-color: #f1f1f1;
+    background-color: #333333;
     text-align: center;
-    padding: 10px 20px;
-}
-header img{
-    height: 20px;
-    margin-bottom: 5px;
+    padding: 10px;
 }
 header nav ul{
     display: flex;
     justify-content: center
 }
+header nav li{
+    padding: 5px;
+    cursor: pointer;
+}
+header nav a:last-child{
+    background-color: #008000;
+    border-radius: 10px;
+    margin-left: 5px;
+    padding: 0 5px;
+    box-shadow:1px 1px #ccc;
+}
+header div > div{
+    padding: 10px;
+}
+header div > div > a{
+    position: relative;
+    line-height: 2rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 2px #22a800;
+    color: rgb(255, 255, 255); 
+}
 header nav a{
-    color: #222;
-    text-transform: uppercase;
-    line-height: 25px;
+    text-transform: capitalize;
+    color: #f1f1f1;
+    line-height: 2.5rem;
     font-weight: 500;
-    margin: 0 10px;
+    font-size: 1.1rem;
 }
 
 
@@ -87,7 +105,6 @@ header nav a{
 
 /* POPULAR ORDER SECTION */
 .top-order{
-    /* background: #4169e1; */
     background: #6495ed;
     padding: 50px 0 20px;
 }
@@ -149,27 +166,13 @@ header nav a{
     line-height: 1.5rem;
 }
 
-/* Medium and large screen responsive */
-@media only screen and (min-width: 740px){
-    .top-order .order-row{
-        flex-direction: row;
-        justify-content: space-between;
-        flex-wrap: wrap;
-    }
-    .top-order .order-card{
-        flex-basis: 30%;
-    }
-    .top-order.order-img{
-        flex:1;
-    }
-    .top-order .card-content{
-        flex:1;
-    }
-}
+
 
 /* HOW TO ORDER SECTION */
 .order-steps{
     padding: 50px 0;
+    text-align: center;
+    margin: 0 auto;
 }
 .order-steps h1{
     text-transform: uppercase;
@@ -184,8 +187,9 @@ header nav a{
     max-width: 300px;
     text-align: center;
     margin: 0 auto;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+    background-color:#d4d4d4;
+    border-top: 3px solid #979797;
+    border-bottom: 3px solid #979797;
 }
 .order-steps .order-steps-img{
     width: 150px;
@@ -226,19 +230,6 @@ header nav a{
     line-height: 2.2rem;
 }
 
-/* media query of medium and large screen */
-@media only screen and (min-width: 760px){
-    .order-steps .order-row{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        flex-wrap: wrap;
-    }
-    .order-steps .order-steps-card{
-        flex-basis: 30%;
-        background-color:#f1f1f1;
-    }
-}
 
 
 /* REVIEWS SECTION */
@@ -315,4 +306,85 @@ footer .footer-content{
 }
 footer span{
     padding-left: 10px;
+}
+
+
+
+/* Medium and large screen responsive */
+@media only screen and (min-width: 740px){
+    header{
+        padding: 0px;
+    }
+    header > div{
+        display: flex;
+        justify-content: space-between;
+    }
+    header nav li{
+        padding: 10px;
+    }
+    header nav a:last-child{
+        background-color: rgba(2, 194, 2, 0.6);
+        border-radius: 0;
+        margin-left: 0;
+        box-shadow:none;
+    }
+    header div > div > a{
+        line-height: 2.5rem;
+    }
+    header div > div > a {
+        line-height: 2.5rem;
+    }
+    header a{
+        position: relative;
+        padding: 0 10px;
+    }
+    header nav a:before,
+    header nav a:after{
+        position: absolute;
+        content: "";
+        background-color: rgb(0, 114, 34);
+        width: 100%;
+        height: 0px;
+        left: 0px;
+        opacity: 0.8;
+        transition: all 0.5s;
+    }
+    header nav a:before{
+        top: 0px;
+    }
+    header nav a:after{
+        bottom: 0px;
+    }
+    header nav a:hover:before,
+    header nav a:hover:after{
+        height: 100%;
+        opacity: 0.6;
+    }
+    .top-order .order-row{
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .top-order .order-card{
+        flex-basis: 30%;
+    }
+    .top-order.order-img{
+        flex:1;
+    }
+    .top-order .card-content{
+        flex:1;
+    }
+    .order-steps,
+    .top-order{
+        padding: 50px 50px;
+    }
+    .order-steps .order-row{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .order-steps .order-steps-card{
+        flex-basis: 30%;
+    }
 }

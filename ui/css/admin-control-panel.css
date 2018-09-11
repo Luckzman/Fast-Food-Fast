@@ -13,13 +13,13 @@ th{
     font-size: 1.2rem;
     text-transform: uppercase;
 }
-td{
-    padding: 10px;
-}
-
 tr:nth-child(even){
     background-color: #ccc;
 }
+td{
+    padding: 10px;
+}
+td:first-child,
 td:nth-child(6),
 th:nth-child(6),
 td:last-child,
