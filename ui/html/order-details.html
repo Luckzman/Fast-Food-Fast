@@ -6,29 +6,31 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FastFoodFast</title>
     <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./../css/reset.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">    <link rel="stylesheet" href="./../css/reset.css">
     <link rel="stylesheet" href="./../css/reuse.css">
     <link rel="stylesheet" href="./../css/main.css">
     <link rel="stylesheet" href="./../css/order-details.css">
 </head>
 <body>
     <header>
-        <div>
-            <a href="./../index.html"><img src="./../images/FastFoodFast_logo.png" alt="FastFoodFast logo"></a>
+        <div class="container">
+            <div>
+                <a href="./../index.html">FastFoodFast.com</a>
+            </div>
+            <nav>
+                <ul>
+                    <a href="./../index.html"><li>Home</li></a>
+                    <a href="./catalog.html"><li>Catalog</li></a>
+                </ul>
+            </nav>
         </div>
-        <nav>
-            <ul>
-                <li><a href="./catalog.html">Catalog</a></li>
-                <li><a href="#">signin/signup</a></li>
-            </ul>
-        </nav>
     </header>
     <main>
         <div class="container">
             <div class="order-row">
                 <div class="order-img">
                     <img src="./../images/image-8.jpg" alt="order image">
+                    <div class="order-img-search"><a href="./../images/image-8.jpg"><i class="fas fa-search"></i></a></div>
                 </div>
                 <div class="order-content">
                     <h3>shrimps magharita</h3>
@@ -45,7 +47,7 @@
                     <p>With basil, mozzarella, tomatoes</p>
                     <div class="order-input">
                         <input type="number" name="num-of-orders" value="1" min="1">
-                        <button>order</button>
+                        <button>order now</button>
                     </div>
                 </div>
             </div>
