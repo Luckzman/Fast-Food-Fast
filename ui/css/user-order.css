@@ -34,9 +34,9 @@ tr:nth-child(even){
 tr:nth-child(even):hover{
     background-color: #c4c4c4;
 }
-.img-container{
-    /* display: flex; */
-}
+/* .img-container{
+    display: flex;
+} */
 img{
     height: 50px;
     width: 50px;
