@@ -1,3 +1,11 @@
+h1{
+    font-size: 2.5rem;
+    color: #333;
+    text-align: center;
+    padding: 10px 0;
+    margin:20px 0;
+    text-transform: uppercase;
+}
 .table-container{
     overflow-x: auto;
     margin:  0 auto;
@@ -19,7 +27,8 @@ th{
 td, th{
     padding: 10px 20px;
 }
-tr td:nth-child(4){
+tr td:nth-child(4),
+tr th:nth-child(4){
     text-align: center;
 }
 tr td:nth-child(3){
@@ -28,6 +37,7 @@ tr td:nth-child(3){
 td{
     line-height: 3rem;
 }
+
 tr:nth-child(even){
     background-color: #ccc;
 }
@@ -47,24 +57,45 @@ img{
 }
 .red{
     color: #cc0000;
+    cursor: pointer;
 }
 .order-calc{
     width: 100%;
-    margin-top: 20px;
+    margin-top: 30px;
     display: flex;
     justify-content: flex-end;
     text-transform: uppercase;
+}
+.order-calc th:nth-child(2){
+    background: #ccc
+}
+.order-calc th:first-child,
+.order-calc td:first-child{
+    background-color: #005c00
 }
 .order-calc tr:nth-child(2){
     font-weight: 600;
     font-size: 1.2rem;
 }
 .order-checkout{
+    margin-top: 15px;
     width: 100%;
     display: flex;
     justify-content: flex-end;
 }
 button{
-    padding: 5px 10px;
+    padding: 10px;
     margin: 10px 0 30px;
+    font-weight: 600;
+    color: #005c00c0;
+    border: 1px solid #005c00;
+    border-radius: 3px;
+    box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.5);
+    cursor: pointer;
+    transition: all 0.4s;
+}
+button:hover{
+    box-shadow: 1px 1px 10px 1px rgb(0,0,0);
+    color: #004e00;
+    border-radius: 8px;
 }

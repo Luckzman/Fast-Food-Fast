@@ -124,7 +124,7 @@ form  input[type="checkbox"]{
     display: inline;
     width: 0px;
 }
-form > label[for="forgetPassword"]{
+form > label[for="remPassword"]{
     margin: 20px 0 -15px;
     display: inline-block;
     padding-left: 30px;
@@ -134,7 +134,7 @@ form > label[for="forgetPassword"]{
     background-position: 0px, 2px;
     line-height: 1.5rem;
 }
-.checkbox:checked + label[for="forgetPassword"]{
+.checkbox:checked + label[for="remPassword"]{
     background: url(./../images/checked.jpg);
     background-repeat: no-repeat;
     background-position: 0px, -4px;
