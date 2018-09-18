@@ -84,7 +84,11 @@ main > .container{
     border-radius: 5px;
     font-size: 1.2rem;
     opacity: 0.9;
+    cursor: pointer;
     box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.5);
+}
+.order-content .order-input > button a{
+    color: #fff;
 }
 .order-content .order-input > button:before{
     font-family: 'Font Awesome 5 Free';

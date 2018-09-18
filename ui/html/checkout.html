@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FastFoodFast</title>
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">    <link rel="stylesheet" href="./../css/reset.css">
+    <link rel="stylesheet" href="./../css/reuse.css">
+    <link rel="stylesheet" href="./../css/main.css">
+    <!-- <link rel="stylesheet" href="./../css/signin-modal.css"> -->
+    <link rel="stylesheet" href="./../css/checkout.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div>
+                <a href="./../index.html">FastFoodFast.com</a>
+            </div>
+            <nav>
+                <ul>
+                    <a href="./../index.html"><li>Home</li></a>
+                    <a href="./catalog.html"><li>Catalog</li></a>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container checkout">
+            <!-- <div class="checkout-header">
+                <h1>order checkout</h1>
+            </div> -->
+            <div class="order-summary">
+                <h4><i class="fa fa-shopping-cart"></i> Cart 
+                    <b>(4)</b> <span>Cost</span></h4>
+                <div>
+                    <p>Shawarma <span>N2500</span></p>
+                    <p>Suya <span>N1500</span></p>
+                    <p>Pizza <span>N4000</span></p>
+                    <p>Burger <span>N1000</span></p>
+                </div><hr>
+                <h3>Total <span>9,000</span></h3>
+            </div>
+            <form>
+                <div class="delivery-section">
+                    <h3>delivery details</h3>
+                    <div class="input-container">
+                        <label for="firstname">Full Name</label>
+                        <input type="text" id="firstname" placeholder="John B. Doe"><br>
+                    </div>
+                    <div class="input-container">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" placeholder="5, xyz str.,"><br>
+                    </div>
+                    <div class="input-container">
+                        <label for="info">Additional Info</label>
+                        <textarea type="text" id="info" placeholder="More Info here!"></textarea><br>
+                    </div>
+                    <div class="input-container">
+                        <label for="city">City</label>
+                        <input type="text" id="city" placeholder="surulere"><br>
+                    </div>
+                    <div class="input-container">
+                        <label for="phone">Mobile Phone Number</label>
+                        <input type="text" id="phone" placeholder="070-5555-5555"><br>
+                    </div> 
+                </div>
+                <div>
+                    <h3>payment</h3>
+                    
+                    <div class="input-container">
+                        <label >Accepted Card</label>
+                        <div class="credit-card">
+                            <div class="icon-container">
+                                <i class="fab fa-cc-visa" style="color:navy;"></i>
+                                <i class="fab fa-cc-mastercard" style="color:red;"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-container">
+                        <label for="cardName">Name on Card</label>
+                        <input type="text" id="cardName" placeholder="John Bull Doe"><br>
+                    </div>
+                    <div class="input-container">
+                        <label for="cardNum">Credit Card Number</label>
+                        <input type="number" minlength="15" maxlength="16" id="cardNum" placeholder="1111-2222-3333-4444"><br>
+                    </div>
+                    <div class="input-container">
+                        <label for="expYear">Exp Month/Year</label>
+                        <input type="text" id="expYear" placeholder="10/18"><br>
+                    </div>
+                    <div class="input-container">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" placeholder="333"><br>
+                        <input type="submit" value="proceed to checkout">
+                    </div> 
+                </div>
+                
+            </form>
+            
+        </div>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <p>FastFoodFast &copy;2018 <span>All Rights Reserved</span></p>
+        </div>
+    </footer>
+</body>
+</html>
