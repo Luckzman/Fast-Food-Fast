@@ -55,9 +55,32 @@ form h3{
     font-size: 0.8rem;
     font-weight: 600;
 }
-.input-container .credit-card label,
+/* .input-container .credit-card label,
 .input-container .credit-card input{
     display: inline !important;
+} */
+.fa-cc-visa{
+    color:#000080;
+    font-size: 3rem;
+    padding-right: 10px;
+}
+.fa-cc-mastercard{
+    color:#ff0000;
+    font-size: 3rem;
+}
+.icon-container > input{
+    display: inline !important;
+    width: 0px !important;
+    margin: 0px !important;
+    box-sizing: border-box !important;
+    box-shadow: 1px 1px 10px 1px #333;
+}
+.icon-container > label {
+    display: inline !important;
+}
+.icon-container input:checked + label{
+    opacity: 0.6;
+    border: #333
 }
 .input-container input, textarea{
     display: inline-block;
@@ -103,18 +126,23 @@ input[type="submit"]{
         float: left;
     }
     textarea,
-    .input-container label,
-    .input-container input{
+    .input-container label{
         display: inline-block;
         width: 25%;
     }
     textarea,
     .input-container input{
+        display: inline-block;
         width: 70%
     }
     input[type="submit"]{
         width: 70%;
         margin-left: 26%;
+    }
+    .credit-card{
+        display: inline-block;
+        vertical-align: top;
+        padding-bottom: 10px;
     }
 
 }
