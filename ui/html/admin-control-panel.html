@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FastFoodFast</title>
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">    <link rel="stylesheet" href="./../css/reset.css">
+    <link rel="stylesheet" href="./../css/reset.css">
+    <link rel="stylesheet" href="./../css/reuse.css">
+    <link rel="stylesheet" href="./../css/main.css">
+    <link rel="stylesheet" href="./../css/admin-control-panel.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div>
+                <a href="#">FastFoodFast.com</a>
+            </div>
+            <nav>
+                <ul>
+                    <a href=""><li>Welcome, Admin</li></a>
+                    <a href="#logout-modal" class="button"><li>LOGOUT</li></a>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="panel-container">
+                <section>
+                    <input id="tab1" type="radio" name="tabs" checked>
+                    <label for="tab1">Food Items</label>
+                    <article id="content1">
+                        <button><a href="#new-food-modal">add new food Item</a></button>
+                        <h2>Food Items</h2>
+                        <div class="food-table">
+                            <table>
+                                <tr>
+                                    <th></th>
+                                    <th>name</th>
+                                    <th>description</th>
+                                    <th>price</th>
+                                    <th>category</th>
+                                    <th>edit</th>
+                                    <th>delete</th>
+                                </tr>
+                                <tr>
+                                    <td><img src="./../images/image-29.jpg" alt=""></td>
+                                    <td>pizza</td>
+                                    <td>creamy and lovely</td>
+                                    <td>8,000</td>
+                                    <td>pasta</td>
+                                    <td><a href="#new-food-modal"><i class="fas fa-edit"></i></a></td>
+                                    <td><i class="fas fa-times-circle red"></i></td>
+                                </tr>
+                                <tr>
+                                    <td><img src="./../images/image-17.jpg" alt=""></td>
+                                    <td>ice-cream</td>
+                                    <td>So delicious, made with best quality cream</td>
+                                    <td>3,000</td>
+                                    <td>cream</td>
+                                    <td><a href="#new-food-modal"><i class="fas fa-edit"></i></a></td>
+                                    <td><i class="fas fa-times-circle red"></i></td>
+                                </tr>
+                                <tr>
+                                    <td><img src="./../images/image-27.jpg" alt=""></td>
+                                    <td>Meat pie</td>
+                                    <td>rich and prepared with quality ingredient</td>
+                                    <td>4,000</td>
+                                    <td>pasta</td>
+                                    <td><a href="#new-food-modal"><i class="fas fa-edit"></i></a></td>
+                                    <td><i class="fas fa-times-circle red"></i></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </article>
+                </section>
+                <section>
+                    <input id="tab2" type="radio" name="tabs">
+                    <label for="tab2">Pending Orders</label>
+                    <article id="content2">
+                        <h2>Pending orders</h2>
+                        <div class="pending-order">
+                            <table>
+                                <tr>
+                                    <th>name</th>
+                                    <th>food ordered</th>
+                                    <th>location</th>
+                                    <th>quantity</th>
+                                    <th>Price</th>
+                                    <th>time/date of order</th>
+                                    <th>Admin Action</th>
+                                </tr>
+                                <tr>
+                                    <td>Adekoya Tolu</td>
+                                    <td>Fried Meat</td>
+                                    <td>Lagos</td>
+                                    <td>1</td>
+                                    <td>3,000</td>
+                                    <td>1:30pm 12/3/2018</td>
+                                    <td><a href="#accept/delete-modal"><button>Accept/Reject</button></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Femi</td>
+                                    <td>Ofada Rice</td>
+                                    <td>Abeokuta</td>
+                                    <td>4</td>
+                                    <td>15000</td>
+                                    <td>2:45pm 7/8/2018</td>
+                                    <td><div><button>Accept/Reject</button></div></td>
+                                </tr>
+                                <tr>
+                                    <td>Femi</td>
+                                    <td>Ofada Rice</td>
+                                    <td>Abeokuta</td>
+                                    <td>4</td>
+                                    <td>15000</td>
+                                    <td>2:45pm 7/8/2018</td>
+                                    <td><div><button>Accept/Reject</button></div></td>
+                                </tr>
+                                <tr>
+                                    <td>Femi</td>
+                                    <td>Ofada Rice</td>
+                                    <td>Abeokuta</td>
+                                    <td>4</td>
+                                    <td>15000</td>
+                                    <td>2:45pm 7/8/2018</td>
+                                    <td><div><button>Accept/Reject</button></div></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </article>
+                </section>
+                <section>
+                    <input id="tab3" type="radio" name="tabs">
+                    <label for="tab3">Completed Orders</label>
+                    <article id="content3">
+                        <h2>completed orders</h2>
+                        <div class="completed-order">
+                            <table>
+                                <tr>
+                                    <th>name</th>
+                                    <th>food ordered</th>
+                                    <th>location</th>
+                                    <th>quantity</th>
+                                    <th>Price</th>
+                                    <th>time/date of order</th>
+                                    <th>Order Status</th>
+                                </tr>
+                                <tr>
+                                    <td>Adekoya Tolu</td>
+                                    <td>Fried Meat</td>
+                                    <td>Lagos</td>
+                                    <td>1</td>
+                                    <td>3,000</td>
+                                    <td>1:30pm 12/3/2018</td>
+                                    <td><i class="fas fa-check green"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Femi</td>
+                                    <td>Ofada Rice</td>
+                                    <td>Abeokuta</td>
+                                    <td>4</td>
+                                    <td>15000</td>
+                                    <td>2:45pm 7/8/2018</td>
+                                    <td><i class="fas fa-check green"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Femi</td>
+                                    <td>Ofada Rice</td>
+                                    <td>Abeokuta</td>
+                                    <td>4</td>
+                                    <td>15000</td>
+                                    <td>2:45pm 7/8/2018</td>
+                                    <td><i class="fas fa-minus-circle red"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Femi</td>
+                                    <td>Ofada Rice</td>
+                                    <td>Abeokuta</td>
+                                    <td>4</td>
+                                    <td>15000</td>
+                                    <td>2:45pm 7/8/2018</td>
+                                    <td><i class="fas fa-check green"></i></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </article>
+                </section>
+            </div>   
+        </div>
+    </main>
+
+    <!-- Add new food item form modal here -->
+    <div id="new-food-modal" class="overlay">
+        <a class="cancel" href="#"></a>
+        <div class="modal">
+            <a href="" class="close">X</a>
+            <div class="content">
+                    <form>
+                        <input type="text"  placeholder="Food Name">
+                        <textarea placeholder="Food Description"></textarea>
+                        <input type="number"  placeholder="Price">
+                        <select>
+                            <option>-- Select Food Category --</option>
+                            <option>Appetizer</option>
+                            <option>Soup</option>
+                            <option>Sandwiches</option>
+                            <option>Salad</option>
+                            <option>Pastas</option>
+                            <option>Extra</option>
+                        </select>
+                        <input type="file"  placeholder="Image">
+                        
+                        <input type="submit" value="submit">
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add new food item form modal here -->
+    <div id="accept/delete-modal" class="overlay">
+        <a class="cancel" href="#"></a>
+        <div class="modal">
+            <a href="" class="close">X</a>
+            <div class="content">
+                    <form>
+                        <input type="radio" name="order-status" id="order-status1">
+                        <label for="order-status1">Accept</label><br>
+                        <input type="radio"  name="order-status" id="order-status2">
+                        <label for="order-status2">Decline</label>
+                        <input type="submit" value="submit">
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>FastFoodFast &copy;2018 <span>All Rights Reserved</span></p>
+        </div>
+    </footer>
+</body>
+</html>
