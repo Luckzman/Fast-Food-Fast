@@ -18,7 +18,9 @@ main{
     width: 100%;
     margin: 0 auto;
 }
-
+a{
+    color: #f1f1f1;
+}
 .checked{
     color: orange;
 }
