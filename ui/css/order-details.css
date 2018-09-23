@@ -1,0 +1,219 @@
+main > .container{
+    margin-top: 35px;
+}
+.order-img{
+    position: relative;
+    max-width:300px;
+    max-height: 300px;
+    border-radius: 10px;
+    margin: 20px auto;
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.7)
+}
+.order-img > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.order-img > .order-img-search{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    background: rgb(243, 243, 243);
+    color: rgb(109, 109, 109);
+    cursor: zoom-in;
+}
+.order-img > .order-img-search{
+    vertical-align: middle;
+    line-height: 1.8rem;
+}
+.order-img > .order-img-search a{
+    color: #555;
+    cursor: zoom-in;
+}
+.order-content{
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+}
+.order-content > h3 {
+    font-size: 2rem;
+    line-height: 4rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.order-content > div{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.order-content > div > p{
+    font-weight: 600;
+}
+.order-content >div + p{
+    line-height: 2.5rem;
+}
+.order-content .order-input{
+    margin: 0 ;
+    text-align: center
+}
+.order-content input{
+    display: block;
+    height: 30px;
+    width: 80%;
+    font-size: 1.2rem;
+    padding-left: 10px;
+}
+.order-content input[type=number]::-webkit-inner-spin-button, 
+.order-content input[type=number]:focus::-webkit-inner-spin-button{
+    opacity: 1;
+    width: 20px;
+    height: 30px;   
+}
+.order-content .order-input > button{
+    position: relative;
+    background-color: #009700;
+    color: #fff;
+    padding: 0 10px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    opacity: 0.9;
+    cursor: pointer;
+    box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.5);
+}
+.order-content .order-input > button a{
+    color: #fff;
+}
+.order-content .order-input > button:before{
+    font-family: 'Font Awesome 5 Free';
+    content: "\f07a";
+    font-weight: 900;
+    padding-right: 15px;
+    opacity: 0.9;
+    transform: translateX(-100px);
+}
+.order-content .order-input > button:hover{
+    box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.5);
+}
+.order-description{
+    margin-top: 30px;
+}
+.order-description input{
+    display: none;
+}
+.order-description section {
+    display: none;
+    padding: 20px 0;
+    border-top: 1px solid #8b8b8b;
+}
+.order-description section p{
+    margin: 10px 0;
+}
+.order-description label {
+    display: inline-block;
+    margin: -1px 0;
+    padding: 10px 10px;
+    font-weight: 600;
+    text-align: center;
+    color: #a7a7a7;
+    border: none;
+} 
+label:hover {
+    color: #5f5f5f;
+    cursor: pointer;
+}
+input:checked + label {
+    color: #555;
+    border: 1px solid #8b8b8b;
+    border-top: 4px solid #f14a02;
+    border-bottom: none;
+    background-color: #f1f1f1;
+    z-index: 99;
+}
+.review-img{
+    max-width:100px;
+    max-height: 100px;
+    border-radius: 100%;
+    margin: 20px auto;
+}
+.review-info{
+    text-align: center;
+    margin: 0 auto;
+}
+.review-info > p{
+    font-size: 1rem;
+    font-weight: 500;
+}
+.review-info > p:first-child{
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.review-img > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 100%;
+}
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2 {
+    display: block;
+}
+
+/* Implement Responsive Design Here! */
+@media only screen and (min-width: 760px){
+    .order-row{
+        display: flex;
+    }
+    .order-img{
+        flex: 1;
+        margin-right: 20px;
+    }
+    .order-content{
+        flex: 1;
+        text-align: left;
+        margin-left: 20px;
+    }
+    .order-content > div{
+        max-width: 80%;
+        padding: 10px 0;
+    }
+    .order-content input{
+        width: 50%;
+        height: 40px;
+        font-size: 1.5rem;
+        padding-left: 10px;
+    }
+    .order-content input[type=number]::-webkit-inner-spin-button, 
+    .order-content input[type=number]:focus::-webkit-inner-spin-button{
+    height: 40px;   
+    }
+    .order-content .order-input > button{
+        background-color: #009700;
+        color: #fff;
+        padding: 0 10px;
+        margin-left: 10px;
+        border: none;
+        font-size: 1.2rem;
+    }
+    .flex-row{
+        display: flex;
+    }
+    .review-img{
+        margin: 20px 30px 20px 0;
+    }
+    .review-info{
+        max-width: 90%;
+        flex: 1;
+        text-align: left;
+        margin: 0 auto;
+    }
+}
+
+
+  
