@@ -33,7 +33,7 @@
                     <input id="tab1" type="radio" name="tabs" checked>
                     <label for="tab1">Food Items</label>
                     <article id="content1">
-                        <button>add new food Item</button>
+                        <button><a href="#new-food-modal">add new food Item</a></button>
                         <h2>Food Items</h2>
                         <div class="food-table">
                             <table>
@@ -52,7 +52,7 @@
                                     <td>creamy and lovely</td>
                                     <td>8,000</td>
                                     <td>pasta</td>
-                                    <td><i class="fas fa-edit"></i></td>
+                                    <td><a href="#new-food-modal"><i class="fas fa-edit"></i></a></td>
                                     <td><i class="fas fa-times-circle red"></i></td>
                                 </tr>
                                 <tr>
@@ -61,7 +61,7 @@
                                     <td>So delicious, made with best quality cream</td>
                                     <td>3,000</td>
                                     <td>cream</td>
-                                    <td><i class="fas fa-edit"></i></td>
+                                    <td><a href="#new-food-modal"><i class="fas fa-edit"></i></a></td>
                                     <td><i class="fas fa-times-circle red"></i></td>
                                 </tr>
                                 <tr>
@@ -70,7 +70,7 @@
                                     <td>rich and prepared with quality ingredient</td>
                                     <td>4,000</td>
                                     <td>pasta</td>
-                                    <td><i class="fas fa-edit"></i></td>
+                                    <td><a href="#new-food-modal"><i class="fas fa-edit"></i></a></td>
                                     <td><i class="fas fa-times-circle red"></i></td>
                                 </tr>
                             </table>
@@ -100,7 +100,7 @@
                                     <td>1</td>
                                     <td>3,000</td>
                                     <td>1:30pm 12/3/2018</td>
-                                    <td><div><button>Accept/Reject</button></div></td>
+                                    <td><a href="#accept/delete-modal"><button>Accept/Reject</button></a></td>
                                 </tr>
                                 <tr>
                                     <td>Femi</td>
@@ -192,11 +192,57 @@
             </div>   
         </div>
     </main>
+
+    <!-- Add new food item form modal here -->
+    <div id="new-food-modal" class="overlay">
+        <a class="cancel" href="#"></a>
+        <div class="modal">
+            <a href="" class="close">X</a>
+            <div class="content">
+                    <form>
+                        <input type="text"  placeholder="Food Name">
+                        <textarea placeholder="Food Description"></textarea>
+                        <input type="number"  placeholder="Price">
+                        <select>
+                            <option>-- Select Food Category --</option>
+                            <option>Appetizer</option>
+                            <option>Soup</option>
+                            <option>Sandwiches</option>
+                            <option>Salad</option>
+                            <option>Pastas</option>
+                            <option>Extra</option>
+                        </select>
+                        <input type="file"  placeholder="Image">
+                        
+                        <input type="submit" value="submit">
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add new food item form modal here -->
+    <div id="accept/delete-modal" class="overlay">
+        <a class="cancel" href="#"></a>
+        <div class="modal">
+            <a href="" class="close">X</a>
+            <div class="content">
+                    <form>
+                        <input type="radio" name="order-status" id="order-status1">
+                        <label for="order-status1">Accept</label><br>
+                        <input type="radio"  name="order-status" id="order-status2">
+                        <label for="order-status2">Decline</label>
+                        <input type="submit" value="submit">
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <div class="footer-content">
             <p>FastFoodFast &copy;2018 <span>All Rights Reserved</span></p>
         </div>
     </footer>
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
 </body>
 </html>
