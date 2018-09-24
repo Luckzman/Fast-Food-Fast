@@ -1,5 +1,10 @@
 import model from '../model/order';
 
+/**
+ *GetAllOrder function  return all orders
+ * @param {*} req
+ * @param {*} res
+ */
 export const getAllOrder = (req, res) => {
   res.status(200).json({
     success: true,
@@ -8,6 +13,11 @@ export const getAllOrder = (req, res) => {
   });
 };
 
+/**
+ * GetOrderItem function returns an order item based on the params id
+ * @param {*} req
+ * @param {*} res
+ */
 export const getOrderItem = (req, res) => {
   for (const data of model) {
     if (data.id === parseInt(req.params.id, 10)) {
@@ -24,6 +34,11 @@ export const getOrderItem = (req, res) => {
   });
 };
 
+/**
+ * CreateOrder function create a new order
+ * @param {*} req
+ * @param {*} res
+ */
 export const createOrder = (req, res) => {
   const newOrder = {
     orderId: 3,
@@ -43,6 +58,11 @@ export const createOrder = (req, res) => {
   });
 };
 
+/**
+ * UpdateOrder Function updates the status of an order
+ * @param {*} req
+ * @param {*} res
+ */
 export const updateOrder = (req, res) => {
   for (const data of model) {
     if (data.id === parseInt(req.params.id, 10)) {

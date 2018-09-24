@@ -16,6 +16,13 @@ const newOrder = {
   sub_total: '6000',
   status: 'pending',
 };
+/**
+ * Test Steps:
+ * 1. create new order
+ * 2. get all order
+ * 3. get a single order
+ * 4. update order status
+ */
 describe('/CREATE NEW ORDER', () => {
   it('should create new order', (done) => {
     chai.request(app)
