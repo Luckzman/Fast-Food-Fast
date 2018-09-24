@@ -1,3 +1,6 @@
+/**
+ * Order array that holds dummy data for order object
+ */
 export default [
   {
     id: 1,

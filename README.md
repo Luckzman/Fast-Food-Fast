@@ -18,8 +18,6 @@ Fast-Food-Fast​ is a food delivery service app for a restaurant.
 * [HTML5](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5) & [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3)
 * [NodeJS](https://nodejs.org/en/)
 * [Express](https://expressjs.com/)
-* [body-parser](https://www.npmjs.com/package/body-parser)
-* [Express-validator](https://www.npmjs.com/package/express-validator)
 
 ### Deployment
 Ride-My-Way UI is hosted on gh-pages while the app is hosted on Heroku
