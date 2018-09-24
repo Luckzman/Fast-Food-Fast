@@ -17,7 +17,7 @@ const newOrder = {
   status: 'pending',
 };
 describe('/CREATE NEW ORDER', () => {
-  it('it should create new order', (done) => {
+  it('should create new order', (done) => {
     chai.request(app)
       .post('/api/v1/order')
       .send(newOrder)
@@ -29,7 +29,7 @@ describe('/CREATE NEW ORDER', () => {
   });
 });
 describe('/GET ALL ORDERS', () => {
-  it('it should be able to get all orders', (done) => {
+  it('should be able to get all orders', (done) => {
     chai.request(app)
       .get('/api/v1/order')
       .end((err, res) => {
@@ -40,7 +40,7 @@ describe('/GET ALL ORDERS', () => {
   });
 });
 describe('/GET SINGLE ORDER', () => {
-  it('it should be able to get an order by its id', (done) => {
+  it('should be able to get an order by its id', (done) => {
     chai.request(app)
       .get('/api/v1/order/1')
       .end((err, res) => {
@@ -49,7 +49,7 @@ describe('/GET SINGLE ORDER', () => {
         done();
       });
   });
-  it('it should not order if id does not exist', (done) => {
+  it('should not order if id does not exist', (done) => {
     chai.request(app)
       .get('/api/v1/order/5')
       .end((err, res) => {
@@ -60,7 +60,7 @@ describe('/GET SINGLE ORDER', () => {
   });
 });
 describe('/UPDATE ORDER STATUS', () => {
-  it('it should be able to update an order by its id', (done) => {
+  it('should be able to update an order by its id', (done) => {
     chai.request(app)
       .put('/api/v1/order/1')
       .send({ status: 'delivered' })
@@ -70,7 +70,7 @@ describe('/UPDATE ORDER STATUS', () => {
         done();
       });
   });
-  it('it should not update order if id does not exist', (done) => {
+  it('should not update order if id does not exist', (done) => {
     chai.request(app)
       .get('/api/v1/order/5')
       .send({ status: 'delivered' })
