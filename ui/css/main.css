@@ -35,7 +35,7 @@ header div > div > a{
     line-height: 2rem;
     font-size: 1.5rem;
     font-weight: 700;
-    text-shadow: 2px 2px 2px #22a800;
+    text-shadow: 1px 1px #22a800;
     color: rgb(255, 255, 255); 
 }
 header nav a{
@@ -93,6 +93,10 @@ header nav a{
     color: #eee;
     font-size: 1.2rem;
     border-bottom: 1px solid #ccc;
+}
+.showcase-input input:focus{
+    outline-color: transparent;
+    border-bottom: 1px solid #00be29;
 }
 .showcase-input button{
     background-color: #00be29;
@@ -223,6 +227,7 @@ header nav a{
     height: 150px;
     margin: 40px auto 80px;
     border-radius: 100%;
+    background-color: #fff;
 }
 .order-steps img{
     width:100%;
@@ -230,7 +235,6 @@ header nav a{
     object-fit: fill;
     border-radius: 100%;
     border: 1px solid #ccc;
-    margin: 20px 0;
     background-color: #fff;
 }
 .order-steps .order-steps-count{
@@ -411,20 +415,22 @@ footer span{
     .top-order .order-img:after{
         transform-origin: -10px -10px;
         transform: rotateZ(-90deg);
-        transition: all .15s;
+        transition: all .5s;
     }
     .top-order .order-img:hover:after{
         transform: rotateZ(0deg);
     }
     .top-order .order-img a{
-        transform: translate(-50%, -400px);;
+        transform: translate(-50%, -400px);
         transition: all .5s;
+        transition-delay: .4s;
     }
     .top-order .order-img:hover a{
-        transform: translate(-50%, -50%)
+        transform: translate(-50%, -50%);
     }
     .top-order .order-img:hover a:hover{
         background-color: #222;
+        border-radius: 20px;
     }
     .order-steps,
     .top-order{
