@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "create_db": "psql -U postgres -f ./server/database/model/db.sql",
+    "create_db_test": "psql -U postgres -f ./server/database/model/db_test.sql",
     "startDev": "nodemon --exec babel-node -- index",
     "babel-node": "babel-node --presets=env",
     "start": "babel-node index",
-    "test": "nyc mocha --require babel-register ./server/**/**/order.js --exit",
+    "test": "set NODE_ENV=test && nyc mocha --require babel-register --env test ./server/**/**/*.js --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "npm test && nyc report --reporter=text-lcov | coveralls"
   },
