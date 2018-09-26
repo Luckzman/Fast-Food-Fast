@@ -1,13 +1,19 @@
 import bcrypt from 'bcryptjs';
-// import jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import uuid from 'uuid';
 import moment from 'moment';
 import db from '../model/config';
 import { isValidEmail, responseMsg } from '../middleware/helpers';
 
-const signup = (req, res) => {
+
+/**
+ * signup controller
+ * @param {object} req
+ * @param {object} res
+ */
+export const signup = (req, res) => {
   /**
-    * Destructure req.body
+    * Destructure req.body object
     */
   const {
     firstname, lastname, phone, email, password,
@@ -30,12 +36,12 @@ const signup = (req, res) => {
   if (!isValidEmail(email)) {
     responseMsg(res, 400, false, 'Email is invalid');
   }
-  const query = 'SELECT * FROM users WHERE email = $1';
-  const value = [email];
 
   /**
    * Ensures no duplicate email entry
    */
+  const query = 'SELECT * FROM users WHERE email = $1';
+  const value = [email];
   db.query(query, value)
     .then((user) => {
       if (user.rowCount > 0) {
@@ -62,4 +68,41 @@ const signup = (req, res) => {
     .catch(error => res.status(400).send(error));
 };
 
-export default signup;
+/**
+ * Login Controller
+ * @param {object} req
+ * @param {object} res
+ */
+export const login = (req, res) => {
+  const { id, email, password } = req.body;
+  if (!email || !password) {
+    responseMsg(res, 400, false, 'All fields must be filled');
+  }
+  if (!isValidEmail(email)) {
+    responseMsg(res, 400, false, 'Enter valid Email');
+  }
+  const query = 'SELECT * FROM users WHERE email = $1';
+  const value = [email];
+  db.query(query, value)
+    .then((user) => {
+      if (user.rowCount < 1) {
+        responseMsg(res, 404, false, 'Email not Found');
+      }
+      bcrypt.compare(password, user.rows[0].password)
+        .then((result) => {
+          if (result) {
+            const token = jwt.sign({
+              id,
+              email,
+            }, process.env.SECRET_KEY,
+            {
+              expiresIn: '1d',
+            });
+            responseMsg(res, 200, true, 'login successful', token);
+          }
+          responseMsg(res, 400, false, 'Password is incorrect');
+        })
+        .catch(error => res.status(400).send(error));
+    })
+    .catch(error => res.status(400).send(error));
+};
