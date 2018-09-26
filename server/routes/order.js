@@ -5,7 +5,7 @@ import
   getOrderItem,
   createOrder,
   updateOrder,
-} from '../controller/order';
+} from '../dummy data/controller/order';
 
 const orderRouter = express.Router();
 orderRouter.get('/', getAllOrder);

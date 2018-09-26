@@ -41,15 +41,17 @@ export const getOrderItem = (req, res) => {
  */
 export const createOrder = (req, res) => {
   const newOrder = {
-    orderId: 3,
-    name: 'Chicken Pie',
-    description: 'This is a brief description of the food order',
-    quantity: 5,
-    image: 'file//image2.jpeg',
-    price: 2000,
-    date_ordered: '25/08/2018',
-    sub_total: 6000,
-    status: 'delivered',
+    id: 4,
+    customer_name: 'Olumide Emmanuel',
+    customer_address: '5, Itori Street, Aguda',
+    city: 'Surulere',
+    additional_info: '',
+    phone_no: 1,
+    ordered_food: 'Burger',
+    quantity_ordered: '2',
+    total_price: '1000',
+    date_ordered: '24/08/2018',
+    status: 'pending',
   };
   model.push(newOrder);
   res.status(201).json({
