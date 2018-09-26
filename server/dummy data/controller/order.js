@@ -2,8 +2,8 @@ import model from '../model/order';
 
 /**
  *GetAllOrder function  return all orders
- * @param {*} req
- * @param {*} res
+ * @param {object} req
+ * @param {object} res
  */
 export const getAllOrder = (req, res) => {
   res.status(200).json({
@@ -15,8 +15,8 @@ export const getAllOrder = (req, res) => {
 
 /**
  * GetOrderItem function returns an order item based on the params id
- * @param {*} req
- * @param {*} res
+ * @param {object} req
+ * @param {object} res
  */
 export const getOrderItem = (req, res) => {
   for (const data of model) {
@@ -36,8 +36,8 @@ export const getOrderItem = (req, res) => {
 
 /**
  * CreateOrder function create a new order
- * @param {*} req
- * @param {*} res
+ * @param {object} req
+ * @param {object} res
  */
 export const createOrder = (req, res) => {
   const newOrder = {
@@ -62,8 +62,8 @@ export const createOrder = (req, res) => {
 
 /**
  * UpdateOrder Function updates the status of an order
- * @param {*} req
- * @param {*} res
+ * @param {object} req
+ * @param {object} res
  */
 export const updateOrder = (req, res) => {
   for (const data of model) {

@@ -1,8 +1,9 @@
 import express from 'express';
-import signup from '../database/controller/user';
+import { signup, login } from '../database/controller/user';
 
 const authRouter = express.Router();
 
 authRouter.post('/signup', signup);
+authRouter.post('/login', login);
 
 export default authRouter;
