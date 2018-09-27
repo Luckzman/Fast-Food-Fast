@@ -79,7 +79,8 @@ export const signup = (req, res) => {
  * @param {object} res
  */
 export const login = (req, res) => {
-  const { id, email, password } = req.body;
+  const { email, password } = req.body;
+
   if (!email || !password) {
     return responseMsg(res, 400, false, 'All fields must be filled');
   }
@@ -97,8 +98,7 @@ export const login = (req, res) => {
         .then((result) => {
           if (result) {
             const token = jwt.sign({
-              id,
-              email,
+              id: user.rows[0].id,
             }, process.env.SECRET_KEY,
             {
               expiresIn: '1d',

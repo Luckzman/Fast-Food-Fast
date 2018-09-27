@@ -22,7 +22,9 @@ CREATE TABLE orders(
     created_date TIMESTAMPTZ,
     modified_date TIMESTAMPTZ,
     user_id UUID NOT NULL,
+    menu_id UUID NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+    FOREIGN KEY (menu_id) REFERENCES food_menus (id)
 );
 
 CREATE TABLE food_menus(
