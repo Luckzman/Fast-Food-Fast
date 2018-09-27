@@ -3,14 +3,14 @@ import
 {
   getAllOrder,
   getOrderItem,
-  createOrder,
-  updateOrder,
-} from '../dummy data/controller/order';
+  placeOrder,
+  updateOrderStatus,
+} from '../database/controller/order';
 
 const orderRouter = express.Router();
 orderRouter.get('/', getAllOrder);
 orderRouter.get('/:id', getOrderItem);
-orderRouter.post('/', createOrder);
-orderRouter.put('/:id', updateOrder);
+orderRouter.post('/', placeOrder);
+orderRouter.put('/:id', updateOrderStatus);
 
 export default orderRouter;

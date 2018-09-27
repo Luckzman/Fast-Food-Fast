@@ -1,9 +1,9 @@
 import express from 'express';
-import { signup, login } from '../database/controller/user';
+import getUserOrderHistory from '../database/controller/user';
+import { authCheck } from '../database/middleware/helpers';
 
-const authRouter = express.Router();
+const userRouter = express.Router();
 
-authRouter.post('/signup', signup);
-authRouter.post('/login', login);
+userRouter.get('/:id/orders', authCheck, getUserOrderHistory);
 
-export default authRouter;
+export default userRouter;
