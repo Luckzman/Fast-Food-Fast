@@ -33,8 +33,6 @@ CREATE TABLE food_menus(
     price VARCHAR NOT NULL,
     image VARCHAR NOT NULL,
     created_date TIMESTAMPTZ,
-    modified_date TIMESTAMPTZ,
-    order_id UUID NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES orders (id) ON DELETE CASCADE
+    modified_date TIMESTAMPTZ
 );
 

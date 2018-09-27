@@ -6,17 +6,17 @@ chai.use(chaiHttp);
 chai.should();
 
 const newOrder = {
-    id: 1,
-    customer_name: 'Olumide Emmanuel',
-    customer_address: '5, Itori Street, Aguda',
-    city: 'Surulere',
-    additional_info: '',
-    phone_no: 1,
-    ordered_food: 'Burger',
-    quantity_ordered: '2',
-    total_price: '1000',
-    date_ordered: '24/08/2018',
-    status: 'pending',
+  id: 1,
+  customer_name: 'Olumide Emmanuel',
+  customer_address: '5, Itori Street, Aguda',
+  city: 'Surulere',
+  additional_info: '',
+  phone_no: 1,
+  ordered_food: 'Burger',
+  quantity_ordered: '2',
+  total_price: '1000',
+  date_ordered: '24/08/2018',
+  status: 'pending',
 };
 /**
  * Test Steps:
