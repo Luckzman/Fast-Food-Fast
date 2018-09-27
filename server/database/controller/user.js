@@ -15,10 +15,15 @@ export const signup = (req, res) => {
   /**
     * Destructure req.body object
     */
-  const {
-    firstname, lastname, phone, email, password,
+  let {
+    firstname, lastname, phone, email,
   } = req.body;
+  const { password } = req.body;
 
+  firstname = firstname.trim();
+  lastname = lastname.trim();
+  phone = phone.trim();
+  email = email.trim();
   /**
    * Check to ensure no empty entry
    */
@@ -27,14 +32,14 @@ export const signup = (req, res) => {
     || !phone
     || !email
     || !password) {
-    responseMsg(res, 400, false, 'All entries must be filled');
+    return responseMsg(res, 400, false, 'All entries must be filled');
   }
 
   /**
    * Enforce valid email input
    */
   if (!isValidEmail(email)) {
-    responseMsg(res, 400, false, 'Email is invalid');
+    return responseMsg(res, 400, false, 'Email is invalid');
   }
 
   /**
@@ -45,7 +50,7 @@ export const signup = (req, res) => {
   db.query(query, value)
     .then((user) => {
       if (user.rowCount > 0) {
-        responseMsg(res, 400, false, 'Email already exist');
+        return responseMsg(res, 400, false, 'Email already exist');
       }
       bcrypt.hash(password, 8)
         .then((hash) => {
@@ -61,11 +66,11 @@ export const signup = (req, res) => {
             moment(new Date())];
           db.query(query, values)
             .then(user => responseMsg(res, 201, true, 'Signup successful', user.rows[0]))
-            .catch(error => res.status(400).send(error));
+            .catch(error => res.status(400).json(error));
         })
-        .catch(error => res.status(400).send(error));
+        .catch(error => res.status(400).json(error));
     })
-    .catch(error => res.status(400).send(error));
+    .catch(error => res.status(400).json(error));
 };
 
 /**
@@ -76,17 +81,17 @@ export const signup = (req, res) => {
 export const login = (req, res) => {
   const { id, email, password } = req.body;
   if (!email || !password) {
-    responseMsg(res, 400, false, 'All fields must be filled');
+    return responseMsg(res, 400, false, 'All fields must be filled');
   }
   if (!isValidEmail(email)) {
-    responseMsg(res, 400, false, 'Enter valid Email');
+    return responseMsg(res, 400, false, 'Enter valid Email');
   }
   const query = 'SELECT * FROM users WHERE email = $1';
   const value = [email];
   db.query(query, value)
     .then((user) => {
       if (user.rowCount < 1) {
-        responseMsg(res, 404, false, 'Email not Found');
+        return responseMsg(res, 404, false, 'Email not Found');
       }
       bcrypt.compare(password, user.rows[0].password)
         .then((result) => {
@@ -98,11 +103,11 @@ export const login = (req, res) => {
             {
               expiresIn: '1d',
             });
-            responseMsg(res, 200, true, 'login successful', token);
+            return responseMsg(res, 200, true, 'login successful', token);
           }
-          responseMsg(res, 400, false, 'Password is incorrect');
+          return responseMsg(res, 400, false, 'Password is incorrect');
         })
-        .catch(error => res.status(400).send(error));
+        .catch(error => res.status(400).json(error));
     })
-    .catch(error => res.status(400).send(error));
+    .catch(error => res.status(400).json(error));
 };

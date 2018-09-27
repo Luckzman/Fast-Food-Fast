@@ -5,7 +5,8 @@
         "no-console": "off",
         "no-restricted-syntax": "off",
         "consistent-return": "off",
-        "no-shadow": "off"
+        "no-shadow": "off",
+        "camelcase": "off"
     },
     "env": {
         "mocha": true
