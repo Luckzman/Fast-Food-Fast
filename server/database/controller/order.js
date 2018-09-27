@@ -3,6 +3,11 @@ import uuid from 'uuid';
 import db from '../model/config';
 import { responseMsg } from '../middleware/helpers';
 
+/**
+ * This controller will place a new order
+ * @param {object} req
+ * @param {object} res
+ */
 export const placeOrder = (req, res) => {
   const query = 'SELECT * FROM food_menus WHERE id = $1';
   const value = [req.body.id];
@@ -26,6 +31,11 @@ export const placeOrder = (req, res) => {
     .catch(error => res.status(404).json(error));
 };
 
+/**
+ * This controller get all orders
+ * @param {object} req
+ * @param {object} res
+ */
 export const getAllOrder = (req, res) => {
   const query = 'SELECT * FROM users WHERE id = $1';
   const value = [req.authData.id];
@@ -42,6 +52,31 @@ export const getAllOrder = (req, res) => {
     .catch(error => res.status(404).json(error));
 };
 
-export const getOrderItem = (req, res) => responseMsg(res, 200, true, 'get an Order OK');
+/**
+ * This controller get a single order item
+ * @param {object} req
+ * @param {object} res
+ */
+export const getOrderItem = (req, res) => {
+  const query = 'SELECT * FROM users WHERE id = $1';
+  const value = [req.authData.id];
+  db.query(query, value)
+    .then((user) => {
+      if (user.rows[0].user_status !== 'admin') {
+        return responseMsg(res, 403, false, 'No permission to access this resource');
+      }
+      const query = 'SELECT * FROM orders WHERE id = $1';
+      const value = [req.params.id];
+      db.query(query, value)
+        .then((order) => {
+          if (!order.rows[0]) {
+            return responseMsg(res, 404, false, 'order not found');
+          }
+          return responseMsg(res, 200, true, 'Order Single Item Request Successful', order.rows[0]);
+        })
+        .catch(error => res.status(404).json(error));
+    })
+    .catch(error => res.status(404).json(error));
+};
 
 export const updateOrderStatus = (req, res) => responseMsg(res, 200, true, 'update order status OK');
