@@ -2,9 +2,9 @@ import express from 'express';
 import { createMenu, getMenu } from '../database/controller/menu';
 import { authCheck } from '../database/middleware/helpers';
 
-const authRouter = express.Router();
+const menuRouter = express.Router();
 
-authRouter.post('/', authCheck, createMenu);
-authRouter.get('/', getMenu);
+menuRouter.post('/', authCheck, createMenu);
+menuRouter.get('/', getMenu);
 
-export default authRouter;
+export default menuRouter;

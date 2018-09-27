@@ -19,14 +19,9 @@ export const createMenu = (req, res) => {
       if (admin.rows[0].user_status !== 'admin') {
         return responseMsg(res, 401, false, 'admin access only');
       }
-      let {
+      const {
         food_name, description, category, price, image,
       } = req.body;
-      food_name = food_name.trim();
-      description = description.trim();
-      category = category.trim();
-      price = price.trim();
-      image = image.trim();
 
       if (!food_name || !description || !category || !price || !image) {
         return responseMsg(res, 400, false, 'Fill all entries');
