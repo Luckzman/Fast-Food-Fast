@@ -8,6 +8,6 @@ const router = express.Router();
 router.use('/api/v1/orders', order);
 router.use('/api/v1/auth', auth);
 router.use('/api/v1/menu', menu);
-router.get('/api/v1/user', user);
+router.use('/api/v1/user', user);
 
 export default router;

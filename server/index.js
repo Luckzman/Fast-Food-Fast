@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import validator from 'express-validator';
 import logger from 'morgan';
 
-import router from './routes/index';
+import router from './route/index';
 
 /**
  * steps:

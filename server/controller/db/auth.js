@@ -7,25 +7,25 @@ import { isValidEmail, responseMsg } from '../middleware/helpers';
 
 
 /**
- * signup controller
+ * @description signup controller
  * @param {object} req
  * @param {object} res
  */
 export const signup = (req, res) => {
   /**
-    * Destructure req.body object
+    * @description Destructure req.body object
     */
   let {
-    firstname, lastname, phone, email,
+    firstname, lastname, phone, email, password,
   } = req.body;
-  const { password } = req.body;
 
   firstname = firstname.trim();
   lastname = lastname.trim();
   phone = phone.trim();
   email = email.trim();
+  password = password.trim();
   /**
-   * Check to ensure no empty entry
+   * @description Check to ensure no empty entry
    */
   if (!firstname
     || !lastname
@@ -36,14 +36,14 @@ export const signup = (req, res) => {
   }
 
   /**
-   * Enforce valid email input
+   * @description Enforce valid email input
    */
   if (!isValidEmail(email)) {
     return responseMsg(res, 400, false, 'Email is invalid');
   }
 
   /**
-   * Ensures no duplicate email entry
+   * @description Ensures no duplicate email entry
    */
   const query = 'SELECT * FROM users WHERE email = $1';
   const value = [email];
@@ -74,7 +74,7 @@ export const signup = (req, res) => {
 };
 
 /**
- * Login Controller
+ * @description Login Controller
  * @param {object} req
  * @param {object} res
  */
@@ -101,7 +101,7 @@ export const login = (req, res) => {
               id: user.rows[0].id,
             }, process.env.SECRET_KEY,
             {
-              expiresIn: '1d',
+              expiresIn: '6h',
             });
             return responseMsg(res, 200, true, 'login successful', token);
           }

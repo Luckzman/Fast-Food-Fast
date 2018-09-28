@@ -35,6 +35,6 @@ CREATE TABLE orders(
     created_date TIMESTAMPTZ,
     modified_date TIMESTAMPTZ,
     user_id UUID NOT NULL REFERENCES users (id) ON DELETE CASCADE,
-    menu_id UUID NOT NULL REFERENCES food_menus (id)
+    menu_id UUID NOT NULL REFERENCES food_menus (id) ON DELETE CASCADE
 );
 
