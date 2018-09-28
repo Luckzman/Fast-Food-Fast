@@ -26,7 +26,21 @@ export const placeOrder = (req, res) => {
     .catch(error => res.status(404).json(error));
 };
 
-export const getAllOrder = (req, res) => responseMsg(res, 200, true, 'get All Order OK');
+export const getAllOrder = (req, res) => {
+  const query = 'SELECT * FROM users WHERE id = $1';
+  const value = [req.authData.id];
+  db.query(query, value)
+    .then((user) => {
+      if (user.rows[0].user_status !== 'admin') {
+        return responseMsg(res, 403, false, 'No permission to access this resource');
+      }
+      const query = 'SELECT * FROM orders';
+      db.query(query)
+        .then(order => responseMsg(res, 200, true, 'Order All Request Successful', order.rows[0]))
+        .catch(error => res.status(404).json(error));
+    })
+    .catch(error => res.status(404).json(error));
+};
 
 export const getOrderItem = (req, res) => responseMsg(res, 200, true, 'get an Order OK');
 
