@@ -104,7 +104,6 @@ main h2 {
         justify-content: flex-start;
     }
     main .img-container button{
-        /* padding: 10px; */
         opacity: 0.8;
         transition: all .4s;
     }

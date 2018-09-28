@@ -35,7 +35,6 @@ form{
     padding: 10px;
     margin: 0 auto;
 }
-/* .checkout-header h1, */
 form h3{
     font-size: 2rem;
     margin:25px 0 15px;
@@ -55,10 +54,6 @@ form h3{
     font-size: 0.8rem;
     font-weight: 600;
 }
-/* .input-container .credit-card label,
-.input-container .credit-card input{
-    display: inline !important;
-} */
 .fa-cc-visa{
     color:#000080;
     font-size: 3rem;
@@ -144,5 +139,4 @@ input[type="submit"]{
         vertical-align: top;
         padding-bottom: 10px;
     }
-
 }
