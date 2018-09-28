@@ -3,6 +3,8 @@ CREATE DATABASE db_fastfoodfast;
 
 \c db_fastfoodfast;
 
+CREATE TYPE order_status AS ENUM ('new', 'processing', 'cancelled', 'complete');
+
 CREATE TABLE users(
     id UUID PRIMARY KEY,
     firstname VARCHAR NOT NULL,
@@ -29,7 +31,7 @@ CREATE TABLE food_menus(
 CREATE TABLE orders(
     id UUID PRIMARY KEY,
     quantity_ordered INT NOT NULL,
-    order_status VARCHAR DEFAULT 'pending',
+    order_status order_status DEFAULT 'new',
     created_date TIMESTAMPTZ,
     modified_date TIMESTAMPTZ,
     user_id UUID NOT NULL REFERENCES users (id) ON DELETE CASCADE,
