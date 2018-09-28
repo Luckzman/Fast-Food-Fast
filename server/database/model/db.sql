@@ -15,18 +15,6 @@ CREATE TABLE users(
     modified_date TIMESTAMPTZ
 );
 
-CREATE TABLE orders(
-    id UUID PRIMARY KEY,
-    quantity_ordered INT NOT NULL,
-    order_status VARCHAR DEFAULT 'pending',
-    created_date TIMESTAMPTZ,
-    modified_date TIMESTAMPTZ,
-    user_id UUID NOT NULL,
-    menu_id UUID NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
-    FOREIGN KEY (menu_id) REFERENCES food_menus (id)
-);
-
 CREATE TABLE food_menus(
     id UUID PRIMARY KEY,
     food_name VARCHAR NOT NULL,
@@ -36,5 +24,15 @@ CREATE TABLE food_menus(
     image VARCHAR NOT NULL,
     created_date TIMESTAMPTZ,
     modified_date TIMESTAMPTZ
+);
+
+CREATE TABLE orders(
+    id UUID PRIMARY KEY,
+    quantity_ordered INT NOT NULL,
+    order_status VARCHAR DEFAULT 'pending',
+    created_date TIMESTAMPTZ,
+    modified_date TIMESTAMPTZ,
+    user_id UUID NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+    menu_id UUID NOT NULL REFERENCES food_menus (id)
 );
 

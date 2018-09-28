@@ -1,16 +1,18 @@
 import express from 'express';
+import { authCheck } from '../database/middleware/helpers';
 import
 {
   getAllOrder,
   getOrderItem,
-  createOrder,
-  updateOrder,
-} from '../dummy data/controller/order';
+  placeOrder,
+  updateOrderStatus,
+} from '../database/controller/order';
 
 const orderRouter = express.Router();
-orderRouter.get('/', getAllOrder);
-orderRouter.get('/:id', getOrderItem);
-orderRouter.post('/', createOrder);
-orderRouter.put('/:id', updateOrder);
+
+orderRouter.post('/', authCheck, placeOrder);
+orderRouter.get('/', authCheck, getAllOrder);
+orderRouter.get('/:id', authCheck, getOrderItem);
+orderRouter.put('/:id', authCheck, updateOrderStatus);
 
 export default orderRouter;
