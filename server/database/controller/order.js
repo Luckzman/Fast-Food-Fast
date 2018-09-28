@@ -79,4 +79,28 @@ export const getOrderItem = (req, res) => {
     .catch(error => res.status(404).json(error));
 };
 
-export const updateOrderStatus = (req, res) => responseMsg(res, 200, true, 'update order status OK');
+/**
+ * This controller update order status
+ * @param {object} req
+ * @param {object} res
+ */
+export const updateOrderStatus = (req, res) => {
+  const query = 'SELECT * FROM users WHERE id = $1';
+  const value = [req.authData.id];
+  db.query(query, value)
+    .then((user) => {
+      console.log(user.rows[0]);
+      if (user.rows[0].user_status !== 'admin') {
+        return responseMsg(res, 403, false, 'No permission to access this resource');
+      }
+      const query = 'UPDATE orders SET order_status = $1 WHERE id = $2 RETURNING *';
+      const values = [req.body.order_status, req.params.id];
+      db.query(query, values)
+        .then((order) => {
+          console.log(order.rows[0]);
+          return responseMsg(res, 200, true, 'Order update Request Successful', order.rows[0]);
+        })
+        .catch(error => res.status(404).json(error));
+    })
+    .catch(error => res.status(404).json(error));
+};
