@@ -1,8 +1,6 @@
 import pg from 'pg';
 
-const env = require('dotenv');
-
-env.config();
+require('dotenv').config();
 
 let conString;
 
@@ -13,7 +11,6 @@ const devConString = {
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
 };
-
 
 const devTestConString = {
   user: process.env.DB_USER,

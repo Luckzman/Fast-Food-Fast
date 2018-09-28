@@ -2,8 +2,8 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import uuid from 'uuid';
 import moment from 'moment';
-import db from '../model/config';
-import { isValidEmail, responseMsg } from '../middleware/helpers';
+import db from '../../model/db/config';
+import { isValidEmail, responseMsg } from '../../utils/helpers';
 
 
 /**

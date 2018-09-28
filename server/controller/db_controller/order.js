@@ -1,7 +1,7 @@
 import moment from 'moment';
 import uuid from 'uuid';
-import db from '../model/config';
-import { responseMsg } from '../middleware/helpers';
+import db from '../../model/db/config';
+import { responseMsg } from '../../utils/helpers';
 
 /**
  * This controller will place a new order

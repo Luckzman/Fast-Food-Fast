@@ -1,12 +1,12 @@
 import express from 'express';
-import { authCheck } from '../database/middleware/helpers';
+import { authCheck } from '../utils/helpers';
 import
 {
   getAllOrder,
   getOrderItem,
   placeOrder,
   updateOrderStatus,
-} from '../database/controller/order';
+} from '../controller/db_controller/order';
 
 const orderRouter = express.Router();
 
