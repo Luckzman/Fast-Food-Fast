@@ -1,0 +1,28 @@
+main .container{
+    margin-bottom: 20px;
+}
+header nav a:first-child{
+    display: inline !important;
+}
+header nav a:last-child{
+    background-color: #008000;
+    border-radius: 10px;
+    margin-left: 5px;
+    padding: 0 5px;
+    box-shadow:1px 1px #ccc;
+}
+header nav a:hover:before,
+header nav a:hover:after{
+    height: 0px;
+    opacity: 0.6;
+}
+header nav a:hover{
+    color: rgb(34, 206, 0);
+    font-weight: 900;
+}
+@media only screen and (min-width: 760px){
+    main .container{
+        width: 70%;
+        margin-bottom: 50px;
+    }
+}

@@ -37,16 +37,24 @@ tr td:nth-child(3){
 td{
     line-height: 3rem;
 }
-
+td input{
+    height: 30px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+td input[type=number]::-webkit-inner-spin-button, 
+td input[type=number]:focus::-webkit-inner-spin-button{
+    opacity: 1;
+    height: 30px;
+    width:40px;
+}
 tr:nth-child(even){
     background-color: #ccc;
 }
 tr:nth-child(even):hover{
     background-color: #c4c4c4;
 }
-/* .img-container{
-    display: flex;
-} */
 img{
     height: 50px;
     width: 50px;

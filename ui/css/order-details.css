@@ -85,7 +85,8 @@ header nav a:hover{
     height: 30px;
     width: 40%;
     font-size: 1.2rem;
-    padding-left: 10px;
+    border-radius: 20px;
+    border: 1px solid rgb(216, 216, 216);
 }
 .order-content input[type=number]::-webkit-inner-spin-button, 
 .order-content input[type=number]:focus::-webkit-inner-spin-button{
