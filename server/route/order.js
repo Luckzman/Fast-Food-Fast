@@ -1,5 +1,5 @@
 import express from 'express';
-import { authCheck } from '../utils/helpers';
+import authCheck from '../utils/auth_checker';
 import
 {
   getAllOrder,

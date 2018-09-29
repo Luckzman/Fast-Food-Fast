@@ -1,7 +1,7 @@
 import uuid from 'uuid';
 import moment from 'moment';
 import db from '../../model/db/config';
-import { responseMsg } from '../../utils/helpers';
+import responseMsg from '../../utils/helpers';
 
 /**
  * @description This controller create Menu Items
@@ -55,7 +55,7 @@ export const getMenu = (req, res) => {
       if (!menu.rows[0]) {
         return responseMsg(res, 204, 'success', 'No menu available');
       }
-      return responseMsg(res, 201, 'success', 'menu retrival successful', menu.rows);
+      return responseMsg(res, 200, 'success', 'menu retrival successful', menu.rows);
     })
     .catch(error => res.status(404).json(error));
 };

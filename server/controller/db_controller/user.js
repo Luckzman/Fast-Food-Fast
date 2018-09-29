@@ -1,5 +1,5 @@
 import db from '../../model/db/config';
-import { responseMsg } from '../../utils/helpers';
+import responseMsg from '../../utils/helpers';
 
 /**
  * This controller to get user order history

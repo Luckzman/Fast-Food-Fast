@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import validator from 'express-validator';
 import logger from 'morgan';
-import { responseMsg } from './utils/helpers';
+import responseMsg from './utils/helpers';
 
 import router from './route/index';
 

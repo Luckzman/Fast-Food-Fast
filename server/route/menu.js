@@ -1,6 +1,6 @@
 import express from 'express';
 import { createMenu, getMenu } from '../controller/db_controller/menu';
-import { authCheck } from '../utils/helpers';
+import authCheck from '../utils/auth_checker';
 
 const menuRouter = express.Router();
 

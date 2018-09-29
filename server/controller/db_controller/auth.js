@@ -3,7 +3,8 @@ import jwt from 'jsonwebtoken';
 import uuid from 'uuid';
 import moment from 'moment';
 import db from '../../model/db/config';
-import { isValidEmail, responseMsg } from '../../utils/helpers';
+import isValidEmail from '../../utils/validate';
+import responseMsg from '../../utils/helpers';
 
 
 /**
@@ -44,8 +45,8 @@ export const signup = (req, res) => {
       }
       bcrypt.hash(password, 8)
         .then((hash) => {
-          const query = 'INSERT INTO users(id, firstname, lastname, email, phone, password, user_status, created_date, modified_date) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *';
-          // const query = 'INSERT INTO users VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *';
+          // const query = 'INSERT INTO users(id, firstname, lastname, email, phone, password, user_status, created_date, modified_date) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *';
+          const query = 'INSERT INTO users VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *';
           const values = [
             uuid(),
             firstname,
