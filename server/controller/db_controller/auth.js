@@ -12,21 +12,17 @@ import { isValidEmail, responseMsg } from '../../utils/helpers';
  * @param {object} res
  */
 export const signup = (req, res) => {
-  /**
-    * @description Destructure req.body object
-    */
   let {
     firstname, lastname, phone, email, password,
   } = req.body;
+  const { user_status } = req.body;
 
   firstname = firstname.trim();
   lastname = lastname.trim();
   phone = phone.trim();
   email = email.trim();
   password = password.trim();
-  /**
-   * @description Check to ensure no empty entry
-   */
+
   if (!firstname
     || !lastname
     || !phone
@@ -35,16 +31,10 @@ export const signup = (req, res) => {
     return responseMsg(res, 400, 'fail', 'All entries must be filled');
   }
 
-  /**
-   * @description Enforce valid email input
-   */
   if (!isValidEmail(email)) {
     return responseMsg(res, 400, 'fail', 'Email is invalid');
   }
 
-  /**
-   * @description Ensures no duplicate email entry
-   */
   const query = 'SELECT * FROM users WHERE email = $1';
   const value = [email];
   db.query(query, value)
@@ -54,7 +44,8 @@ export const signup = (req, res) => {
       }
       bcrypt.hash(password, 8)
         .then((hash) => {
-          const query = 'INSERT INTO users(id, firstname, lastname, email, phone, password, created_date, modified_date) VALUES($1, $2, $3, $4, $5, $6, $7, $8) returning *';
+          const query = 'INSERT INTO users(id, firstname, lastname, email, phone, password, user_status, created_date, modified_date) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *';
+          // const query = 'INSERT INTO users VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *';
           const values = [
             uuid(),
             firstname,
@@ -62,6 +53,7 @@ export const signup = (req, res) => {
             email,
             phone,
             hash,
+            user_status,
             moment(new Date()),
             moment(new Date())];
           db.query(query, values)

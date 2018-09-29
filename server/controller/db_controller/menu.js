@@ -16,7 +16,7 @@ export const createMenu = (req, res) => {
   db.query(query, values)
     .then((admin) => {
       if (admin.rows[0].user_status !== 'admin') {
-        return responseMsg(res, 401, 'fail', 'admin access only');
+        return responseMsg(res, 403, 'fail', 'admin access only');
       }
       const {
         food_name, description, category, price, image,
@@ -43,8 +43,7 @@ export const createMenu = (req, res) => {
 };
 
 /**
- * This controller allows all users get access
- * to the entire food menu.
+ * @description This controller allows all users get access to the entire food menu.
  * @param {object} req
  * @param {object} res
  * @returns {object} responseMsg
@@ -52,6 +51,11 @@ export const createMenu = (req, res) => {
 export const getMenu = (req, res) => {
   const query = 'SELECT * FROM food_menus';
   db.query(query)
-    .then(menu => responseMsg(res, 201, 'success', 'menu retrival successful', menu.rows))
+    .then((menu) => {
+      if (!menu.rows[0]) {
+        return responseMsg(res, 204, 'success', 'No menu available');
+      }
+      return responseMsg(res, 201, 'success', 'menu retrival successful', menu.rows);
+    })
     .catch(error => res.status(404).json(error));
 };
