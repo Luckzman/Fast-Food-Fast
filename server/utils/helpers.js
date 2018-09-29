@@ -2,8 +2,8 @@ import jwt from 'jsonwebtoken';
 
 export const isValidEmail = email => /\S+@\S+\.\S/.test(email);
 
-export const responseMsg = (res, code, success, message, data) => res.status(code).json({
-  success,
+export const responseMsg = (res, code, status, message, data) => res.status(code).json({
+  status,
   message,
   data,
 });
@@ -15,6 +15,6 @@ export const authCheck = (req, res, next) => {
     req.authData = decode;
     next();
   } catch (error) {
-    return responseMsg(res, 401, false, 'Authentication Failed');
+    return responseMsg(res, 401, 'fail', 'Authentication Failed');
   }
 };

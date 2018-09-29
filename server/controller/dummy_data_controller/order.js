@@ -1,7 +1,7 @@
-import model from '../model/order';
+import model from '../../model/dummy_data/order';
 
 /**
- *GetAllOrder function  return all orders
+ *@description GetAllOrder function  return all orders
  * @param {object} req
  * @param {object} res
  */
@@ -14,7 +14,7 @@ export const getAllOrder = (req, res) => {
 };
 
 /**
- * GetOrderItem function returns an order item based on the params id
+ * @description GetOrderItem function returns an order item based on the params id
  * @param {object} req
  * @param {object} res
  */
@@ -35,7 +35,7 @@ export const getOrderItem = (req, res) => {
 };
 
 /**
- * CreateOrder function create a new order
+ * @description CreateOrder function create a new order
  * @param {object} req
  * @param {object} res
  */
@@ -61,7 +61,7 @@ export const createOrder = (req, res) => {
 };
 
 /**
- * UpdateOrder Function updates the status of an order
+ * @description UpdateOrder Function updates the status of an order
  * @param {object} req
  * @param {object} res
  */

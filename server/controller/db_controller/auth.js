@@ -32,14 +32,14 @@ export const signup = (req, res) => {
     || !phone
     || !email
     || !password) {
-    return responseMsg(res, 400, false, 'All entries must be filled');
+    return responseMsg(res, 400, 'fail', 'All entries must be filled');
   }
 
   /**
    * @description Enforce valid email input
    */
   if (!isValidEmail(email)) {
-    return responseMsg(res, 400, false, 'Email is invalid');
+    return responseMsg(res, 400, 'fail', 'Email is invalid');
   }
 
   /**
@@ -50,7 +50,7 @@ export const signup = (req, res) => {
   db.query(query, value)
     .then((user) => {
       if (user.rowCount > 0) {
-        return responseMsg(res, 400, false, 'Email already exist');
+        return responseMsg(res, 400, 'fail', 'Email already exist');
       }
       bcrypt.hash(password, 8)
         .then((hash) => {
@@ -65,7 +65,7 @@ export const signup = (req, res) => {
             moment(new Date()),
             moment(new Date())];
           db.query(query, values)
-            .then(user => responseMsg(res, 201, true, 'Signup successful', user.rows[0]))
+            .then(user => responseMsg(res, 201, 'success', 'Signup successful', user.rows[0]))
             .catch(error => res.status(400).json(error));
         })
         .catch(error => res.status(400).json(error));
@@ -82,17 +82,17 @@ export const login = (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return responseMsg(res, 400, false, 'All fields must be filled');
+    return responseMsg(res, 400, 'fail', 'All fields must be filled');
   }
   if (!isValidEmail(email)) {
-    return responseMsg(res, 400, false, 'Enter valid Email');
+    return responseMsg(res, 400, 'fail', 'Enter valid Email');
   }
   const query = 'SELECT * FROM users WHERE email = $1';
   const value = [email];
   db.query(query, value)
     .then((user) => {
       if (user.rowCount < 1) {
-        return responseMsg(res, 404, false, 'Email not Found');
+        return responseMsg(res, 404, 'fail', 'Email not Found');
       }
       bcrypt.compare(password, user.rows[0].password)
         .then((result) => {
@@ -103,9 +103,9 @@ export const login = (req, res) => {
             {
               expiresIn: '6h',
             });
-            return responseMsg(res, 200, true, 'login successful', token);
+            return responseMsg(res, 200, 'success', 'login successful', token);
           }
-          return responseMsg(res, 400, false, 'Password is incorrect');
+          return responseMsg(res, 400, 'fail', 'Password is incorrect');
         })
         .catch(error => res.status(400).json(error));
     })
