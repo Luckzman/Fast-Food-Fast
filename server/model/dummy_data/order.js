@@ -1,5 +1,5 @@
 /**
- * Order array that holds dummy data for order object
+ * @description Order array that holds dummy data for order object
  */
 export default [
   {

@@ -4,11 +4,12 @@
   "description": "Fast-Food-Fast​ is a food delivery service app for a restaurant.",
   "main": "index.js",
   "scripts": {
-    "create_db": "psql -U postgres -f ./server/database/model/db.sql",
+    "create_db": "psql -U postgres -f ./server/model/db/db.sql",
+    "create_test_db": "psql -U postgres -f ./server/model/db/db_test.sql",
     "startDev": "nodemon --exec babel-node -- index",
     "babel-node": "babel-node --presets=env",
     "start": "babel-node index",
-    "test": "nyc mocha --require babel-register ./server/**/**/order.js --exit",
+    "test": "npm run create_test_db && set NODE_ENV=test&&  mocha --require babel-register --env test ./server/**/coverage/*.js --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "npm test && nyc report --reporter=text-lcov | coveralls"
   },
@@ -30,6 +31,7 @@
     "chai-http": "^4.2.0",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
+    "express-validator": "^5.3.0",
     "jsonwebtoken": "^8.3.0",
     "moment": "^2.22.2",
     "morgan": "^1.9.0",

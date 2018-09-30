@@ -1,9 +1,10 @@
-DROP DATABASE IF EXISTS db_fastfoodfast;
-CREATE DATABASE db_fastfoodfast;
+DROP DATABASE IF EXISTS db_test;
+CREATE DATABASE db_test;
 
-\c db_fastfoodfast;
+\c db_test;
 
 CREATE TYPE order_status AS ENUM ('new', 'processing', 'cancelled', 'complete');
+CREATE TYPE user_status AS ENUM ('regular', 'admin');
 
 CREATE TABLE users(
     id UUID PRIMARY KEY,
@@ -12,14 +13,14 @@ CREATE TABLE users(
     email VARCHAR NOT NULL,
     phone VARCHAR NOT NULL,
     password VARCHAR NOT NULL,
-    user_status VARCHAR DEFAULT 'regular',
+    user_status user_status DEFAULT 'regular',
     created_date TIMESTAMPTZ,
     modified_date TIMESTAMPTZ
 );
 
 CREATE TABLE food_menus(
     id UUID PRIMARY KEY,
-    food_name VARCHAR NOT NULL,
+    food_name VARCHAR NOT NULL UNIQUE,
     description TEXT NOT NULL,
     category VARCHAR NOT NULL,
     price VARCHAR NOT NULL,
@@ -35,6 +36,6 @@ CREATE TABLE orders(
     created_date TIMESTAMPTZ,
     modified_date TIMESTAMPTZ,
     user_id UUID NOT NULL REFERENCES users (id) ON DELETE CASCADE,
-    menu_id UUID NOT NULL REFERENCES food_menus (id)
+    menu_id UUID NOT NULL REFERENCES food_menus (id) ON DELETE CASCADE
 );
 

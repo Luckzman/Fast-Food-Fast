@@ -2,91 +2,260 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../index';
 
+process.env.NODE_ENV = 'test';
+
 chai.use(chaiHttp);
 chai.should();
 
-const newOrder = {
-  id: 1,
-  customer_name: 'Olumide Emmanuel',
-  customer_address: '5, Itori Street, Aguda',
-  city: 'Surulere',
-  additional_info: '',
-  phone_no: 1,
-  ordered_food: 'Burger',
-  quantity_ordered: '2',
-  total_price: '1000',
-  date_ordered: '24/08/2018',
-  status: 'pending',
+const admin = {
+  email: 'admin@fastfoodfast.com',
+  password: 'admin',
 };
-/**
- * Test Steps:
- * 1. create new order
- * 2. get all order
- * 3. get a single order
- * 4. update order status
- */
-describe('/CREATE NEW ORDER', () => {
-  it('should create new order', (done) => {
+
+const user = {
+  email: 'user@fastfoodfast.com',
+  password: '12345',
+};
+
+const order = {
+  food_name: 'meat_pie',
+  quantity_ordered: 10,
+};
+
+
+describe('EMPTY ORDERS TABLE', () => {
+  it('should return no content if order table is empty', (done) => {
     chai.request(app)
-      .post('/api/v1/order')
-      .send(newOrder)
-      .end((err, res) => {
-        res.should.have.status(201);
-        res.body.should.have.property('success').equals(true);
-        done();
-      });
-  });
-});
-describe('/GET ALL ORDERS', () => {
-  it('should be able to get all orders', (done) => {
-    chai.request(app)
-      .get('/api/v1/order')
+      .post('/api/v1/auth/login')
+      .send(admin)
       .end((err, res) => {
         res.should.have.status(200);
-        res.body.should.have.property('success').equals(true);
-        done();
+        const token = res.body.data;
+        chai.request(app)
+          .get('/api/v1/orders')
+          .set('Authorization', `Bearer ${token}`)
+          .end((err, res) => {
+            res.should.have.status(204);
+            done();
+          });
       });
   });
 });
-describe('/GET SINGLE ORDER', () => {
-  it('should be able to get an order by its id', (done) => {
+
+// describe('/INVALID ORDER PARAMS', () => {
+//   it('admin should have access to a single order', (done) => {
+//     chai.request(app)
+//       .post('/api/v1/auth/login')
+//       .send(admin)
+//       .end((err, res) => {
+//         res.should.have.status(200);
+//         const token = res.body.data;
+//         chai.request(app)
+//           .get('/api/v1/orders/')
+//           .set('Authorization', `Bearer ${token}`)
+//           .end((err, res) => {
+//             res.should.have.status(200);
+//             const { id } = res.body.data[0];
+//             chai.request(app)
+//               .get(`/api/v1/orders/${id}`)
+//               .set('Authorization', `Bearer ${token}`)
+//               .end((err, res) => {
+//                 res.should.have.status(200);
+//                 done();
+//               });
+//           });
+//       });
+//   });
+// });
+
+describe('PLACE ORDER', () => {
+  it('should allow regular users to place an order', (done) => {
     chai.request(app)
-      .get('/api/v1/order/1')
+      .post('/api/v1/auth/login')
+      .send(user)
       .end((err, res) => {
         res.should.have.status(200);
-        res.body.should.have.property('success').equals(true);
-        done();
+        const token = res.body.data;
+        chai.request(app)
+          .post('/api/v1/orders')
+          .set('Authorization', `Bearer ${token}`)
+          .send(order)
+          .end((err, res) => {
+            res.should.have.status(201);
+            done();
+          });
       });
   });
-  it('should not order if id does not exist', (done) => {
+//   it('quantity ordered must be an integer', (done) => {
+//     chai.request(app)
+//       .post('/api/v1/auth/login')
+//       .send(user)
+//       .end((err, res) => {
+//         res.should.have.status(200);
+//         const token = res.body.data;
+//         chai.request(app)
+//           .post('/api/v1/orders')
+//           .set('Authorization', `Bearer ${token}`)
+//           .send(order)
+//           .end((err, res) => {
+//             res.should.have.status(201);
+//             done();
+//           });
+//       });
+//   });
+});
+
+describe('GET ALL ORDERS', () => {
+  it('should allow ONLY ADMIN to access all orders', (done) => {
     chai.request(app)
-      .get('/api/v1/order/5')
+      .post('/api/v1/auth/login')
+      .send(admin)
       .end((err, res) => {
-        res.should.have.status(404);
-        res.body.should.have.property('success').equals(false);
-        done();
+        res.should.have.status(200);
+        const token = res.body.data;
+        chai.request(app)
+          .get('/api/v1/orders')
+          .set('Authorization', `Bearer ${token}`)
+          .end((err, res) => {
+            res.should.have.status(200);
+            done();
+          });
+      });
+  });
+  it('should not allow regular users to access all orders', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(user)
+      .end((err, res) => {
+        res.should.have.status(200);
+        const token = res.body.data;
+        chai.request(app)
+          .get('/api/v1/orders')
+          .set('Authorization', `Bearer ${token}`)
+          .end((err, res) => {
+            res.should.have.status(403);
+            done();
+          });
       });
   });
 });
-describe('/UPDATE ORDER STATUS', () => {
-  it('should be able to update an order by its id', (done) => {
+
+describe('GET A SPECIFIC ORDER', () => {
+  it('should allow admin to access a specific order', (done) => {
     chai.request(app)
-      .put('/api/v1/order/1')
-      .send({ status: 'delivered' })
+      .post('/api/v1/auth/login')
+      .send(admin)
       .end((err, res) => {
-        res.should.have.status(201);
-        res.body.should.have.property('success').equals(true);
-        done();
+        res.should.have.status(200);
+        const token = res.body.data;
+        chai.request(app)
+          .get('/api/v1/orders/')
+          .set('Authorization', `Bearer ${token}`)
+          .end((err, res) => {
+            res.should.have.status(200);
+            const { id } = res.body.data[0];
+            chai.request(app)
+              .get(`/api/v1/orders/${id}`)
+              .set('Authorization', `Bearer ${token}`)
+              .end((err, res) => {
+                res.should.have.status(200);
+                done();
+              });
+          });
       });
   });
-  it('should not update order if id does not exist', (done) => {
+
+  it('should NOT allow regular users to access a specific order', (done) => {
     chai.request(app)
-      .get('/api/v1/order/5')
-      .send({ status: 'delivered' })
+      .post('/api/v1/auth/login')
+      .send(user)
       .end((err, res) => {
-        res.should.have.status(404);
-        res.body.should.have.property('success').equals(false);
-        done();
+        res.should.have.status(200);
+        const token = res.body.data;
+        chai.request(app)
+          .get('/api/v1/orders/')
+          .set('Authorization', `Bearer ${token}`)
+          .end((err, res) => {
+            res.should.have.status(403);
+            done();
+          });
+      });
+  });
+});
+
+describe('UPDATE AN ORDER STATUS', () => {
+  it('should allow only admin to update an order status', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(admin)
+      .end((err, res) => {
+        res.should.have.status(200);
+        const token = res.body.data;
+        chai.request(app)
+          .get('/api/v1/orders/')
+          .set('Authorization', `Bearer ${token}`)
+          .end((err, res) => {
+            res.should.have.status(200);
+            const { id } = res.body.data[0];
+            chai.request(app)
+              .put(`/api/v1/orders/${id}`)
+              .set('Authorization', `Bearer ${token}`)
+              .send({
+                food_name: 'meat_pie',
+                quantity_ordered: 10,
+                order_status: 'processing',
+              })
+              .end((err, res) => {
+                res.should.have.status(201);
+                done();
+              });
+          });
+      });
+  });
+
+  it('should not allow admin to update order status with invalid entries', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(admin)
+      .end((err, res) => {
+        res.should.have.status(200);
+        const token = res.body.data;
+        chai.request(app)
+          .get('/api/v1/orders/')
+          .set('Authorization', `Bearer ${token}`)
+          .end((err, res) => {
+            res.should.have.status(200);
+            const { id } = res.body.data[0];
+            chai.request(app)
+              .put(`/api/v1/orders/${id}`)
+              .set('Authorization', `Bearer ${token}`)
+              .send({
+                food_name: 'meat_pie',
+                quantity_ordered: 10,
+                order_status: 'proce',
+              })
+              .end((err, res) => {
+                res.should.have.status(400);
+                done();
+              });
+          });
+      });
+  });
+
+  it('should not allow regular users to update an order status', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(user)
+      .end((err, res) => {
+        res.should.have.status(200);
+        const token = res.body.data;
+        chai.request(app)
+          .get('/api/v1/orders/')
+          .set('Authorization', `Bearer ${token}`)
+          .end((err, res) => {
+            res.should.have.status(403);
+            done();
+          });
       });
   });
 });
