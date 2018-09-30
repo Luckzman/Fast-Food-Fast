@@ -16,7 +16,7 @@ const getUserOrderHistory = (req, res) => {
       db.query(query, value)
         .then((order) => {
           if (!order.rows[0]) {
-            return responseMsg(res, 204, 'fail', 'No order has been placed');
+            return responseMsg(res, 204, 'success', 'No order has been placed');
           }
           return responseMsg(res, 200, 'success', 'User Order History Request Successful', order.rows[0]);
         })
