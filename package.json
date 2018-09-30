@@ -9,7 +9,7 @@
     "startDev": "nodemon --exec babel-node -- index",
     "babel-node": "babel-node --presets=env",
     "start": "babel-node index",
-    "test": "npm run create_test_db && set NODE_ENV=test&&  mocha --require babel-register --env test ./server/**/coverage/*.js --exit",
+    "test": "set NODE_ENV=test&& npm run create_test_db && mocha --require babel-register --env test ./server/**/coverage/*.js --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "npm test && nyc report --reporter=text-lcov | coveralls"
   },
