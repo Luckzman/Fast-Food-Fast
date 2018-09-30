@@ -20,7 +20,7 @@ CREATE TABLE users(
 
 CREATE TABLE food_menus(
     id UUID PRIMARY KEY,
-    food_name VARCHAR NOT NULL,
+    food_name VARCHAR NOT NULL UNIQUE,
     description TEXT NOT NULL,
     category VARCHAR NOT NULL,
     price VARCHAR NOT NULL,

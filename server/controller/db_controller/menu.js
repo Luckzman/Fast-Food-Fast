@@ -33,8 +33,8 @@ export const createMenu = (req, res) => {
         category,
         price,
         image,
-        moment(new Date()),
-        moment(new Date())];
+        new Date(),
+        new Date()];
       db.query(query, values)
         .then(menu => responseMsg(res, 201, 'success', 'menu created', menu.rows[0]))
         .catch(error => res.status(400).json({ error }));

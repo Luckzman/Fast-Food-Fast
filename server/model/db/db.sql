@@ -4,7 +4,7 @@ CREATE DATABASE db_fastfoodfast;
 \c db_fastfoodfast;
 
 CREATE TYPE order_status AS ENUM ('new', 'processing', 'cancelled', 'complete');
-CREATE TYPE user_status AS ENUM ('regular', 'admin');
+--CREATE TYPE user_status AS ENUM ('regular', 'admin');
 
 CREATE TABLE users(
     id UUID PRIMARY KEY,
@@ -13,14 +13,14 @@ CREATE TABLE users(
     email VARCHAR NOT NULL,
     phone VARCHAR NOT NULL,
     password VARCHAR NOT NULL,
-    user_status user_status DEFAULT 'regular',
+    user_status VARCHAR,
     created_date TIMESTAMPTZ,
     modified_date TIMESTAMPTZ
 );
 
 CREATE TABLE food_menus(
     id UUID PRIMARY KEY,
-    food_name VARCHAR NOT NULL,
+    food_name VARCHAR NOT NULL UNIQUE,
     description TEXT NOT NULL,
     category VARCHAR NOT NULL,
     price VARCHAR NOT NULL,

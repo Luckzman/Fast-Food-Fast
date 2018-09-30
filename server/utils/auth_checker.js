@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { responseMsg } from './helpers';
+import responseMsg from './helpers';
 
 const authCheck = (req, res, next) => {
   try {
