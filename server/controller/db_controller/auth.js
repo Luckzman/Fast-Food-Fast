@@ -12,34 +12,15 @@ import responseMsg from '../../utils/helpers';
  * @param {object} res
  */
 export const signup = (req, res) => {
-  let {
-    firstname, lastname, phone, email, password,
+  const {
+    firstname, lastname, phone, email, password, user_status,
   } = req.body;
-  const { user_status } = req.body;
-
-  firstname = firstname.trim();
-  lastname = lastname.trim();
-  phone = phone.trim();
-  email = email.trim();
-  password = password.trim();
-
-  if (!firstname
-    || !lastname
-    || !phone
-    || !email
-    || !password) {
-    return responseMsg(res, 400, 'fail', 'All entries must be filled');
-  }
-
-  if (!isValidEmail(email)) {
-    return responseMsg(res, 400, 'fail', 'Email is invalid');
-  }
 
   const query = 'SELECT * FROM users WHERE email = $1';
   const value = [email];
   db.query(query, value)
     .then((user) => {
-      if (user.rowCount > 0) {
+      if (user.rows[0]) {
         return responseMsg(res, 400, 'fail', 'Email already exist');
       }
       bcrypt.hash(password, 8)
@@ -71,15 +52,9 @@ export const signup = (req, res) => {
  */
 export const login = (req, res) => {
   const { email, password } = req.body;
-
-  if (!email || !password) {
-    return responseMsg(res, 400, 'fail', 'All fields must be filled');
-  }
-  if (!isValidEmail(email)) {
-    return responseMsg(res, 400, 'fail', 'Enter valid Email');
-  }
   const query = 'SELECT * FROM users WHERE email = $1';
   const value = [email];
+
   db.query(query, value)
     .then((user) => {
       if (user.rowCount < 1) {
