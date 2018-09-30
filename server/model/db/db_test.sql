@@ -3,7 +3,7 @@ CREATE DATABASE db_test;
 
 \c db_test;
 
-CREATE TYPE order_status AS ENUM ('new', 'processing', 'cancelled', 'complete');
+CREATE TYPE order_status AS ENUM ('new', 'processing', 'cancelled', 'nomplete');
 CREATE TYPE user_status AS ENUM ('regular', 'admin');
 
 CREATE TABLE users(

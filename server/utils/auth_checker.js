@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import responseMsg from './helpers';
 
-const authCheck = (req, res, next) => {
+const authChecker = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(' ')[1];
     const decode = jwt.verify(token, process.env.SECRET_KEY);
@@ -12,4 +12,4 @@ const authCheck = (req, res, next) => {
   }
 };
 
-export default authCheck;
+export default authChecker;
