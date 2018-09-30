@@ -1,6 +1,6 @@
 import responseMsg from './helpers';
 
-const isValidEmail = email => /\S+@\S+\.\S/.test(email);
+const isValidEmail = input => /\S+@\S+\.\S/.test(input);
 
 const isValidInt = input => /^\+?\d+$/.test(input);
 
@@ -12,6 +12,20 @@ const numChecker = input => /[0-9]/.test(input);
 
 const specCharChecker = input => /[$@#&!]/.test(input);
 
+const uuidRegex = /^[0-9A-F]{8}-[0-9A-F]{4}-[1-5][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
+
+const uuidChecker = input => uuidRegex.test(input);
+
+const updateInputRegex = /\b(new|processing|cancelled|complete)\b/;
+
+const isValidUpdateInput = input => updateInputRegex.test(input);
+
+/**
+ * @description This function validate user signup field
+ * @param {object} req
+ * @param {object} res
+ * @param {function} next
+ */
 export const signupValidator = (req, res, next) => {
   let {
     firstname, lastname, phone, email, password,
@@ -69,6 +83,12 @@ export const signupValidator = (req, res, next) => {
   next();
 };
 
+/**
+ * @description This function validate user signup input field
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ */
 export const loginValidator = (req, res, next) => {
   let {
     email, password,
@@ -105,25 +125,40 @@ export const loginValidator = (req, res, next) => {
   next();
 };
 
+/**
+ * @description This function validate menu input fields
+ * @param {object} req
+ * @param {object} res
+ * @param {function} next
+ */
 export const menuValidator = (req, res, next) => {
   let {
-    food_name, description, category, price, image,
+    food_name, description, category, image,
   } = req.body;
+  const { price } = req.body;
 
   food_name = food_name.trim();
   description = description.trim();
   category = category.trim();
-  price = price.trim();
   image = image.trim();
 
   if (!food_name) {
-    return responseMsg(res, 400, 'fail', 'food name is missing');
+    return responseMsg(res, 400, 'fail', 'Menu name is missing');
+  }
+  if (typeof food_name !== 'string') {
+    return responseMsg(res, 400, 'fail', 'Menu name must be string');
   }
   if (!description) {
-    return responseMsg(res, 400, 'fail', 'description is missing');
+    return responseMsg(res, 400, 'fail', 'Menu description is missing');
+  }
+  if (typeof description !== 'string') {
+    return responseMsg(res, 400, 'fail', 'Menu description must be string');
   }
   if (!category) {
-    return responseMsg(res, 400, 'fail', 'Category is not selected');
+    return responseMsg(res, 400, 'fail', 'Menu category is not selected');
+  }
+  if (typeof category !== 'string') {
+    return responseMsg(res, 400, 'fail', 'Menu category must be string');
   }
   if (!price) {
     return responseMsg(res, 400, 'fail', 'price is missing');
@@ -133,6 +168,64 @@ export const menuValidator = (req, res, next) => {
   }
   if (!image) {
     return responseMsg(res, 400, 'fail', 'upload an image');
+  }
+
+  next();
+};
+
+/**
+ *@description This function validate order input fields
+ * @param {object} req
+ * @param {object} res
+ * @param {function} next
+ */
+export const placeOrderValidator = (req, res, next) => {
+  const {
+    quantity_ordered,
+  } = req.body;
+
+  if (!quantity_ordered) {
+    return responseMsg(res, 400, 'fail', 'quantity ordered is missing');
+  }
+  if (!isValidInt(quantity_ordered)) {
+    return responseMsg(res, 400, 'fail', 'quantity ordered must be a positive integer');
+  }
+
+  next();
+};
+
+/**
+ *@description This function validate order input fields
+ * @param {object} req
+ * @param {object} res
+ * @param {function} next
+ */
+export const updateOrderValidator = (req, res, next) => {
+  const {
+    order_status,
+  } = req.body;
+
+  if (!order_status) {
+    return responseMsg(res, 400, 'fail', 'order_status is missing');
+  }
+  if (!isValidUpdateInput(order_status)) {
+    return responseMsg(res, 400, 'fail', 'order_status must be either new, processing, cancelled or complete');
+  }
+
+  next();
+};
+
+/**
+ * @description This function ensures params id is a UUID type
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ */
+export const urlParamsChecker = (req, res, next) => {
+  const { id } = req.params;
+
+  if (!uuidChecker(id)) {
+    return responseMsg(res, 400, 'fail', 'url params id is not valid');
   }
 
   next();

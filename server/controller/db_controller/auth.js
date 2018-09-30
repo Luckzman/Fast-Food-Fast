@@ -2,7 +2,6 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import uuid from 'uuid';
 import db from '../../model/db/config';
-import isValidEmail from '../../utils/validate';
 import responseMsg from '../../utils/helpers';
 
 
@@ -13,9 +12,9 @@ import responseMsg from '../../utils/helpers';
  */
 export const signup = (req, res) => {
   const {
-    firstname, lastname, phone, email, password, user_status,
+    firstname, lastname, phone, email, password,
   } = req.body;
-
+  const user_status = req.body.user_status || 'regular';
   const query = 'SELECT * FROM users WHERE email = $1';
   const value = [email];
   db.query(query, value)

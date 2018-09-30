@@ -5,7 +5,7 @@ import { createMenu, getMenu } from '../controller/db_controller/menu';
 
 const menuRouter = express.Router();
 
-menuRouter.post('/', authChecker, menuValidator, createMenu);
+menuRouter.post('/', menuValidator, authChecker, createMenu);
 menuRouter.get('/', getMenu);
 
 export default menuRouter;
