@@ -4,6 +4,6 @@ import authCheck from '../utils/auth_checker';
 
 const userRouter = express.Router();
 
-userRouter.get('/:id/orders', authCheck, getUserOrderHistory);
+userRouter.get('/orders', authCheck, getUserOrderHistory);
 
 export default userRouter;
