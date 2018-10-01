@@ -136,7 +136,7 @@ export const menuValidator = (req, res, next) => {
     food_name, description, category,
   } = req.body;
   const { price } = req.body;
-  const image = req.file.path;
+  const image = `${req.file.destination}${req.file.filename}`;
 
   food_name = food_name.trim();
   description = description.trim();

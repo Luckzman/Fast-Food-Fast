@@ -17,15 +17,6 @@ const user = {
   password: '12345678aB@',
 };
 
-
-const menu = {
-  food_name: 'meat_pie',
-  description: 'Fresh and tasty',
-  category: 'pastas',
-  price: '500',
-  image: 'file://meat.jpg',
-};
-
 describe('EMPTY MENU TABLE', () => {
   it('should return no content if menu table is empty', (done) => {
     chai.request(app)
@@ -49,7 +40,12 @@ describe('CREATE MENU', () => {
         chai.request(app)
           .post('/api/v1/menu')
           .set('Authorization', `Bearer ${token}`)
-          .send(menu)
+          .type('form')
+          .field('food_name', 'meat_pie')
+          .field('description', 'Fresh and tasty')
+          .field('category', 'pastas')
+          .field('price', '500')
+          .attach('image', './server/test/test_img.jpg')
           .end((err, res) => {
             res.should.have.status(201);
             done();
@@ -66,7 +62,12 @@ describe('CREATE MENU', () => {
         chai.request(app)
           .post('/api/v1/menu')
           .set('Authorization', `Bearer ${token}`)
-          .send(menu)
+          .type('form')
+          .field('food_name', 'meat_pie')
+          .field('description', 'Fresh and tasty')
+          .field('category', 'pastas')
+          .field('price', '500')
+          .attach('image', './server/test/test_img.jpg')
           .end((err, res) => {
             res.should.have.status(403);
             done();
@@ -83,13 +84,12 @@ describe('CREATE MENU', () => {
         chai.request(app)
           .post('/api/v1/menu')
           .set('Authorization', `Bearer ${token}`)
-          .send({
-            food_name: '',
-            description: 'Fresh and tasty',
-            category: 'pastas',
-            price: '500',
-            image: 'file://meat.jpg',
-          })
+          .type('form')
+          .field('food_name', '')
+          .field('description', 'Fresh and tasty')
+          .field('category', 'pastas')
+          .field('price', '500')
+          .attach('image', './server/test/test_img.jpg')
           .end((err, res) => {
             res.should.have.status(400);
             done();
@@ -106,13 +106,12 @@ describe('CREATE MENU', () => {
         chai.request(app)
           .post('/api/v1/menu')
           .set('Authorization', `Bearer ${token}`)
-          .send({
-            food_name: 'Fried Rice',
-            description: '',
-            category: 'pastas',
-            price: '500',
-            image: 'file://meat.jpg',
-          })
+          .type('form')
+          .field('food_name', 'meat_pie')
+          .field('description', '')
+          .field('category', 'pastas')
+          .field('price', '500')
+          .attach('image', './server/test/test_img.jpg')
           .end((err, res) => {
             res.should.have.status(400);
             done();
@@ -129,13 +128,12 @@ describe('CREATE MENU', () => {
         chai.request(app)
           .post('/api/v1/menu')
           .set('Authorization', `Bearer ${token}`)
-          .send({
-            food_name: 'fried Rice',
-            description: 'Fresh and tasty',
-            category: '',
-            price: '500',
-            image: 'file://meat.jpg',
-          })
+          .type('form')
+          .field('food_name', 'meat_pie')
+          .field('description', 'Fresh and tasty')
+          .field('category', '')
+          .field('price', '500')
+          .attach('image', './server/test/test_img.jpg')
           .end((err, res) => {
             res.should.have.status(400);
             done();
@@ -152,13 +150,12 @@ describe('CREATE MENU', () => {
         chai.request(app)
           .post('/api/v1/menu')
           .set('Authorization', `Bearer ${token}`)
-          .send({
-            food_name: 'Fried Rice',
-            description: 'Fresh and tasty',
-            category: 'pastas',
-            price: '',
-            image: 'file://meat.jpg',
-          })
+          .type('form')
+          .field('food_name', 'meat_pie')
+          .field('description', 'Fresh and tasty')
+          .field('category', 'pastas')
+          .field('price', '')
+          .attach('image', './server/test/test_img.jpg')
           .end((err, res) => {
             res.should.have.status(400);
             done();
@@ -175,13 +172,12 @@ describe('CREATE MENU', () => {
         chai.request(app)
           .post('/api/v1/menu')
           .set('Authorization', `Bearer ${token}`)
-          .send({
-            food_name: 'Fried Rice',
-            description: 'Fresh and tasty',
-            category: 'pastas',
-            price: 'asd',
-            image: 'file://meat.jpg',
-          })
+          .type('form')
+          .field('food_name', 'meat_pie')
+          .field('description', 'Fresh and tasty')
+          .field('category', 'pastas')
+          .field('price', 'asd')
+          .attach('image', './server/test/test_img.jpg')
           .end((err, res) => {
             res.should.have.status(400);
             done();
@@ -198,13 +194,12 @@ describe('CREATE MENU', () => {
         chai.request(app)
           .post('/api/v1/menu')
           .set('Authorization', `Bearer ${token}`)
-          .send({
-            food_name: 'Fried Rice',
-            description: 'Fresh and tasty',
-            category: 'pastas',
-            price: '500',
-            image: '',
-          })
+          .type('form')
+          .field('food_name', 'meat_pie')
+          .field('description', 'Fresh and tasty')
+          .field('category', 'pastas')
+          .field('price', '500')
+          .attach('image', './server/test/test_img.jpg')
           .end((err, res) => {
             res.should.have.status(400);
             done();

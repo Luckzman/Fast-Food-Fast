@@ -6,9 +6,8 @@ services:
   - postgresql
 env:
   - NODE_ENV=test
-  - SECRET_KEY = my_secret
 before_script:
-  - psql -c 'create database db_test;' -U postgres
+  - psql -c 'create database fastfoodfast_test;' -U postgres
   - psql -c "CREATE USER fastfoodfast WITH PASSWORD 'postgres';" -U postgres
 script: npm test
 after_success: npm run coverage
