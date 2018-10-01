@@ -1,4 +1,13 @@
 language: node_js
 node_js:
-- "stable"
+  - "stable"
+install: npm install
+services:
+  - postgresql
+env:
+  - NODE_ENV=test
+before_script:
+  - psql -c 'create database fastfoodfast_test;' -U postgres
+  - psql -c "CREATE USER fastfoodfast WITH PASSWORD 'fastfoodfast';" -U postgres
+script: npm test
 after_success: npm run coverage
