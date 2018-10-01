@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS db_test;
-CREATE DATABASE db_test;
+DROP DATABASE IF EXISTS fastfoodfast_test;
+CREATE DATABASE fastfoodfast_test;
 
-\c db_test;
+\c fastfoodfast_test;
 
 CREATE TYPE order_status AS ENUM ('new', 'processing', 'cancelled', 'nomplete');
 CREATE TYPE user_status AS ENUM ('regular', 'admin');
