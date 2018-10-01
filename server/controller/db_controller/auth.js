@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import uuid from 'uuid';
 import db from '../../model/db/config';
-import responseMsg from '../../utils/helpers';
+import { responseMsg } from '../../utils/helpers';
 
 
 /**

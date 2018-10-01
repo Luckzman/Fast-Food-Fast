@@ -1,6 +1,6 @@
 import uuid from 'uuid';
 import db from '../../model/db/config';
-import responseMsg from '../../utils/helpers';
+import { responseMsg } from '../../utils/helpers';
 
 /**
  * @description This controller create Menu Items
@@ -11,8 +11,9 @@ import responseMsg from '../../utils/helpers';
 export const createMenu = (req, res) => {
   const { id } = req.authData;
   const {
-    food_name, description, category, price, image,
+    food_name, description, category, price,
   } = req.body;
+  const image = `${req.file.destination}${req.file.filename}`;
   const query = 'SELECT * FROM users WHERE id = $1';
   const values = [id];
   db.query(query, values)

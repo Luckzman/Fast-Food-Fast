@@ -1,4 +1,4 @@
-import responseMsg from './helpers';
+import { responseMsg } from './helpers';
 
 const isValidEmail = input => /\S+@\S+\.\S/.test(input);
 
@@ -133,14 +133,14 @@ export const loginValidator = (req, res, next) => {
  */
 export const menuValidator = (req, res, next) => {
   let {
-    food_name, description, category, image,
+    food_name, description, category,
   } = req.body;
   const { price } = req.body;
+  const image = req.file.path;
 
   food_name = food_name.trim();
   description = description.trim();
   category = category.trim();
-  image = image.trim();
 
   if (!food_name) {
     return responseMsg(res, 400, 'fail', 'Menu name is missing');
