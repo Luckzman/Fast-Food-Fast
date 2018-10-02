@@ -1,9 +1,9 @@
-DROP DATABASE IF EXISTS fastfoodfast_test;
-CREATE DATABASE fastfoodfast_test;
+-- DROP DATABASE IF EXISTS db_test;
+-- CREATE DATABASE db_test;
 
-\c fastfoodfast_test;
+\c db_test;
 
-CREATE TYPE order_status AS ENUM ('new', 'processing', 'cancelled', 'nomplete');
+CREATE TYPE order_status AS ENUM ('new', 'processing', 'cancelled', 'complete');
 CREATE TYPE user_status AS ENUM ('regular', 'admin');
 
 CREATE TABLE users(
@@ -13,6 +13,7 @@ CREATE TABLE users(
     email VARCHAR NOT NULL,
     phone VARCHAR NOT NULL,
     password VARCHAR NOT NULL,
+    location VARCHAR NOT NULL,
     user_status user_status DEFAULT 'regular',
     created_date TIMESTAMPTZ,
     modified_date TIMESTAMPTZ
@@ -38,4 +39,3 @@ CREATE TABLE orders(
     user_id UUID NOT NULL REFERENCES users (id) ON DELETE CASCADE,
     menu_id UUID NOT NULL REFERENCES food_menus (id) ON DELETE CASCADE
 );
-

@@ -13,6 +13,7 @@ CREATE TABLE users(
     email VARCHAR NOT NULL,
     phone VARCHAR NOT NULL,
     password VARCHAR NOT NULL,
+    location VARCHAR NOT NULL,
     user_status user_status DEFAULT 'regular',
     created_date TIMESTAMPTZ,
     modified_date TIMESTAMPTZ

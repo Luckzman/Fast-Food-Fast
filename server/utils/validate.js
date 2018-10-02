@@ -28,7 +28,7 @@ const isValidUpdateInput = input => updateInputRegex.test(input);
  */
 export const signupValidator = (req, res, next) => {
   let {
-    firstname, lastname, phone, email, password,
+    firstname, lastname, phone, email, password, location,
   } = req.body;
 
   firstname = firstname.trim();
@@ -36,6 +36,7 @@ export const signupValidator = (req, res, next) => {
   phone = phone.trim();
   email = email.trim();
   password = password.trim();
+  location = location.trim();
 
   if (!firstname) {
     return responseMsg(res, 400, 'fail', 'First name is missing');
@@ -78,6 +79,9 @@ export const signupValidator = (req, res, next) => {
   }
   if (!specCharChecker(password)) {
     return responseMsg(res, 400, 'fail', 'Password must contain lease one \'$\', \'@\', \'#\', \'&\', or \'!\'');
+  }
+  if (!location) {
+    return responseMsg(res, 400, 'fail', 'location is missing');
   }
 
   next();

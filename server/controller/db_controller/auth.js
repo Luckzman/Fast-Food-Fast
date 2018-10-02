@@ -12,7 +12,7 @@ import { responseMsg } from '../../utils/helpers';
  */
 export const signup = (req, res) => {
   const {
-    firstname, lastname, phone, email, password,
+    firstname, lastname, phone, email, password, location,
   } = req.body;
   const user_status = req.body.user_status || 'regular';
   const query = 'SELECT * FROM users WHERE email = $1';
@@ -24,7 +24,7 @@ export const signup = (req, res) => {
       }
       bcrypt.hash(password, 8)
         .then((hash) => {
-          const query = 'INSERT INTO users VALUES($1, $2, $3, $4, $5, $6, $7, $8 , $9) returning *';
+          const query = 'INSERT INTO users VALUES($1, $2, $3, $4, $5, $6, $7, $8 , $9, $10) returning *';
           const values = [
             uuid(),
             firstname,
@@ -32,6 +32,7 @@ export const signup = (req, res) => {
             email,
             phone,
             hash,
+            location,
             user_status,
             new Date(),
             new Date()];
@@ -56,7 +57,7 @@ export const login = (req, res) => {
 
   db.query(query, value)
     .then((user) => {
-      if (user.rowCount < 1) {
+      if (!user.rows[0]) {
         return responseMsg(res, 404, 'fail', 'Email not Found');
       }
       bcrypt.compare(password, user.rows[0].password)
