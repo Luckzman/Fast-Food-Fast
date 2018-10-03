@@ -13,7 +13,7 @@ export const createMenu = (req, res) => {
   const {
     food_name, description, category, price,
   } = req.body;
-  const image = `${req.file.destination}${req.file.filename}`;
+  // const image = `${req.file.destination}${req.file.filename}`;
   const query = 'SELECT * FROM users WHERE id = $1';
   const values = [id];
   db.query(query, values)
@@ -21,21 +21,28 @@ export const createMenu = (req, res) => {
       if (admin.rows[0].user_status !== 'admin') {
         return responseMsg(res, 403, 'fail', 'admin access only');
       }
-      const query = 'INSERT INTO food_menus(id,food_name, description, category, price, image,created_date,modified_date) VALUES($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *';
-      const values = [
-        uuid(),
-        food_name,
-        description,
-        category,
-        price,
-        image,
-        new Date(),
-        new Date()];
-      db.query(query, values)
-        .then(menu => responseMsg(res, 201, 'success', 'menu created', menu.rows[0]))
+      const query = 'SELECT * FROM food_menus';
+      db.query(query)
+        .then((menu) => {
+          console.log(food_name === menu.rows[0].food_name);
+          if (food_name === menu.rows[0].food_name) {
+            return responseMsg(res, 400, 'fail', 'Food Menu already created');
+          }
+          const query = 'INSERT INTO food_menus(id,food_name, description, category, price, created_date,modified_date) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING *';
+          const values = [
+            uuid(),
+            food_name,
+            description,
+            category,
+            price,
+            new Date(),
+            new Date()];
+          db.query(query, values)
+            .then(menuItem => responseMsg(res, 201, 'success', 'menu created', menuItem.rows[0]))
+            .catch(error => res.status(400).json({ error }));
+        })
         .catch(error => res.status(400).json({ error }));
-    })
-    .catch(error => res.status(400).json({ error }));
+    });
 };
 
 /**
@@ -49,7 +56,7 @@ export const getMenu = (req, res) => {
   db.query(query)
     .then((menu) => {
       if (!menu.rows[0]) {
-        return responseMsg(res, 204, 'success', 'No menu available');
+        return responseMsg(res, 200, 'success', 'No menu available');
       }
       return responseMsg(res, 200, 'success', 'menu retrival successful', menu.rows);
     })

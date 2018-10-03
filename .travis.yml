@@ -6,12 +6,13 @@ node_js:
 install: npm install
 services:
   - postgresql
-env:
-  - NODE_ENV=test
+# env:
+#   - NODE_ENV=test
 before_script:
-  - psql -c 'create database fastfoodfast_test;' -U postgres
+  # - psql -c 'drop database if exists db_test;' -U postgres
+  - psql -c 'create database db_test;' -U postgres
+  - cat ./server/model/db/test.sql | psql -h localhost -U postgres db_test
+  # - psql -c "CREATE USER fastfoodfast WITH PASSWORD 'postgres';" -U postgres
 
-  - psql -c "CREATE USER fastfoodfast WITH PASSWORD 'postgres';" -U postgres
-
-script: npm test
+script: npm run test
 after_success: npm run coverage

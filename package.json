@@ -6,9 +6,11 @@
   "scripts": {
     "create_db": "psql -U postgres -f ./server/model/db/db.sql",
     "create_test_db": "psql -U postgres -f ./server/model/db/db_test.sql",
-    "startDev": "nodemon --exec babel-node -- index",
+    "startDev": "nodemon --exec babel-node -- ./server/index",
     "babel-node": "babel-node --presets=env",
-    "start": "babel-node index",
+    "start": "npm run build && npm run serve",
+    "build": "babel server -d dist --presets env",
+    "serve": "node dist/index.js",
     "test": "npm run create_test_db && set NODE_ENV=test&&  mocha --require babel-register --env test ./server/test/*.js --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "npm test && nyc report --reporter=text-lcov | coveralls"
@@ -32,10 +34,10 @@
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "jsonwebtoken": "^8.3.0",
-    "moment": "^2.22.2",
     "morgan": "^1.9.0",
     "multer": "^1.4.0",
     "pg": "^7.4.3",
+    "swagger-ui-express": "^4.0.1",
     "uuid": "^3.3.2"
   },
   "devDependencies": {

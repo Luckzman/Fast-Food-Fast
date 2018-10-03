@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 chai.should();
 
 const user = {
-  email: 'admin@fastfoodfast.com',
+  email: 'admin_tester@fastfoodfast.com',
   password: '12345678aB@',
 };
 const order = {
