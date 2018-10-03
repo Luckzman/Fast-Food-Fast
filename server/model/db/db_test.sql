@@ -1,5 +1,5 @@
--- DROP DATABASE IF EXISTS db_test;
--- CREATE DATABASE db_test;
+DROP DATABASE IF EXISTS db_test;
+CREATE DATABASE db_test;
 
 \c db_test;
 

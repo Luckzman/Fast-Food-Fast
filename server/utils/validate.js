@@ -27,28 +27,21 @@ const isValidUpdateInput = input => updateInputRegex.test(input);
  * @param {function} next
  */
 export const signupValidator = (req, res, next) => {
-  let {
+  const {
     firstname, lastname, phone, email, password, location,
   } = req.body;
 
-  firstname = firstname.trim();
-  lastname = lastname.trim();
-  phone = phone.trim();
-  email = email.trim();
-  password = password.trim();
-  location = location.trim();
-
-  if (!firstname) {
-    return responseMsg(res, 400, 'fail', 'First name is missing');
-  }
   if (typeof firstname !== 'string') {
     return responseMsg(res, 400, 'fail', 'First name must be string');
   }
-  if (!lastname) {
-    return responseMsg(res, 400, 'fail', 'Last name is missing');
+  if (!firstname || !firstname.trim()) {
+    return responseMsg(res, 400, 'fail', 'First name is missing');
   }
   if (typeof lastname !== 'string') {
     return responseMsg(res, 400, 'fail', 'Last name must be string');
+  }
+  if (!lastname || !lastname.trim()) {
+    return responseMsg(res, 400, 'fail', 'Last name is missing');
   }
   if (!phone) {
     return responseMsg(res, 400, 'fail', 'Phone number is missing');
@@ -80,7 +73,10 @@ export const signupValidator = (req, res, next) => {
   if (!specCharChecker(password)) {
     return responseMsg(res, 400, 'fail', 'Password must contain lease one \'$\', \'@\', \'#\', \'&\', or \'!\'');
   }
-  if (!location) {
+  if (typeof location !== 'string') {
+    return responseMsg(res, 400, 'fail', 'location must be string');
+  }
+  if (!location || !location.trim()) {
     return responseMsg(res, 400, 'fail', 'location is missing');
   }
 
@@ -129,6 +125,7 @@ export const loginValidator = (req, res, next) => {
   next();
 };
 
+
 /**
  * @description This function validate menu input fields
  * @param {object} req
@@ -136,33 +133,33 @@ export const loginValidator = (req, res, next) => {
  * @param {function} next
  */
 export const menuValidator = (req, res, next) => {
-  let {
-    food_name, description, category,
+  const {
+    food_name, description, category, price,
   } = req.body;
-  const { price } = req.body;
-  const image = `${req.file.destination}${req.file.filename}`;
+  // const image = `${req.file.destination}${req.file.filename}`;
+  // const { image } = req.file;
 
-  food_name = food_name.trim();
-  description = description.trim();
-  category = category.trim();
+  // food_name = food_name.trim();
+  // description = description.trim();
+  // category = category.trim();
 
-  if (!food_name) {
-    return responseMsg(res, 400, 'fail', 'Menu name is missing');
-  }
   if (typeof food_name !== 'string') {
-    return responseMsg(res, 400, 'fail', 'Menu name must be string');
+    return responseMsg(res, 400, 'fail', 'Food menu name must be string');
   }
-  if (!description) {
-    return responseMsg(res, 400, 'fail', 'Menu description is missing');
+  if (!food_name || !food_name.trim()) {
+    return responseMsg(res, 400, 'fail', 'Food menu name is missing');
   }
   if (typeof description !== 'string') {
     return responseMsg(res, 400, 'fail', 'Menu description must be string');
   }
-  if (!category) {
-    return responseMsg(res, 400, 'fail', 'Menu category is not selected');
+  if (!description || !description.trim()) {
+    return responseMsg(res, 400, 'fail', 'Menu description is missing');
   }
   if (typeof category !== 'string') {
     return responseMsg(res, 400, 'fail', 'Menu category must be string');
+  }
+  if (!category || !category.trim()) {
+    return responseMsg(res, 400, 'fail', 'Menu category is not selected');
   }
   if (!price) {
     return responseMsg(res, 400, 'fail', 'price is missing');
@@ -170,9 +167,9 @@ export const menuValidator = (req, res, next) => {
   if (!isValidInt(price)) {
     return responseMsg(res, 400, 'fail', 'price must be a number');
   }
-  if (!image) {
-    return responseMsg(res, 400, 'fail', 'upload an image');
-  }
+  // if (!image) {
+  //   return responseMsg(res, 400, 'fail', 'image is missing');
+  // }
 
   next();
 };

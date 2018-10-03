@@ -25,7 +25,7 @@ CREATE TABLE food_menus(
     description TEXT NOT NULL,
     category VARCHAR NOT NULL,
     price VARCHAR NOT NULL,
-    image VARCHAR NOT NULL,
+    image VARCHAR,
     created_date TIMESTAMPTZ,
     modified_date TIMESTAMPTZ
 );
