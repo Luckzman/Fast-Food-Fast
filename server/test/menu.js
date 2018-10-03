@@ -17,12 +17,19 @@ const user = {
   password: '12345678aB@',
 };
 
+const menu = {
+  food_name: 'meat-pie',
+  description: 'Sweet and fresh',
+  price: 500,
+  category: 'pasta',
+};
+
 describe('EMPTY MENU TABLE', () => {
   it('should return no content if menu table is empty', (done) => {
     chai.request(app)
       .get('/api/v1/menu')
       .end((err, res) => {
-        res.should.have.status(204);
+        res.should.have.status(200);
         done();
       });
   });
@@ -30,23 +37,23 @@ describe('EMPTY MENU TABLE', () => {
 
 
 describe('CREATE MENU', () => {
-  it('should allow only admin to create a menu', (done) => {
+  it.only('should allow only admin to create a menu', (done) => {
     chai.request(app)
       .post('/api/v1/auth/login')
       .send(admin)
       .end((err, res) => {
         res.should.have.status(200);
+        console.log(res.body);
         const token = res.body.data;
         chai.request(app)
           .post('/api/v1/menu')
           .set('Authorization', `Bearer ${token}`)
-          .type('form')
           .field('food_name', 'meat_pie')
           .field('description', 'Fresh and tasty')
           .field('category', 'pastas')
-          .field('price', '500')
-          .attach('image', './server/test/test_img.jpg')
+          .field('price', 500)
           .end((err, res) => {
+            console.log(res.body);
             res.should.have.status(201);
             done();
           });
@@ -66,7 +73,7 @@ describe('CREATE MENU', () => {
           .field('food_name', 'meat_pie')
           .field('description', 'Fresh and tasty')
           .field('category', 'pastas')
-          .field('price', '500')
+          .field('price', 500)
           .attach('image', './server/test/test_img.jpg')
           .end((err, res) => {
             res.should.have.status(403);
@@ -88,7 +95,7 @@ describe('CREATE MENU', () => {
           .field('food_name', '')
           .field('description', 'Fresh and tasty')
           .field('category', 'pastas')
-          .field('price', '500')
+          .field('price', 500)
           .attach('image', './server/test/test_img.jpg')
           .end((err, res) => {
             res.should.have.status(400);
@@ -110,7 +117,7 @@ describe('CREATE MENU', () => {
           .field('food_name', 'meat_pie')
           .field('description', '')
           .field('category', 'pastas')
-          .field('price', '500')
+          .field('price', 500)
           .attach('image', './server/test/test_img.jpg')
           .end((err, res) => {
             res.should.have.status(400);
@@ -132,7 +139,7 @@ describe('CREATE MENU', () => {
           .field('food_name', 'meat_pie')
           .field('description', 'Fresh and tasty')
           .field('category', '')
-          .field('price', '500')
+          .field('price', 500)
           .attach('image', './server/test/test_img.jpg')
           .end((err, res) => {
             res.should.have.status(400);
@@ -198,7 +205,7 @@ describe('CREATE MENU', () => {
           .field('food_name', 'meat_pie')
           .field('description', 'Fresh and tasty')
           .field('category', 'pastas')
-          .field('price', '500')
+          .field('price', 500)
           .attach('image', './server/test/test_img.jpg')
           .end((err, res) => {
             res.should.have.status(400);

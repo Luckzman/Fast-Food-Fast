@@ -13,7 +13,6 @@ export const createMenu = (req, res) => {
   const {
     food_name, description, category, price,
   } = req.body;
-  // const image = `${req.file.destination}${req.file.filename}`;
   const query = 'SELECT * FROM users WHERE id = $1';
   const values = [id];
   db.query(query, values)
@@ -24,7 +23,7 @@ export const createMenu = (req, res) => {
       const query = 'SELECT * FROM food_menus';
       db.query(query)
         .then((menu) => {
-          console.log(food_name === menu.rows[0].food_name);
+          console.log(menu.rows[0], '======================?');
           if (food_name === menu.rows[0].food_name) {
             return responseMsg(res, 400, 'fail', 'Food Menu already created');
           }
@@ -61,4 +60,30 @@ export const getMenu = (req, res) => {
       return responseMsg(res, 200, 'success', 'menu retrival successful', menu.rows);
     })
     .catch(error => res.status(404).json(error));
+};
+
+export const imageUpload = (req, res) => {
+  const { id } = req.authData;
+  const query = 'SELECT * FROM users WHERE id = $1';
+  const values = [id];
+  db.query(query, values)
+    .then((admin) => {
+      if (admin.rows[0].user_status !== 'admin') {
+        return responseMsg(res, 403, 'fail', 'admin access only');
+      }
+      const { food_name } = req.body;
+      const image = `${req.file.destination}${req.file.filename}`;
+      // console.log(req.file);
+      const query = 'UPDATE food_menus SET image = $1 WHERE food_name = $2 RETURNING *';
+      const value = [image, food_name];
+      db.query(query, value)
+        .then((menuImage) => {
+          if (!menuImage.rows[0].image) {
+            return responseMsg(res, 400, 'fail', 'No image uploaded');
+          }
+          return responseMsg(res, 200, 'success', 'file upload successful', menuImage.rows[0]);
+        })
+        .catch(error => res.status(400).json(error));
+    })
+    .catch(error => res.status(400).json(error));
 };
