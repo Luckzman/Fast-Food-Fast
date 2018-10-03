@@ -4,6 +4,13 @@ require('dotenv').config();
 
 let conString;
 
+let ssl;
+if (process.env === 'production') {
+  ssl = true;
+} else {
+  ssl = false;
+}
+
 const devConString = {
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
@@ -31,7 +38,7 @@ if (process.env.NODE_ENV === 'test') {
   conString = devConString;
 }
 
-const dbConnection = new pg.Pool(conString);
+const dbConnection = new pg.Pool(conString, ssl);
 
 dbConnection.on('connect', () => {
   console.log('database connected successfully');

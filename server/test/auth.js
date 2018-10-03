@@ -31,7 +31,6 @@ describe('SIGNUP USERS', () => {
       .post('/api/v1/auth/signup')
       .send(admin)
       .end((err, res) => {
-        console.log(res.body);
         res.should.have.status(201);
         done();
       });

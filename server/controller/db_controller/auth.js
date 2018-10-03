@@ -57,6 +57,7 @@ export const login = (req, res) => {
 
   db.query(query, value)
     .then((user) => {
+      console.log(user);
       if (!user.rows[0]) {
         return responseMsg(res, 404, 'fail', 'Email not Found');
       }

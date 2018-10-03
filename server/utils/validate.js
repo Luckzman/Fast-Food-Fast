@@ -136,16 +136,11 @@ export const menuValidator = (req, res, next) => {
   const {
     food_name, description, category, price,
   } = req.body;
-  // const image = `${req.file.destination}${req.file.filename}`;
-  // const { image } = req.file;
 
-  // food_name = food_name.trim();
-  // description = description.trim();
-  // category = category.trim();
-
-  if (typeof food_name !== 'string') {
-    return responseMsg(res, 400, 'fail', 'Food menu name must be string');
-  }
+  console.log(req.body, 'erdtfyuh');
+  // if (typeof food_name !== 'string') {
+  //   return responseMsg(res, 400, 'fail', 'Food menu name must be string');
+  // }
   if (!food_name || !food_name.trim()) {
     return responseMsg(res, 400, 'fail', 'Food menu name is missing');
   }
@@ -167,9 +162,24 @@ export const menuValidator = (req, res, next) => {
   if (!isValidInt(price)) {
     return responseMsg(res, 400, 'fail', 'price must be a number');
   }
-  // if (!image) {
-  //   return responseMsg(res, 400, 'fail', 'image is missing');
-  // }
+
+  next();
+};
+
+
+/**
+ *@description This function validate image upload
+ * @param {object} req
+ * @param {object} res
+ * @param {function} next
+ */
+export const uploadImageValidator = (req, res, next) => {
+  const image = `${req.file.destination}${req.file.filename}`;
+  console.log(req.file);
+  console.log(image.length);
+  if (image.length) {
+    return responseMsg(res, 400, 'fail', 'No Image Upload has been made');
+  }
 
   next();
 };
