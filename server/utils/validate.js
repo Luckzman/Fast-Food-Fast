@@ -137,10 +137,9 @@ export const menuValidator = (req, res, next) => {
     food_name, description, category, price,
   } = req.body;
 
-  console.log(req.body, 'erdtfyuh');
-  // if (typeof food_name !== 'string') {
-  //   return responseMsg(res, 400, 'fail', 'Food menu name must be string');
-  // }
+  if (typeof food_name !== 'string') {
+    return responseMsg(res, 400, 'fail', 'Food menu name must be string');
+  }
   if (!food_name || !food_name.trim()) {
     return responseMsg(res, 400, 'fail', 'Food menu name is missing');
   }
@@ -177,7 +176,7 @@ export const uploadImageValidator = (req, res, next) => {
   const image = `${req.file.destination}${req.file.filename}`;
   console.log(req.file);
   console.log(image.length);
-  if (image.length) {
+  if (!image.length) {
     return responseMsg(res, 400, 'fail', 'No Image Upload has been made');
   }
 
@@ -192,9 +191,16 @@ export const uploadImageValidator = (req, res, next) => {
  */
 export const placeOrderValidator = (req, res, next) => {
   const {
+    food_name,
     quantity_ordered,
   } = req.body;
 
+  if (typeof food_name !== 'string') {
+    return responseMsg(res, 400, 'fail', 'Food menu name must be string');
+  }
+  if (!food_name || !food_name.trim()) {
+    return responseMsg(res, 400, 'fail', 'Food menu name is missing');
+  }
   if (!quantity_ordered) {
     return responseMsg(res, 400, 'fail', 'quantity ordered is missing');
   }

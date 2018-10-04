@@ -18,7 +18,7 @@ const user = {
 };
 
 const order = {
-  food_name: 'meat_pie',
+  food_name: 'meat-pie',
   quantity_ordered: 10,
 };
 
@@ -65,7 +65,7 @@ describe('PLACE ORDER', () => {
   it('should allow regular users to place an order', (done) => {
     chai.request(app)
       .post('/api/v1/auth/login')
-      .send(user)
+      .send(admin)
       .end((err, res) => {
         res.should.have.status(200);
         const token = res.body.data;

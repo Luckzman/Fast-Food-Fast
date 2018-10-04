@@ -12,9 +12,7 @@ export const placeOrder = (req, res) => {
   const value = [req.body.food_name];
   db.query(query, value)
     .then((menu) => {
-      if (!menu.rows[0]) {
-        return responseMsg(res, 404, 'fail', 'menu not found');
-      }
+      console.log(menu.rows[0]);
       const { quantity_ordered } = req.body;
       const query = 'INSERT INTO orders(id, quantity_ordered,created_date, modified_date,user_id, menu_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
       const value = [uuid(),
@@ -26,8 +24,7 @@ export const placeOrder = (req, res) => {
       db.query(query, value)
         .then(order => responseMsg(res, 201, 'success', 'menu successfully ordered', order.rows[0]))
         .catch(error => res.status(400).json(error));
-    })
-    .catch(error => res.status(404).json(error));
+    });
 };
 
 /**
