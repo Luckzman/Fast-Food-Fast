@@ -24,7 +24,7 @@ export const signup = (req, res) => {
       }
       bcrypt.hash(password, 8)
         .then((hash) => {
-          const query = 'INSERT INTO users VALUES($1, $2, $3, $4, $5, $6, $7, $8 , $9, $10) returning *';
+          const query = 'INSERT INTO users VALUES($1, $2, $3, $4, $5, $6, $7, $8 , $9, $10) returning id, firstname, lastname, email, phone, user_status, location, created_date';
           const values = [
             uuid(),
             firstname,
@@ -65,6 +65,7 @@ export const login = (req, res) => {
           if (result) {
             const token = jwt.sign({
               id: user.rows[0].id,
+              user_status: user.rows[0].user_status,
             }, process.env.SECRET_KEY,
             {
               expiresIn: '6h',

@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger('dev'));
 app.use('/', router);
-app.use('/', (req, res) => res.redirect('/api-doc'));
+app.get('/', (req, res) => res.redirect('/api/v1/doc'));
 app.use('*', (req, res) => responseMsg(res, 404, 'fail', 'wrong url entered'));
 
 const port = process.env.PORT || 3000;

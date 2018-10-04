@@ -4,11 +4,11 @@
   "description": "Fast-Food-Fast​ is a food delivery service app for a restaurant.",
   "main": "index.js",
   "scripts": {
-    "create_db": "psql -U postgres -f ./server/model/db/db.sql",
+    "create_db": "psql -U postgres -f ./server/model/db/db_test.sql",
     "create_test_db": "psql -U postgres -f ./server/model/db/db_test.sql",
     "startDev": "nodemon --exec babel-node -- ./server/index",
     "babel-node": "babel-node --presets=env",
-    "start": "set NODE_ENV=production&&npm run build && npm run serve",
+    "start": "npm run build && npm run serve",
     "build": "babel server -d dist --presets env",
     "serve": "node dist/index.js",
     "test": "npm run create_test_db && set NODE_ENV=test&&  mocha --require babel-register --env test ./server/test/*.js --exit",
