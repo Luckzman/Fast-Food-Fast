@@ -37,23 +37,19 @@ describe('EMPTY MENU TABLE', () => {
 
 
 describe('CREATE MENU', () => {
-  it.only('should allow only admin to create a menu', (done) => {
+  it('should allow only admin to create a menu', (done) => {
     chai.request(app)
       .post('/api/v1/auth/login')
       .send(admin)
       .end((err, res) => {
         res.should.have.status(200);
-        console.log(res.body);
         const token = res.body.data;
         chai.request(app)
           .post('/api/v1/menu')
           .set('Authorization', `Bearer ${token}`)
-          .field('food_name', 'meat_pie')
-          .field('description', 'Fresh and tasty')
-          .field('category', 'pastas')
-          .field('price', 500)
+          .set('Content-Type', 'application/json')
+          .send(menu)
           .end((err, res) => {
-            console.log(res.body);
             res.should.have.status(201);
             done();
           });
@@ -69,12 +65,7 @@ describe('CREATE MENU', () => {
         chai.request(app)
           .post('/api/v1/menu')
           .set('Authorization', `Bearer ${token}`)
-          .type('form')
-          .field('food_name', 'meat_pie')
-          .field('description', 'Fresh and tasty')
-          .field('category', 'pastas')
-          .field('price', 500)
-          .attach('image', './server/test/test_img.jpg')
+          .send(menu)
           .end((err, res) => {
             res.should.have.status(403);
             done();
@@ -96,7 +87,6 @@ describe('CREATE MENU', () => {
           .field('description', 'Fresh and tasty')
           .field('category', 'pastas')
           .field('price', 500)
-          .attach('image', './server/test/test_img.jpg')
           .end((err, res) => {
             res.should.have.status(400);
             done();
@@ -118,7 +108,6 @@ describe('CREATE MENU', () => {
           .field('description', '')
           .field('category', 'pastas')
           .field('price', 500)
-          .attach('image', './server/test/test_img.jpg')
           .end((err, res) => {
             res.should.have.status(400);
             done();
@@ -140,7 +129,6 @@ describe('CREATE MENU', () => {
           .field('description', 'Fresh and tasty')
           .field('category', '')
           .field('price', 500)
-          .attach('image', './server/test/test_img.jpg')
           .end((err, res) => {
             res.should.have.status(400);
             done();

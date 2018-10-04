@@ -8,7 +8,7 @@ const menuRouter = express.Router();
 
 menuRouter.post('/', menuValidator, authChecker, createMenu);
 menuRouter.get('/', getMenu);
-// menuRouter.put('/', uploadImageValidator, upload.single('image'), authChecker, imageUpload);
-menuRouter.put('/', upload.single('image'), authChecker, imageUpload);
+menuRouter.put('/upload', upload.single('image'), authChecker, imageUpload);
+// menuRouter.put('/id/upload', upload.single('image'), authChecker, imageUpload);
 
 export default menuRouter;

@@ -11,10 +11,6 @@ const user = {
   email: 'admin_tester@fastfoodfast.com',
   password: '12345678aB@',
 };
-const order = {
-  food_name: 'meat_pie',
-  quantity_ordered: 20,
-};
 
 describe('USER ORDER HISTORY', () => {
   it('should return NO CONTENT if user is yet to place an order', (done) => {
@@ -28,7 +24,7 @@ describe('USER ORDER HISTORY', () => {
           .get('/api/v1/user/orders')
           .set('Authorization', `Bearer ${token}`)
           .end((err, res) => {
-            res.should.have.status(204);
+            res.should.have.status(200);
             done();
           });
       });
@@ -41,18 +37,11 @@ describe('USER ORDER HISTORY', () => {
         res.should.have.status(200);
         const token = res.body.data;
         chai.request(app)
-          .post('/api/v1/orders/')
+          .get('/api/v1/user/orders')
           .set('Authorization', `Bearer ${token}`)
-          .send(order)
           .end((err, res) => {
-            res.should.have.status(201);
-            chai.request(app)
-              .get('/api/v1/user/orders')
-              .set('Authorization', `Bearer ${token}`)
-              .end((err, res) => {
-                res.should.have.status(200);
-                done();
-              });
+            res.should.have.status(200);
+            done();
           });
       });
   });

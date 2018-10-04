@@ -1,4 +1,5 @@
 # Fast-Food-Fast
+# Fast-Food-Fast
 
 [![Build Status](https://travis-ci.com/Luckzman/Fast-Food-Fast.svg?branch=develop)](https://travis-ci.com/Luckzman/Fast-Food-Fast)
 [![Coverage Status](https://coveralls.io/repos/github/Luckzman/Fast-Food-Fast/badge.svg?branch=develop)](https://coveralls.io/github/Luckzman/Fast-Food-Fast?branch=develop)
@@ -39,10 +40,15 @@ Ride-My-Way UI is hosted on gh-pages while the app is hosted on Heroku
 ### API Endpoint
 Endpoint | Functionality
 -------- | -------------
-GET  /orders | Get all the orders
-GET /orders/:id | Fetch a specific order
-POST /orders | Place a new order
-PUT /orders/:id | Update the status of an order
+POST  /auth/signup | Register a User
+POST  /auth/login | Login a Users
+POST  /orders | Place an order for food
+GET /orders/ | Fetch all orders (Admin Access Only)
+GET /orders/:id | Fetch a specific order (Admin Access Only)
+PUT /orders/:id | Update the status of an order (Admin Access Only)
+GET /menu | Get all available menu
+POST /menu | Add meal option to Menu (Admin Access Only)
+PUT /menu/id/upload | Update menu item with image (Admin Access Only)
 
 ## How to use
 ### Prerequisite
