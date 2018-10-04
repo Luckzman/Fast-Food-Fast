@@ -20,28 +20,20 @@ export const createMenu = (req, res) => {
       if (admin.rows[0].user_status !== 'admin') {
         return responseMsg(res, 403, 'fail', 'admin access only');
       }
-      const query = 'SELECT * FROM food_menus';
-      db.query(query)
-        .then((menu) => {
-          console.log(menu.rows[0], '======================?');
-          if (food_name === menu.rows[0].food_name) {
-            return responseMsg(res, 400, 'fail', 'Food Menu already created');
-          }
-          const query = 'INSERT INTO food_menus(id,food_name, description, category, price, created_date,modified_date) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING *';
-          const values = [
-            uuid(),
-            food_name,
-            description,
-            category,
-            price,
-            new Date(),
-            new Date()];
-          db.query(query, values)
-            .then(menuItem => responseMsg(res, 201, 'success', 'menu created', menuItem.rows[0]))
-            .catch(error => res.status(400).json({ error }));
-        })
+      const query = 'INSERT INTO food_menus(id,food_name, description, category, price, created_date,modified_date) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING *';
+      const values = [
+        uuid(),
+        food_name,
+        description,
+        category,
+        price,
+        new Date(),
+        new Date()];
+      db.query(query, values)
+        .then(menuItem => responseMsg(res, 201, 'success', 'menu created', menuItem.rows[0]))
         .catch(error => res.status(400).json({ error }));
-    });
+    })
+    .catch(error => res.status(400).json({ error }));
 };
 
 /**
@@ -73,11 +65,12 @@ export const imageUpload = (req, res) => {
       }
       const { food_name } = req.body;
       const image = `${req.file.destination}${req.file.filename}`;
-      // console.log(req.file);
+      console.log(image);
       const query = 'UPDATE food_menus SET image = $1 WHERE food_name = $2 RETURNING *';
       const value = [image, food_name];
       db.query(query, value)
         .then((menuImage) => {
+          console.log(menuImage.rows);
           if (!menuImage.rows[0].image) {
             return responseMsg(res, 400, 'fail', 'No image uploaded');
           }
