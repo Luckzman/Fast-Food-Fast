@@ -1,6 +1,7 @@
 import uuid from 'uuid';
 import db from '../../model/db/config';
-import { responseMsg } from '../../utils/helpers';
+import { responseMsg, menuResponseMsg } from '../../utils/helpers';
+import { adminChecker } from '../../utils/validate';
 
 /**
  * @description This controller create Menu Items
@@ -9,30 +10,32 @@ import { responseMsg } from '../../utils/helpers';
  * @returns {object} responseMsg
  */
 export const createMenu = (req, res) => {
-  const { id } = req.authData;
   const {
     food_name, description, category, price,
   } = req.body;
-  const query = 'SELECT * FROM users WHERE id = $1';
-  const values = [id];
-  db.query(query, values)
-    .then((admin) => {
-      if (admin.rows[0].user_status !== 'admin') {
-        return responseMsg(res, 403, 'fail', 'admin access only');
-      }
-      const query = 'INSERT INTO food_menus(id,food_name, description, category, price, created_date,modified_date) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING *';
-      const values = [
-        uuid(),
-        food_name,
-        description,
-        category,
-        price,
-        new Date(),
-        new Date()];
-      db.query(query, values)
-        .then(menuItem => responseMsg(res, 201, 'success', 'menu created', menuItem.rows[0]))
-        .catch(error => res.status(400).json({ error }));
+  adminChecker(req, res);
+  const query = 'SELECT * FROM food_menus';
+  db.query(query)
+    .then((menus) => {
+      menus.rows.map((menu) => {
+        console.log(menu.food_name === req.body.food_name);
+        if (menu.food_name === req.body.food_name) {
+          return responseMsg(res, 400, 'fail', 'Menu is already created');
+        }
+      });
     })
+    .catch(error => res.status(404).json(error));
+  const query2 = 'INSERT INTO food_menus(id,food_name, description, category, price, created_date,modified_date) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING *';
+  const values = [
+    uuid(),
+    food_name,
+    description,
+    category,
+    price,
+    new Date(),
+    new Date()];
+  db.query(query2, values)
+    .then(menuItem => responseMsg(res, 201, 'success', 'menu created', menuItem.rows[0]))
     .catch(error => res.status(400).json({ error }));
 };
 
@@ -49,7 +52,7 @@ export const getMenu = (req, res) => {
       if (!menu.rows[0]) {
         return responseMsg(res, 200, 'success', 'No menu available');
       }
-      return responseMsg(res, 200, 'success', 'menu retrival successful', menu.rows);
+      return menuResponseMsg(res, 200, 'success', 'menu retrival successful', menu.rows);
     })
     .catch(error => res.status(404).json(error));
 };

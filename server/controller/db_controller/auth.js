@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import uuid from 'uuid';
 import db from '../../model/db/config';
-import { responseMsg } from '../../utils/helpers';
+import { responseMsg, userResponseMsg } from '../../utils/helpers';
 
 
 /**
@@ -37,7 +37,7 @@ export const signup = (req, res) => {
             new Date(),
             new Date()];
           db.query(query, values)
-            .then(user => responseMsg(res, 201, 'success', 'Signup successful', user.rows[0]))
+            .then(user => userResponseMsg(res, 201, 'success', 'Signup successful', user.rows[0]))
             .catch(error => res.status(400).json(error));
         })
         .catch(error => res.status(400).json(error));
@@ -76,5 +76,14 @@ export const login = (req, res) => {
         })
         .catch(error => res.status(400).json(error));
     })
+    .catch(error => res.status(400).json(error));
+};
+
+
+export const getUsers = (req, res) => {
+  const query = 'SELECT id, firstname, lastname, email, phone, location, created_date FROM users';
+
+  db.query(query)
+    .then(users => res.status(200).json(users.rows))
     .catch(error => res.status(400).json(error));
 };
