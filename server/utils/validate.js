@@ -18,44 +18,6 @@ const updateInputRegex = /\b(new|processing|cancelled|complete)\b/;
 
 const isValidUpdateInput = input => updateInputRegex.test(input);
 
-const emptyInputChecker = (res, input, msg) => {
-  if (!input || !input.trim()) {
-    return responseMsg(res, 400, 'fail', `${msg} is required`);
-  }
-};
-
-const emailChecker = (res, input, msg) => {
-  if (!isValidEmail(input)) {
-    return responseMsg(res, 400, 'fail', msg);
-  }
-};
-
-const passwordLengthChecker = (res, input, msg) => {
-  if (input.length < 8) {
-    return responseMsg(res, 400, 'fail', msg);
-  }
-};
-
-const passwordStrengthChecker = (res, input, msg) => {
-  if (!lowerCaseChecker(input)) {
-    return responseMsg(res, 400, 'fail', `${msg}`);
-  }
-};
-const passwordStrengthChecker2 = (res, input, msg) => {
-  if (!upperCaseChecker(input)) {
-    return responseMsg(res, 400, 'fail', `${msg}`);
-  }
-};
-const passwordStrengthChecker3 = (res, input, msg) => {
-  if (!numChecker(input)) {
-    return responseMsg(res, 400, 'fail', `${msg}`);
-  }
-};
-const passwordStrengthChecker4 = (res, input, msg) => {
-  if (!specCharChecker(input)) {
-    return responseMsg(res, 400, 'fail', `${msg}`);
-  }
-};
 
 /**
  * @description This function validate user signup field
@@ -68,18 +30,42 @@ export const signupValidator = (req, res, next) => {
     firstname, lastname, phone, email, password, location,
   } = req.body;
 
-  emptyInputChecker(res, firstname, 'First name');
-  emptyInputChecker(res, lastname, 'Last name');
-  emptyInputChecker(res, phone, 'phone');
-  emptyInputChecker(res, email, 'email');
-  emailChecker(res, email, 'Email is invalid');
-  emptyInputChecker(res, password, 'password');
-  passwordLengthChecker(res, password, 'Password must not be less than 8 characters');
-  passwordStrengthChecker(res, password, 'Password must contain at least a lowercase');
-  passwordStrengthChecker2(res, password, 'Password must contain at least an uppercase');
-  passwordStrengthChecker3(res, password, 'Password must contain at least a number');
-  passwordStrengthChecker4(res, password, 'Password must contain at least one \'$\', \'@\', \'#\', \'&\', or \'!\'');
-  emptyInputChecker(res, location, 'Location');
+  if (!firstname || !firstname.trim()) {
+    return responseMsg(res, 400, 'fail', 'First name is required');
+  }
+  if (!lastname || !lastname.trim()) {
+    return responseMsg(res, 400, 'fail', 'Last name is required');
+  }
+  if (!phone || !phone.trim()) {
+    return responseMsg(res, 400, 'fail', 'phone is required');
+  }
+  if (!email || !email.trim()) {
+    return responseMsg(res, 400, 'fail', 'email is required');
+  }
+  if (!password || !password.trim()) {
+    return responseMsg(res, 400, 'fail', 'password is required');
+  }
+  if (!location || !location.trim()) {
+    return responseMsg(res, 400, 'fail', 'password is required');
+  }
+  if (!isValidEmail(email)) {
+    return responseMsg(res, 400, 'fail', 'email is not valid');
+  }
+  if (password.length < 8) {
+    return responseMsg(res, 400, 'fail', 'password must not be less than 8 character');
+  }
+  if (!lowerCaseChecker(password)) {
+    return responseMsg(res, 400, 'fail', 'password must contain at least a lowercase');
+  }
+  if (!upperCaseChecker(password)) {
+    return responseMsg(res, 400, 'fail', 'Password must contain at least an uppercase');
+  }
+  if (!numChecker(password)) {
+    return responseMsg(res, 400, 'fail', 'Password must contain at least a number');
+  }
+  if (!specCharChecker(password)) {
+    return responseMsg(res, 400, 'fail', 'Password must contain at least one \'$\',\'@\',\'#\',\'&\',or\'!\'');
+  }
 
   next();
 };
@@ -93,15 +79,30 @@ export const signupValidator = (req, res, next) => {
 export const loginValidator = (req, res, next) => {
   const { email, password } = req.body;
 
-  emptyInputChecker(res, email, 'email');
-  emailChecker(res, email, 'Email is invalid');
-  emptyInputChecker(res, password, 'password');
-  passwordLengthChecker(res, password, 'Password must not be less than 8 characters');
-  passwordStrengthChecker(res, password, 'Password must contain at least a lowercase');
-  passwordStrengthChecker2(res, password, 'Password must contain at least an uppercase');
-  passwordStrengthChecker3(res, password, 'Password must contain at least a number');
-  passwordStrengthChecker4(res, password, 'Password must contain at least one \'$\', \'@\', \'#\', \'&\', or \'!\'');
-
+  if (!email || !email.trim()) {
+    return responseMsg(res, 400, 'fail', 'email is required');
+  }
+  if (!password || !password.trim()) {
+    return responseMsg(res, 400, 'fail', 'password is required');
+  }
+  if (!isValidEmail(email)) {
+    return responseMsg(res, 400, 'fail', 'email is not valid');
+  }
+  if (password.length < 8) {
+    return responseMsg(res, 400, 'fail', 'password must not be less than 8 character');
+  }
+  if (!lowerCaseChecker(password)) {
+    return responseMsg(res, 400, 'fail', 'password must contain at least a lowercase');
+  }
+  if (!upperCaseChecker(password)) {
+    return responseMsg(res, 400, 'fail', 'Password must contain at least an uppercase');
+  }
+  if (!numChecker(password)) {
+    return responseMsg(res, 400, 'fail', 'Password must contain at least a number');
+  }
+  if (!specCharChecker(password)) {
+    return responseMsg(res, 400, 'fail', 'Password must contain at least one \'$\',\'@\',\'#\',\'&\',or\'!\'');
+  }
   next();
 };
 
@@ -117,10 +118,18 @@ export const menuValidator = (req, res, next) => {
     food_name, description, category, price,
   } = req.body;
 
-  emptyInputChecker(res, food_name, 'Food menu');
-  emptyInputChecker(res, description, 'Menu Description');
-  emptyInputChecker(res, category, 'Menu Category');
-  emptyInputChecker(res, price, 'price');
+  if (!food_name || !food_name.trim()) {
+    return responseMsg(res, 400, 'fail', 'Food name is required');
+  }
+  if (!description || !description.trim()) {
+    return responseMsg(res, 400, 'fail', 'Description is required');
+  }
+  if (!category || !category.trim()) {
+    return responseMsg(res, 400, 'fail', 'category is required');
+  }
+  if (!price || !price.trim()) {
+    return responseMsg(res, 400, 'fail', 'price is required');
+  }
 
   next();
 };
@@ -134,8 +143,12 @@ export const menuValidator = (req, res, next) => {
 export const placeOrderValidator = (req, res, next) => {
   const { food_name, quantity_ordered } = req.body;
 
-  emptyInputChecker(res, food_name, 'Food menu');
-  emptyInputChecker(res, quantity_ordered, 'Quantity ordered');
+  if (!food_name || !food_name.trim()) {
+    return responseMsg(res, 400, 'fail', 'Food name is required');
+  }
+  if (!quantity_ordered || !quantity_ordered.trim()) {
+    return responseMsg(res, 400, 'fail', 'quantity ordered is required');
+  }
 
   next();
 };
@@ -148,10 +161,15 @@ export const placeOrderValidator = (req, res, next) => {
  */
 export const updateOrderValidator = (req, res, next) => {
   const {
-    order_status,
+    id, order_status,
   } = req.body;
 
-  emptyInputChecker(order_status, res, 'order status');
+  if (!uuidChecker(id)) {
+    return responseMsg(res, 400, 'fail', 'menu id is not valid');
+  }
+  if (!order_status || !order_status.trim()) {
+    return responseMsg(res, 400, 'fail', 'order status is required');
+  }
   if (!isValidUpdateInput(order_status)) {
     return responseMsg(res, 400, 'fail', 'order_status must be either new, processing, cancelled or complete');
   }
@@ -173,15 +191,4 @@ export const urlParamsChecker = (req, res, next) => {
   }
 
   next();
-};
-
-/**
- * @description This is a reuseable function checks if a user is an admin
- * @param {object} req
- * @param {object} res
- */
-export const adminChecker = (req, res) => {
-  if (req.authData.user_status !== 'admin') {
-    return responseMsg(res, 403, 'fail', 'admin access only');
-  }
 };

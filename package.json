@@ -4,7 +4,7 @@
   "description": "Fast-Food-Fast​ is a food delivery service app for a restaurant.",
   "main": "index.js",
   "scripts": {
-    "create_db": "psql -U postgres -f ./server/model/db/db_test.sql",
+    "create_db": "psql -U postgres -f ./server/model/db/db.sql",
     "create_test_db": "psql -U postgres -f ./server/model/db/db_test.sql",
     "startDev": "nodemon --exec babel-node -- ./server/index",
     "babel-node": "babel-node --presets=env",
