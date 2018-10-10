@@ -17,13 +17,13 @@ app.use(logger('dev'));
 app.use('/', router);
 app.get('/', (req, res) => res.redirect('/api/v1/doc'));
 app.use('*', (req, res) => responseMsg(res, 404, 'fail', 'wrong url entered'));
-// app.use((error, req, res, next) => {
-//   res.status(error.status).json({
-//     success: 'fail',
-//     message: error.message,
-//   });
-//   next();
-// });
+app.use((error, req, res, next) => {
+  res.status(error.status || 500).json({
+    success: 'fail',
+    message: error.message,
+  });
+  next();
+});
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {

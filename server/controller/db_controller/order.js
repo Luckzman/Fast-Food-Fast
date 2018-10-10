@@ -1,6 +1,6 @@
 import uuid from 'uuid';
 import db from '../../model/db/config';
-import { responseMsg } from '../../utils/helpers';
+import { responseMsg, orderResponseMsg } from '../../utils/helpers';
 
 /**
  * @description This controller will place a new order
@@ -24,7 +24,7 @@ export const placeOrder = (req, res) => {
         req.authData.id,
         menu.rows[0].id];
       db.query(query, value)
-        .then(order => responseMsg(res, 201, 'success', 'menu successfully ordered', order.rows[0]))
+        .then(order => orderResponseMsg(res, 201, 'success', 'menu successfully ordered', order.rows[0]))
         .catch(error => res.status(400).json(error));
     })
     .catch(error => res.status(400).json(error));
@@ -46,7 +46,7 @@ export const getAllOrder = (req, res) => {
       if (!order.rows[0]) {
         return responseMsg(res, 204, 'success', 'No Order Content');
       }
-      return responseMsg(res, 200, 'success', 'Order Request Successful', order.rows);
+      return orderResponseMsg(res, 200, 'success', 'Order Request Successful', order.rows);
     })
     .catch(error => res.status(404).json(error));
 };
@@ -65,7 +65,7 @@ export const getSingleOrder = (req, res) => {
   db.query(query, value)
     .then((order) => {
       if (order) {
-        return responseMsg(res, 200, 'success', 'Order Request Successful', order.rows[0]);
+        return orderResponseMsg(res, 200, 'success', 'Order Request Successful', order.rows[0]);
       }
       return responseMsg(res, 200, 'success', 'Empty Order Entry');
     })
@@ -86,18 +86,18 @@ export const updateOrderStatus = (req, res) => {
   db.query(query, value)
     .then((menu) => {
       if (!menu.rows[0]) {
-        return responseMsg(res, 201, 'fail', 'menu not available');
+        return responseMsg(res, 404, 'fail', 'menu not available');
       }
       const query = 'UPDATE orders SET order_status = $1, modified_date = $2 WHERE id = $3 RETURNING *';
       const values = [req.body.order_status, new Date(), req.params.id];
       db.query(query, values)
         .then((order) => {
           if (order.rows[0]) {
-            return responseMsg(res, 201, 'success', 'Update request successful', order.rows[0]);
+            return orderResponseMsg(res, 200, 'success', 'Update request successful', order.rows[0]);
           }
-          return responseMsg(res, 404, 'fail', 'Wrong Order Update Input');
+          return responseMsg(res, 400, 'fail', 'Wrong Order Update Input');
         })
         .catch(error => res.status(400).json(error));
     })
-    .catch(error => res.status(400).json(error));
+    .catch(error => res.status(404).json(error));
 };

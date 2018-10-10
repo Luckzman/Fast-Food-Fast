@@ -84,6 +84,6 @@ export const getUsers = (req, res) => {
   const query = 'SELECT id, firstname, lastname, email, phone, location, created_date FROM users';
 
   db.query(query)
-    .then(users => res.status(200).json(users.rows))
+    .then(users => userResponseMsg(res, 200, 'success', 'get request succesful', users.rows))
     .catch(error => res.status(400).json(error));
 };

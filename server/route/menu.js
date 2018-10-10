@@ -6,7 +6,7 @@ import { createMenu, getMenu, imageUpload } from '../controller/db_controller/me
 
 const menuRouter = express.Router();
 
-menuRouter.post('/', menuValidator, authChecker, createMenu);
+menuRouter.post('/', upload.single('image'), menuValidator, authChecker, createMenu);
 menuRouter.get('/', getMenu);
 menuRouter.put('/upload', upload.single('image'), authChecker, imageUpload);
 
