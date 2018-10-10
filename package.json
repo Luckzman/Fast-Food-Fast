@@ -13,7 +13,7 @@
     "serve": "node dist/index.js",
     "test": "npm run create_test_db && set NODE_ENV=test&&  mocha --require babel-register --env test ./server/test/*.js --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "coveralls": "npm test && nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "npm run test-local && nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",

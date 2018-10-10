@@ -30,6 +30,7 @@ describe('SIGNUP USERS', () => {
       .send(admin)
       .end((err, res) => {
         res.should.have.status(201);
+        console.log(res);
         done();
       });
   });

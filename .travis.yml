@@ -11,8 +11,8 @@ services:
 before_script:
   # - psql -c 'drop database if exists db_test;' -U postgres
   - psql -c 'create database db_test;' -U postgres
-  - cat ./server/model/db/test.sql | psql -h localhost -U postgres db_test
-  # - psql -c "CREATE USER fastfoodfast WITH PASSWORD 'postgres';" -U postgres
+  # - cat ./server/model/db/test.sql | psql -h localhost -U postgres db_test
+  - psql -c "CREATE USER fastfoodfast WITH PASSWORD 'postgres';" -U postgres
 
 script: npm run test
 after_success: npm run coverage

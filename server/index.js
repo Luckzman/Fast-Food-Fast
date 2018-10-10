@@ -2,7 +2,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 import { responseMsg } from './utils/helpers';
-
 import router from './route/index';
 
 
@@ -18,7 +17,7 @@ app.use('/', router);
 app.get('/', (req, res) => res.redirect('/api/v1/doc'));
 app.use('*', (req, res) => responseMsg(res, 404, 'fail', 'wrong url entered'));
 app.use((error, req, res, next) => {
-  res.status(error.status || 500).json({
+  res.status(error.status).json({
     success: 'fail',
     message: error.message,
   });
