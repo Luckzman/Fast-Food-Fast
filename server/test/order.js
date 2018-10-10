@@ -15,11 +15,6 @@ const user = {
   password: '12345678aB@',
 };
 
-const order = {
-  food_name: 'meat-pie',
-  quantity_ordered: 10,
-};
-
 
 describe('EMPTY ORDERS TABLE', () => {
   it('should return no content if order table is empty', (done) => {
@@ -63,7 +58,7 @@ describe('PLACE ORDER', () => {
   it('should allow regular users to place an order', (done) => {
     chai.request(app)
       .post('/api/v1/auth/login')
-      .send(admin)
+      .send(user)
       .end((err, res) => {
         res.should.have.status(200);
         const token = res.body.data;
@@ -72,10 +67,14 @@ describe('PLACE ORDER', () => {
           .set('Authorization', `Bearer ${token}`)
           .end((err, res) => {
             res.should.have.status(200);
+            const { id } = res.body.menu[0];
             chai.request(app)
               .post('/api/v1/orders')
               .set('Authorization', `Bearer ${token}`)
-              .send(order)
+              .send({
+                id,
+                quantity_ordered: '10',
+              })
               .end((err, res) => {
                 res.should.have.status(201);
                 done();
@@ -173,7 +172,7 @@ describe('GET A SPECIFIC ORDER', () => {
           .set('Authorization', `Bearer ${token}`)
           .end((err, res) => {
             res.should.have.status(200);
-            const { id } = res.body.data[0];
+            const { id } = res.body.order[0];
             chai.request(app)
               .get(`/api/v1/orders/${id}`)
               .set('Authorization', `Bearer ${token}`)
@@ -216,17 +215,15 @@ describe('UPDATE AN ORDER STATUS', () => {
           .set('Authorization', `Bearer ${token}`)
           .end((err, res) => {
             res.should.have.status(200);
-            const { id } = res.body.data[0];
+            const { id } = res.body.order[0];
             chai.request(app)
               .put(`/api/v1/orders/${id}`)
               .set('Authorization', `Bearer ${token}`)
               .send({
-                food_name: 'meat_pie',
-                quantity_ordered: 10,
                 order_status: 'processing',
               })
               .end((err, res) => {
-                res.should.have.status(201);
+                res.should.have.status(200);
                 done();
               });
           });
@@ -245,7 +242,7 @@ describe('UPDATE AN ORDER STATUS', () => {
           .set('Authorization', `Bearer ${token}`)
           .end((err, res) => {
             res.should.have.status(200);
-            const { id } = res.body.data[0];
+            const { id } = res.body.order[0];
             chai.request(app)
               .put(`/api/v1/orders/${id}`)
               .set('Authorization', `Bearer ${token}`)

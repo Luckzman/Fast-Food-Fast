@@ -141,10 +141,10 @@ export const menuValidator = (req, res, next) => {
  * @param {function} next
  */
 export const placeOrderValidator = (req, res, next) => {
-  const { food_name, quantity_ordered } = req.body;
+  const { id, quantity_ordered } = req.body;
 
-  if (!food_name || !food_name.trim()) {
-    return responseMsg(res, 400, 'fail', 'Food name is required');
+  if (!uuidChecker(id)) {
+    return responseMsg(res, 400, 'fail', 'order id is not valid');
   }
   if (!quantity_ordered || !quantity_ordered.trim()) {
     return responseMsg(res, 400, 'fail', 'quantity ordered is required');
@@ -161,12 +161,9 @@ export const placeOrderValidator = (req, res, next) => {
  */
 export const updateOrderValidator = (req, res, next) => {
   const {
-    id, order_status,
+    order_status,
   } = req.body;
 
-  if (!uuidChecker(id)) {
-    return responseMsg(res, 400, 'fail', 'menu id is not valid');
-  }
   if (!order_status || !order_status.trim()) {
     return responseMsg(res, 400, 'fail', 'order status is required');
   }

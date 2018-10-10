@@ -81,12 +81,12 @@ export const updateOrderStatus = (req, res) => {
   if (req.authData.user_status !== 'admin') {
     return responseMsg(res, 403, 'fail', 'Admin Access Only');
   }
-  const query = 'SELECT * FROM food_menus WHERE id = $1';
-  const value = [req.body.id];
+  const query = 'SELECT * FROM orders WHERE id = $1';
+  const value = [req.params.id];
   db.query(query, value)
     .then((menu) => {
       if (!menu.rows[0]) {
-        return responseMsg(res, 404, 'fail', 'menu not available');
+        return responseMsg(res, 404, 'fail', 'order not available');
       }
       const query = 'UPDATE orders SET order_status = $1, modified_date = $2 WHERE id = $3 RETURNING *';
       const values = [req.body.order_status, new Date(), req.params.id];
