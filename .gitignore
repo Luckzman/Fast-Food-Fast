@@ -4,3 +4,4 @@ coverage
 .env
 image
 dist
+db_sample.sql

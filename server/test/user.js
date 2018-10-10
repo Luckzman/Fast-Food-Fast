@@ -2,8 +2,6 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../index';
 
-process.env.NODE_ENV = 'test';
-
 chai.use(chaiHttp);
 chai.should();
 

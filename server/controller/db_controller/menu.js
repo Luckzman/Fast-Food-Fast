@@ -1,6 +1,6 @@
 import uuid from 'uuid';
 import db from '../../model/db/config';
-import { responseMsg } from '../../utils/helpers';
+import { responseMsg, menuResponseMsg } from '../../utils/helpers';
 
 /**
  * @description This controller create Menu Items
@@ -9,31 +9,38 @@ import { responseMsg } from '../../utils/helpers';
  * @returns {object} responseMsg
  */
 export const createMenu = (req, res) => {
-  const { id } = req.authData;
   const {
     food_name, description, category, price,
   } = req.body;
-  const query = 'SELECT * FROM users WHERE id = $1';
-  const values = [id];
-  db.query(query, values)
-    .then((admin) => {
-      if (admin.rows[0].user_status !== 'admin') {
-        return responseMsg(res, 403, 'fail', 'admin access only');
+  if (req.authData.user_status !== 'admin') {
+    return responseMsg(res, 403, 'fail', 'admin access only');
+  }
+  if (!req.file) {
+    return responseMsg(res, 400, 'fail', 'No image uploaded');
+  }
+  const image = `${req.file.destination}${req.file.filename}`;
+  const query = 'SELECT * FROM food_menus WHERE food_name = $1';
+  const value = [req.body.food_name];
+  db.query(query, value)
+    .then((menu) => {
+      if (menu.rows[0]) {
+        return responseMsg(res, 400, 'fail', 'Menu is already created');
       }
-      const query = 'INSERT INTO food_menus(id,food_name, description, category, price, created_date,modified_date) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING *';
+      const query2 = 'INSERT INTO food_menus(id, food_name, description, category, price, image, created_date,modified_date) VALUES($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *';
       const values = [
         uuid(),
         food_name,
         description,
         category,
         price,
+        image,
         new Date(),
         new Date()];
-      db.query(query, values)
-        .then(menuItem => responseMsg(res, 201, 'success', 'menu created', menuItem.rows[0]))
+      db.query(query2, values)
+        .then(menuItem => menuResponseMsg(res, 201, 'success', 'menu created', menuItem.rows[0]))
         .catch(error => res.status(400).json({ error }));
     })
-    .catch(error => res.status(400).json({ error }));
+    .catch(error => res.status(404).json(error));
 };
 
 /**
@@ -49,34 +56,23 @@ export const getMenu = (req, res) => {
       if (!menu.rows[0]) {
         return responseMsg(res, 200, 'success', 'No menu available');
       }
-      return responseMsg(res, 200, 'success', 'menu retrival successful', menu.rows);
+      return menuResponseMsg(res, 200, 'success', 'menu retrival successful', menu.rows);
     })
     .catch(error => res.status(404).json(error));
 };
 
 export const imageUpload = (req, res) => {
-  const { id } = req.authData;
-  const query = 'SELECT * FROM users WHERE id = $1';
-  const values = [id];
-  db.query(query, values)
-    .then((admin) => {
-      if (admin.rows[0].user_status !== 'admin') {
-        return responseMsg(res, 403, 'fail', 'admin access only');
-      }
-      const { food_name } = req.body;
-      const image = `${req.file.destination}${req.file.filename}`;
-      console.log(image);
-      const query = 'UPDATE food_menus SET image = $1 WHERE food_name = $2 RETURNING *';
-      const value = [image, food_name];
-      db.query(query, value)
-        .then((menuImage) => {
-          console.log(menuImage.rows);
-          if (!menuImage.rows[0].image) {
-            return responseMsg(res, 400, 'fail', 'No image uploaded');
-          }
-          return responseMsg(res, 200, 'success', 'file upload successful', menuImage.rows[0]);
-        })
-        .catch(error => res.status(400).json(error));
-    })
+  if (req.authData.user_status !== 'admin') {
+    return responseMsg(res, 403, 'fail', 'admin access only');
+  }
+  const { id } = req.body;
+  if (!req.file) {
+    return responseMsg(res, 400, 'fail', 'No image uploaded');
+  }
+  const image = `${req.file.destination}${req.file.filename}`;
+  const query = 'UPDATE food_menus SET image = $1 WHERE id = $2 RETURNING *';
+  const value = [image, id];
+  db.query(query, value)
+    .then(menuImage => responseMsg(res, 200, 'success', 'file upload successful', menuImage.rows[0]))
     .catch(error => res.status(400).json(error));
 };

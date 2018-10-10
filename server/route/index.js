@@ -12,6 +12,6 @@ router.use('/api/v1/orders', order);
 router.use('/api/v1/auth', auth);
 router.use('/api/v1/menu', menu);
 router.use('/api/v1/user', user);
-router.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+router.use('/api/v1/doc', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 export default router;

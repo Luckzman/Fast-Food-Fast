@@ -1,5 +1,5 @@
 import db from '../../model/db/config';
-import { responseMsg } from '../../utils/helpers';
+import { responseMsg, orderResponseMsg } from '../../utils/helpers';
 
 /**
  * @description This controller to get user order history
@@ -18,7 +18,7 @@ const getUserOrderHistory = (req, res) => {
           if (!order.rows[0]) {
             return responseMsg(res, 200, 'fail', 'No order has been placed');
           }
-          return responseMsg(res, 200, 'success', 'User Order History Request Successful', order.rows[0]);
+          return orderResponseMsg(res, 200, 'success', 'User Order History Request Successful', order.rows[0]);
         })
         .catch(error => res.status(404).json(error));
     })

@@ -2,8 +2,6 @@ import { responseMsg } from './helpers';
 
 const isValidEmail = input => /\S+@\S+\.\S/.test(input);
 
-const isValidInt = input => /^\+?\d+$/.test(input);
-
 const lowerCaseChecker = input => /[a-z]/.test(input);
 
 const upperCaseChecker = input => /[A-Z]/.test(input);
@@ -20,6 +18,7 @@ const updateInputRegex = /\b(new|processing|cancelled|complete)\b/;
 
 const isValidUpdateInput = input => updateInputRegex.test(input);
 
+
 /**
  * @description This function validate user signup field
  * @param {object} req
@@ -31,53 +30,41 @@ export const signupValidator = (req, res, next) => {
     firstname, lastname, phone, email, password, location,
   } = req.body;
 
-  if (typeof firstname !== 'string') {
-    return responseMsg(res, 400, 'fail', 'First name must be string');
-  }
   if (!firstname || !firstname.trim()) {
-    return responseMsg(res, 400, 'fail', 'First name is missing');
-  }
-  if (typeof lastname !== 'string') {
-    return responseMsg(res, 400, 'fail', 'Last name must be string');
+    return responseMsg(res, 400, 'fail', 'First name is required');
   }
   if (!lastname || !lastname.trim()) {
-    return responseMsg(res, 400, 'fail', 'Last name is missing');
+    return responseMsg(res, 400, 'fail', 'Last name is required');
   }
-  if (!phone) {
-    return responseMsg(res, 400, 'fail', 'Phone number is missing');
+  if (!phone || !phone.trim()) {
+    return responseMsg(res, 400, 'fail', 'phone is required');
   }
-  if (!isValidInt(phone)) {
-    return responseMsg(res, 400, 'fail', 'Phone number must be valid');
+  if (!email || !email.trim()) {
+    return responseMsg(res, 400, 'fail', 'email is required');
   }
-  if (!email) {
-    return responseMsg(res, 400, 'fail', 'Email is missing');
-  }
-  if (!isValidEmail(email)) {
-    return responseMsg(res, 400, 'fail', 'Email is invalid');
-  }
-  if (!password) {
-    return responseMsg(res, 400, 'fail', 'Password is missing');
-  }
-  if (password.length < 8) {
-    return responseMsg(res, 400, 'fail', 'Password must not be less than 8 characters');
-  }
-  if (!lowerCaseChecker(password)) {
-    return responseMsg(res, 400, 'fail', 'Password must contain at lease one lowercase character');
-  }
-  if (!upperCaseChecker(password)) {
-    return responseMsg(res, 400, 'fail', 'Password must contain at lease one uppercase character');
-  }
-  if (!numChecker(password)) {
-    return responseMsg(res, 400, 'fail', 'Password must contain at lease one number');
-  }
-  if (!specCharChecker(password)) {
-    return responseMsg(res, 400, 'fail', 'Password must contain lease one \'$\', \'@\', \'#\', \'&\', or \'!\'');
-  }
-  if (typeof location !== 'string') {
-    return responseMsg(res, 400, 'fail', 'location must be string');
+  if (!password || !password.trim()) {
+    return responseMsg(res, 400, 'fail', 'password is required');
   }
   if (!location || !location.trim()) {
-    return responseMsg(res, 400, 'fail', 'location is missing');
+    return responseMsg(res, 400, 'fail', 'password is required');
+  }
+  if (!isValidEmail(email)) {
+    return responseMsg(res, 400, 'fail', 'email is not valid');
+  }
+  if (password.length < 8) {
+    return responseMsg(res, 400, 'fail', 'password must not be less than 8 character');
+  }
+  if (!lowerCaseChecker(password)) {
+    return responseMsg(res, 400, 'fail', 'password must contain at least a lowercase');
+  }
+  if (!upperCaseChecker(password)) {
+    return responseMsg(res, 400, 'fail', 'Password must contain at least an uppercase');
+  }
+  if (!numChecker(password)) {
+    return responseMsg(res, 400, 'fail', 'Password must contain at least a number');
+  }
+  if (!specCharChecker(password)) {
+    return responseMsg(res, 400, 'fail', 'Password must contain at least one \'$\',\'@\',\'#\',\'&\',or\'!\'');
   }
 
   next();
@@ -90,38 +77,32 @@ export const signupValidator = (req, res, next) => {
  * @param {object} next
  */
 export const loginValidator = (req, res, next) => {
-  let {
-    email, password,
-  } = req.body;
+  const { email, password } = req.body;
 
-  email = email.trim();
-  password = password.trim();
-
-  if (!email) {
-    return responseMsg(res, 400, 'fail', 'Email is missing');
+  if (!email || !email.trim()) {
+    return responseMsg(res, 400, 'fail', 'email is required');
+  }
+  if (!password || !password.trim()) {
+    return responseMsg(res, 400, 'fail', 'password is required');
   }
   if (!isValidEmail(email)) {
-    return responseMsg(res, 400, 'fail', 'Email is invalid');
-  }
-  if (!password) {
-    return responseMsg(res, 400, 'fail', 'Password is missing');
+    return responseMsg(res, 400, 'fail', 'email is not valid');
   }
   if (password.length < 8) {
-    return responseMsg(res, 400, 'fail', 'Password must not be less than 8 characters');
+    return responseMsg(res, 400, 'fail', 'password must not be less than 8 character');
   }
   if (!lowerCaseChecker(password)) {
-    return responseMsg(res, 400, 'fail', 'Password must contain at lease one lowercase character');
+    return responseMsg(res, 400, 'fail', 'password must contain at least a lowercase');
   }
   if (!upperCaseChecker(password)) {
-    return responseMsg(res, 400, 'fail', 'Password must contain at lease one uppercase character');
+    return responseMsg(res, 400, 'fail', 'Password must contain at least an uppercase');
   }
   if (!numChecker(password)) {
-    return responseMsg(res, 400, 'fail', 'Password must contain at lease one number');
+    return responseMsg(res, 400, 'fail', 'Password must contain at least a number');
   }
   if (!specCharChecker(password)) {
-    return responseMsg(res, 400, 'fail', 'Password must contain lease one \'$\', \'@\', \'#\', \'&\', or \'!\'');
+    return responseMsg(res, 400, 'fail', 'Password must contain at least one \'$\',\'@\',\'#\',\'&\',or\'!\'');
   }
-
   next();
 };
 
@@ -137,47 +118,17 @@ export const menuValidator = (req, res, next) => {
     food_name, description, category, price,
   } = req.body;
 
-  if (typeof food_name !== 'string') {
-    return responseMsg(res, 400, 'fail', 'Food menu name must be string');
-  }
   if (!food_name || !food_name.trim()) {
-    return responseMsg(res, 400, 'fail', 'Food menu name is missing');
-  }
-  if (typeof description !== 'string') {
-    return responseMsg(res, 400, 'fail', 'Menu description must be string');
+    return responseMsg(res, 400, 'fail', 'Food name is required');
   }
   if (!description || !description.trim()) {
-    return responseMsg(res, 400, 'fail', 'Menu description is missing');
-  }
-  if (typeof category !== 'string') {
-    return responseMsg(res, 400, 'fail', 'Menu category must be string');
+    return responseMsg(res, 400, 'fail', 'Description is required');
   }
   if (!category || !category.trim()) {
-    return responseMsg(res, 400, 'fail', 'Menu category is not selected');
+    return responseMsg(res, 400, 'fail', 'category is required');
   }
-  if (!price) {
-    return responseMsg(res, 400, 'fail', 'price is missing');
-  }
-  if (!isValidInt(price)) {
-    return responseMsg(res, 400, 'fail', 'price must be a number');
-  }
-
-  next();
-};
-
-
-/**
- *@description This function validate image upload
- * @param {object} req
- * @param {object} res
- * @param {function} next
- */
-export const uploadImageValidator = (req, res, next) => {
-  const image = `${req.file.destination}${req.file.filename}`;
-  console.log(req.file);
-  console.log(image.length);
-  if (!image.length) {
-    return responseMsg(res, 400, 'fail', 'No Image Upload has been made');
+  if (!price || !price.trim()) {
+    return responseMsg(res, 400, 'fail', 'price is required');
   }
 
   next();
@@ -190,22 +141,13 @@ export const uploadImageValidator = (req, res, next) => {
  * @param {function} next
  */
 export const placeOrderValidator = (req, res, next) => {
-  const {
-    food_name,
-    quantity_ordered,
-  } = req.body;
+  const { id, quantity_ordered } = req.body;
 
-  if (typeof food_name !== 'string') {
-    return responseMsg(res, 400, 'fail', 'Food menu name must be string');
+  if (!uuidChecker(id)) {
+    return responseMsg(res, 400, 'fail', 'order id is not valid');
   }
-  if (!food_name || !food_name.trim()) {
-    return responseMsg(res, 400, 'fail', 'Food menu name is missing');
-  }
-  if (!quantity_ordered) {
-    return responseMsg(res, 400, 'fail', 'quantity ordered is missing');
-  }
-  if (!isValidInt(quantity_ordered)) {
-    return responseMsg(res, 400, 'fail', 'quantity ordered must be a positive integer');
+  if (!quantity_ordered || !quantity_ordered.trim()) {
+    return responseMsg(res, 400, 'fail', 'quantity ordered is required');
   }
 
   next();
@@ -222,8 +164,8 @@ export const updateOrderValidator = (req, res, next) => {
     order_status,
   } = req.body;
 
-  if (!order_status) {
-    return responseMsg(res, 400, 'fail', 'order_status is missing');
+  if (!order_status || !order_status.trim()) {
+    return responseMsg(res, 400, 'fail', 'order status is required');
   }
   if (!isValidUpdateInput(order_status)) {
     return responseMsg(res, 400, 'fail', 'order_status must be either new, processing, cancelled or complete');

@@ -2,8 +2,6 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../index';
 
-process.env.NODE_ENV = 'test';
-
 chai.use(chaiHttp);
 chai.should();
 
@@ -32,6 +30,7 @@ describe('SIGNUP USERS', () => {
       .send(admin)
       .end((err, res) => {
         res.should.have.status(201);
+        console.log(res);
         done();
       });
   });

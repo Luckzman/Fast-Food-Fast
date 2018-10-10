@@ -2,8 +2,6 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../index';
 
-process.env.NODE_ENV = 'test';
-
 chai.use(chaiHttp);
 chai.should();
 
@@ -15,13 +13,6 @@ const admin = {
 const user = {
   email: 'user@fastfoodfast.com',
   password: '12345678aB@',
-};
-
-const menu = {
-  food_name: 'meat-pie',
-  description: 'Sweet and fresh',
-  price: 500,
-  category: 'pasta',
 };
 
 describe('EMPTY MENU TABLE', () => {
@@ -47,8 +38,12 @@ describe('CREATE MENU', () => {
         chai.request(app)
           .post('/api/v1/menu')
           .set('Authorization', `Bearer ${token}`)
-          .set('Content-Type', 'application/json')
-          .send(menu)
+          .type('form')
+          .field('food_name', 'Pepper Soup')
+          .field('description', 'Fresh and tasty')
+          .field('category', 'pastas')
+          .field('price', 500)
+          .attach('image', './server/test/test_img.jpg')
           .end((err, res) => {
             res.should.have.status(201);
             done();
@@ -65,7 +60,12 @@ describe('CREATE MENU', () => {
         chai.request(app)
           .post('/api/v1/menu')
           .set('Authorization', `Bearer ${token}`)
-          .send(menu)
+          .type('form')
+          .field('food_name', 'Pepper Soup')
+          .field('description', 'Fresh and tasty')
+          .field('category', 'pastas')
+          .field('price', 500)
+          .attach('image', './server/test/test_img.jpg')
           .end((err, res) => {
             res.should.have.status(403);
             done();
@@ -157,28 +157,6 @@ describe('CREATE MENU', () => {
           });
       });
   });
-  it('should ensure food price is a positive integer', (done) => {
-    chai.request(app)
-      .post('/api/v1/auth/login')
-      .send(admin)
-      .end((err, res) => {
-        res.should.have.status(200);
-        const token = res.body.data;
-        chai.request(app)
-          .post('/api/v1/menu')
-          .set('Authorization', `Bearer ${token}`)
-          .type('form')
-          .field('food_name', 'meat_pie')
-          .field('description', 'Fresh and tasty')
-          .field('category', 'pastas')
-          .field('price', 'asd')
-          .attach('image', './server/test/test_img.jpg')
-          .end((err, res) => {
-            res.should.have.status(400);
-            done();
-          });
-      });
-  });
   it('should ensure that admin upload an image', (done) => {
     chai.request(app)
       .post('/api/v1/auth/login')
@@ -194,7 +172,29 @@ describe('CREATE MENU', () => {
           .field('description', 'Fresh and tasty')
           .field('category', 'pastas')
           .field('price', 500)
-          .attach('image', './server/test/test_img.jpg')
+          .attach('image', '')
+          .end((err, res) => {
+            res.should.have.status(400);
+            done();
+          });
+      });
+  });
+  it('should ensure image mimeType is .jpeg or .png', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(admin)
+      .end((err, res) => {
+        res.should.have.status(200);
+        const token = res.body.data;
+        chai.request(app)
+          .post('/api/v1/menu')
+          .set('Authorization', `Bearer ${token}`)
+          .type('form')
+          .field('food_name', 'meat_pie')
+          .field('description', 'Fresh and tasty')
+          .field('category', 'pastas')
+          .field('price', 500)
+          .attach('image', './server/test/auth.js')
           .end((err, res) => {
             res.should.have.status(400);
             done();

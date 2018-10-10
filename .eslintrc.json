@@ -6,7 +6,8 @@
         "no-restricted-syntax": "off",
         "consistent-return": "off",
         "no-shadow": "off",
-        "camelcase": "off"
+        "camelcase": "off",
+        "array-callback-return": "off"
     },
     "env": {
         "mocha": true
