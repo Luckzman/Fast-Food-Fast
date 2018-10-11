@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./../css/reuse.css">
     <link rel="stylesheet" href="./../css/main.css">
     <link rel="stylesheet" href="./../css/user-order.css">
+    <link rel="stylesheet" href="./../css/user-order-history.css">
 </head>
 <body>
     <header>
@@ -20,90 +21,72 @@
             </div>
             <nav>
                 <ul>
-                    <a href="./user-order-history.html"><li>Order History</li></a>
                     <a href="./catalog.html"><li>Catalog</li></a>
-                    <a href="./../index.html" class="button"><li>LOGOUT</li></a>
+                    <div class="cart">
+                        <a href="./user-order.html">
+                            <img src="./../images/grey-shopping-cart-2.png" alt="shopping cart image">
+                        </a>
+                        <div class="notification"><span>4</span></div>
+                    </div>
                 </ul>
             </nav>
         </div>
     </header>
+
     <main>
         <div class="container">
-            <h1>cart orders</h1>
+            <h1>My Orders History</h1>
             <div class="table-container">
                 <table>
                     <tr>
-                        <th></th>
                         <th></th>
                         <th>food</th>
                         <th>Quantity</th>
                         <th>Price</th>
                         <th>Category</th>
-                        <th>Sub-Total</th>
+                        <th>Total</th>
                     </tr>
                     <tr>
-                        <td><i class="fas fa-times-circle red"></i></td>
                         <td><img src="./../images/image-1.jpg" alt=""></td>
                         <td>pizza</td>
-                        <td><input type="number" min="1" max="99" value="2"></td>
+                        <td>2</td>
                         <td>2000</td>
                         <td>Meat</td>
                         <td>4000</td>
                     </tr>
                     <tr>
-                        <td><i class="fas fa-times-circle red"></i></td>
                         <td><img src="./../images/image-10.jpg" alt=""></td>
                         <td>Pepper Soup</td>
-                        <td><input type="number" min="1" max="99" value="1"></td>
+                        <td>5</td>
                         <td>1500</td>
                         <td>Soup</td>
                         <td>7500</td>
                     </tr>
                     <tr>
-                        <td><i class="fas fa-times-circle red"></i></td>
                         <td><img src="./../images/image-11.jpg" alt=""></td>
                         <td>Coconut Rice</td>
-                        <td><input type="number" min="1" max="99" value="5"></td>
+                        <td>1</td>
                         <td>3000</td>
                         <td>Meat</td>
                         <td>3000</td>
                     </tr>
                     <tr>
-                        <td><i class="fas fa-times-circle red"></i></td>
                         <td><img src="./../images/image-12.jpg" alt=""></td>
                         <td>Jollof Rice</td>
-                        <td><input type="number" min="1" max="99" value="3"></td>
+                        <td>3</td>
                         <td>2000</td>
                         <td>Rice</td>
                         <td>6000</td>
                     </tr>
                     <tr>
-                        <td><i class="fas fa-times-circle red"></i></td>
                         <td><img src="./../images/image-13.jpg" alt=""></td>
                         <td>Spagetti</td>
-                        <td><input type="number" min="1" max="99" value="2"></td>
+                        <td>2</td>
                         <td>1000</td>
                         <td>Rice</td>
                         <td>2000</td>
                     </tr>
                 </table>
-            </div>
-            <div class="order-calc">
-                <div class="order-content-left">
-                    <table>
-                        <tr>
-                            <th>sub total</th>
-                            <th>20,000</th>
-                        </tr>
-                        <tr>
-                            <td>total</td>
-                            <td>20,000</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="order-checkout">
-                <a href="./checkout.html"><button>proceed to checkout</button></a>
             </div>
         </div>
     </main>
@@ -113,6 +96,5 @@
             <p>FastFoodFast &copy;2018 <span>All Rights Reserved</span></p>
         </div>
     </footer>
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
 </body>
 </html>
