@@ -1,0 +1,15 @@
+{
+    "extends": "airbnb",
+    "rules": {
+        "linebreak-style": "off",
+        "no-console": "off",
+        "no-restricted-syntax": "off",
+        "consistent-return": "off",
+        "no-shadow": "off",
+        "camelcase": "off",
+        "array-callback-return": "off"
+    },
+    "env": {
+        "mocha": true
+    }
+}

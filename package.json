@@ -1,0 +1,61 @@
+{
+  "name": "fast-food-fast",
+  "version": "1.0.0",
+  "description": "Fast-Food-Fast​ is a food delivery service app for a restaurant.",
+  "main": "index.js",
+  "scripts": {
+    "create_db": "psql -U postgres -f ./server/model/db/db.sql",
+    "create_test_db": "psql -U postgres -f ./server/model/db/db_test.sql",
+    "startDev": "nodemon --exec babel-node -- ./server/index",
+    "babel-node": "babel-node --presets=env",
+    "start": "set NODE_ENV=production&&npm run build && npm run serve",
+    "build": "babel server -d dist --presets env",
+    "serve": "node dist/index.js",
+    "test": "npm run create_test_db && set NODE_ENV=test&&  mocha --require babel-register --env test ./server/test/*.js --exit",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "npm run test-local && nyc report --reporter=text-lcov | coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Luckzman/Fast-Food-Fast.git"
+  },
+  "keywords": [],
+  "author": "Oniovosa Lucky Omokarho",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Luckzman/Fast-Food-Fast/issues"
+  },
+  "homepage": "https://github.com/Luckzman/Fast-Food-Fast#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "chai": "^4.1.2",
+    "chai-http": "^4.2.0",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
+    "morgan": "^1.9.0",
+    "multer": "^1.4.0",
+    "pg": "^7.4.3",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "swagger-ui-express": "^4.0.1",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "coveralls": "^3.0.2",
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "jsdoc": "^3.5.5",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.4",
+    "nyc": "^13.0.1"
+  }
+}
