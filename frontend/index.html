@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FastFoodFast</title>
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">    
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/reuse.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/signin-modal.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div>
+                <a href="#">FastFoodFast.com</a>
+            </div>
+            <nav>
+                <ul>
+                    <a href="#order"><li>how to order</li></a>
+                    <a href="./html/catalog.html"><li>Catalog</li></a>
+                    <a href="#signin-modal" class="button"><li>SIGNIN / SIGNUP</li></a>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div id="signin-modal" class="overlay">
+        <a class="cancel" href="#"></a>
+        <div class="modal">
+            <a href="" class="close">X</a>
+            <div class="content">
+                <input id="tab1" type="radio" name="tabs" checked>
+                <label for="tab1">Sign Up</label>
+                <input id="tab2" type="radio" name="tabs">
+                <label for="tab2">Log In</label>
+                <section id="content1">
+                    <form>
+                        <div class="form-name">
+                            <input type="text"  placeholder="First Name">
+                            <input type="text" placeholder="Last Name">
+                        </div>
+                        <input type="email" placeholder="Email">
+                        <input type="text" placeholder="Phone">
+                        <div class="form-name"> 
+                            <input type="password" placeholder="Password">
+                            <input type="password" placeholder="Repeat Password">
+                        </div>
+                        <a href="./html/user-order.html">SIGNUP</a>
+                    </form>
+                </section>
+                <section id="content2">
+                    <form>
+                        <input type="email" placeholder="Email">
+                        <input type="password" placeholder="Password">
+                        <input type="checkbox" name="" id="remPassword" class="checkbox">
+                        <label for="remPassword"> Remember Password </label>
+                        
+                        <a href="./html/user-order.html">LOG IN</a>                    
+                    </form>
+                    <a href="./html/admin-control-panel.html" class="admin">Admin here</a>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <div class="showcase">
+            <div class="dark-overlay">
+                <div class="showcase-container">
+                    <div class="showcase-ad">
+                        <h1>you order!  we deliver!!</h1>
+                        <p>We're No.1 food delivery service in Nigeria!</p>
+                        <div class="showcase-input">
+                            <input type="text" placeholder="Search Food">
+                            <a href="./html/catalog.html"><button>Search</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="top-order">
+            <div class="container">
+                <h1>top order</h1>
+                <p>Customer's Top Most Choice</p>
+                <div class="order-row">
+                    <div class="order-card">
+                        <div class="order-img">
+                            <img src="./images/image-3.jpg" alt="">
+                            <a href="./html/order-details.html">view details</a>
+                        </div>
+                        <div class="card-content">
+                            <h3>meat</h3>
+                            <div class="star-rating">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                            </div>
+                            <p>Very testy and delicious with nice blend of fried plantain</p>
+                        </div>
+                    </div>
+                    <div class="order-card">
+                        <div class="order-img">
+                            <img src="./images/image-17.jpg" alt="">
+                            <a href="./html/order-details.html">view details</a>
+                        </div>
+                        <div class="card-content">
+                            <h3>plantain sauce</h3>
+                            <div class="star-rating">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                            </div>
+                            <p>Very testy and delicious with nice blend of fried plantain</p>
+                        </div>
+                    </div>
+                    <div class="order-card">
+                        <div class="order-img">
+                            <img src="./images/image-5.jpg" alt="">
+                            <a href="./html/order-details.html">view details</a>
+                        </div>
+                        <div class="card-content">
+                            <h3>meat</h3>
+                            <div class="star-rating">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star unchecked"></span>
+                            </div>
+                            <p>Very testy and delicious with nice blend of fried plantain</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="order" class="order-steps">
+            <div class="container"> 
+                <h1>how to order</h1>
+                <div class="order-row">
+                    <div class="order-steps-card">
+                        <div class="order-steps-img">
+                            <img src="./images/make_order.jpeg" alt="make order">
+                        </div>
+                        <div class="order-steps-count"><span>1</span></div>
+                        <div class="order-steps-msg">
+                            <p>Make your order</p>
+                        </div>
+                    </div>
+                    <div class="order-steps-card">
+                        <div class="order-steps-img">
+                            <img src="./images/location.png" alt="make order">
+                        </div>
+                        <div class="order-steps-count"><span>2</span></div>
+                        <div class="order-steps-msg">
+                            <p>Choose your location</p>
+                        </div>
+                    </div>
+                    <div class="order-steps-card">
+                        <div class="order-steps-img">
+                            <img src="./images/food-truck-de-hamburgueres_2.png" alt="make order">
+                        </div>
+                        <div class="order-steps-count"><span>3</span></div>
+                        <div class="order-steps-msg">
+                            <p>Food is on the way</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="reviews">
+            <div class="dark-overlay">
+                <div class="reviews-container">
+                    <div class="container">
+                        <h1>reviews</h1>
+                        <div class="reviews-msg">
+                            <p> Your website was very easy to navigate, service was prompt and staff was very pleasant. I will definitely use your service again, and I have already recommended it to a friends.”</p>
+                        </div>
+                        <div class="reviews-img">
+                            <img src="./images/reviewer.jpg" alt="reviewer's name">
+                        </div>
+                        <p>Floral Wilson, <span>2 days ago</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div id="backToTop" onclick="backToTop()" class="floating-btn">
+        <i class="fas fa-arrow-circle-up"></i>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <p>FastFoodFast &copy;2018 <span>All Rights Reserved</span></p>
+        </div>
+    </footer>
+    
+    <script src="./js/backToTopBtn.js"></script>
+    <!-- <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script> -->
+</body>
+</html>

@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
+import path from 'path';
 import { responseMsg } from './utils/helpers';
 import router from './route/index';
 
@@ -13,6 +14,7 @@ app.use('/image/menu/', express.static('image/menu/'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger('dev'));
+app.use(express.static(path.join(__dirname, '../frontend')));
 app.use('/', router);
 app.get('/', (req, res) => res.redirect('/api/v1/doc'));
 app.use('*', (req, res) => responseMsg(res, 404, 'fail', 'wrong url entered'));
