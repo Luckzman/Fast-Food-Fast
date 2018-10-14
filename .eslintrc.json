@@ -7,7 +7,9 @@
         "consistent-return": "off",
         "no-shadow": "off",
         "camelcase": "off",
-        "array-callback-return": "off"
+        "array-callback-return": "off",
+        "no-undef":"off",
+        "no-alert":"off"
     },
     "env": {
         "mocha": true

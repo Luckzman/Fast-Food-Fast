@@ -62,7 +62,7 @@ body.modal {
 }
 section {
     display: none;
-    padding: 20px 0;
+    padding: 20px 0 0;
 }
 section p{
     margin: 10px 0;
@@ -92,7 +92,8 @@ input:checked + label {
     display: block;
     width: 100%;
 }
-form input{
+form input,
+form textarea{
     width: 95%;
     padding: 5px;
     margin: 6px 0;
@@ -105,20 +106,21 @@ form input{
 .form-name > input {
     flex-basis: 44%;
 }
-form a{
+form input[type="submit"]{
     display: block;
     width:100%;
     background-color: rgb(0, 99, 25);
     border: none;
     padding: 10px 0;
-    margin: 20px 0 15px;
+    margin: 20px 0 0;
     color: #ececec;
     text-align: center;
     font-weight: 600;
+    box-sizing: border-box;
     box-shadow: 1px 1px 10px rgba(0,0,0,0.7);
     transition: all .3s;
 }
-form a:hover{
+form input[type="submit"]:hover{
     border-radius: 15px;
     box-shadow: 1px 1px 10px rgba(0,0,0,0.9);
 }
@@ -147,4 +149,32 @@ form > label[for="remPassword"]{
     border: none;
     line-height: 1.5rem;
     color: #666;
+}
+
+.alert{
+    width: 80%;
+    padding: 20px;
+    margin: 30px auto;
+    color: #fff;
+    background-color: rgb(67, 255, 108);
+    border-radius: 5px;
+    font-size: 1.2rem;
+    opacity: 1;
+    transition: opacity 1s;
+
+}
+.alert span{
+    float: right;
+    cursor: pointer !important;
+    /* transition: all 0.3s; */
+}
+.alert span:hover{
+    display: block;
+    background-color:#fff;
+    color: rgb(67, 255, 108);
+    border-radius: 100%;
+}
+.amber{
+    background-color: #fca400 !important;
+    color: #fff !important;
 }

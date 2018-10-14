@@ -31,42 +31,49 @@
     <div id="signin-modal" class="overlay">
         <a class="cancel" href="#"></a>
         <div class="modal">
-            <a href="" class="close">X</a>
+            <a href="" class="close">&times;</a>
             <div class="content">
                 <input id="tab1" type="radio" name="tabs" checked>
                 <label for="tab1">Sign Up</label>
                 <input id="tab2" type="radio" name="tabs">
                 <label for="tab2">Log In</label>
                 <section id="content1">
-                    <form>
+                    <form id="signupUser">
                         <div class="form-name">
-                            <input type="text"  placeholder="First Name">
-                            <input type="text" placeholder="Last Name">
+                            <input id="firstName" type="text"  placeholder="First Name">
+                            <input id="lastName" type="text" placeholder="Last Name">
                         </div>
-                        <input type="email" placeholder="Email">
-                        <input type="text" placeholder="Phone">
+                        <input id="email" type="email" placeholder="Email">
+                        <input id="phone" type="text" placeholder="Phone">
                         <div class="form-name"> 
-                            <input type="password" placeholder="Password">
-                            <input type="password" placeholder="Repeat Password">
+                            <input id="password" type="password" placeholder="Password">
+                            <input id="re-password" type="password" placeholder="Repeat Password">
                         </div>
-                        <a href="./html/user-order.html">SIGNUP</a>
+                        <textarea id="location" rows="2" placeholder="Location"></textarea>
+                        <input type="submit" value="SIGNUP">
+                        <!-- <a href="./html/user-order.html">SIGNUP</a> -->
                     </form>
                 </section>
                 <section id="content2">
-                    <form>
-                        <input type="email" placeholder="Email">
-                        <input type="password" placeholder="Password">
+                    <form id="loginUser">
+                        <input id="loginEmail" type="email" placeholder="Email">
+                        <input id="loginPassword" type="password" placeholder="Password">
                         <input type="checkbox" name="" id="remPassword" class="checkbox">
                         <label for="remPassword"> Remember Password </label>
-                        
-                        <a href="./html/user-order.html">LOG IN</a>                    
+                        <input type="submit" value="LOGIN">                   
                     </form>
+                    <a href="#alert" class="admin">response</a><br>
                     <a href="./html/admin-control-panel.html" class="admin">Admin here</a>
                 </section>
             </div>
         </div>
     </div>
-
+    <div id="alert" class="overlay">
+        <a class="cancel" href="#"></a>
+        <div class="alert">
+            <span class="close" >&times;</span>
+        </div>
+    </div>
     <main>
         <div class="showcase">
             <div class="dark-overlay">
@@ -200,7 +207,7 @@
             <p>FastFoodFast &copy;2018 <span>All Rights Reserved</span></p>
         </div>
     </footer>
-    
+    <script src="./js/signup.js"></script>
     <script src="./js/backToTopBtn.js"></script>
     <!-- <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script> -->
 </body>
