@@ -20,7 +20,7 @@ export const signup = (req, res) => {
   db.query(query, value)
     .then((user) => {
       if (user.rows[0]) {
-        return responseMsg(res, 400, 'fail', 'Email already exist');
+        return responseMsg(res, 400, 'fail', 'User already exist');
       }
       bcrypt.hash(password, 8)
         .then((hash) => {
