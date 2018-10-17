@@ -12,7 +12,8 @@ const swaggerDoc = require('../swagger.json');
  * @description Create server using express framework
  */
 const app = express();
-app.use('/image/menu/', express.static('image/menu/'));
+app.use('/image/menu', express.static(path.join(__dirname, '../image/menu/')));
+console.log(path.join(__dirname, '../image/menu'));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
