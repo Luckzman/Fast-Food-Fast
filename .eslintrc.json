@@ -9,7 +9,11 @@
         "camelcase": "off",
         "array-callback-return": "off",
         "no-undef":"off",
-        "no-alert":"off"
+        "no-alert":"off",
+        "no-unused-expressions":"off",
+        "guard-for-in":"off",
+        "no-loop-func":"off",
+        "no-prototype-builtins":"off"
     },
     "env": {
         "mocha": true
