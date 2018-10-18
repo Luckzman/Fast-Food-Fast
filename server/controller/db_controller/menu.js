@@ -61,6 +61,30 @@ export const getMenu = (req, res) => {
     .catch(error => res.status(404).json(error));
 };
 
+/**
+ * @description This controller allows users to get a single menu details
+ * @param {object} req
+ * @param {object} res
+ */
+export const getMenuItem = (req, res) => {
+  const query = 'SELECT * FROM food_menus WHERE id=$1';
+  const value = [req.params.id];
+  db.query(query, value)
+    .then((menu) => {
+      if (!menu.rows[0]) {
+        return responseMsg(res, 404, 'fail', 'Menu not found');
+      }
+      return menuResponseMsg(res, 200, 'success', 'menu item request successful', menu.rows[0]);
+    })
+    .catch(error => res.status(404).json(error));
+};
+
+/**
+ * @description This controller update the image of a specific menu
+ * @param {object} req
+ * @param {object} res
+ * @returns {function} responseMsg
+ */
 export const imageUpload = (req, res) => {
   if (req.authData.user_status !== 'admin') {
     return responseMsg(res, 403, 'fail', 'admin access only');
