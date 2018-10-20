@@ -70,7 +70,8 @@ export const login = (req, res) => {
             {
               expiresIn: '6h',
             });
-            return responseMsg(res, 200, 'success', 'login successful', token);
+            console.log(user.rows[0].user_status);
+            return responseMsg(res, 200, 'success', 'login successful', { token, user_status: user.rows[0].user_status });
           }
           return responseMsg(res, 400, 'fail', 'Password is incorrect');
         })

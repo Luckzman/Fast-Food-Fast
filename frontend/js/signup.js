@@ -33,7 +33,7 @@ const createUser = (event) => {
       alert(message);
       if (status === 'success') {
         alert(message);
-        window.location.replace('/index.html#signin-modal');
+        window.location.replace('/index.html');
       }
     })
     .catch(error => console.log(error));
@@ -58,9 +58,15 @@ const loginUser = (e) => {
 
   fetch(url, options)
     .then(res => res.json())
-    .then((data) => {
-      const { message } = data;
-      alert(message);
+    .then((userData) => {
+      const { message, data } = userData;
+      localStorage.setItem('data', JSON.stringify(data.token));
+      if (data.user_status === 'admin') {
+        alert('Admin login successful');
+        window.location = '../admin-control-panel.html';
+        return window.location;
+      } alert(message);
+      window.location = '/catalog.html';
     })
     .catch(error => console.log(error));
 };
