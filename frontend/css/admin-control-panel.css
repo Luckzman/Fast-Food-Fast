@@ -205,6 +205,17 @@ body.modal {
     display: inline-block;
     text-align: left;
 } 
+.content form input[type="submit"]{
+    background-color: #005a00;
+    border: none;
+    color: #fff;
+    font-size: 1.1rem;
+    box-shadow: none;
+    text-transform: uppercase;
+}
+.content form input[type="submit"]:hover{
+    box-shadow: 2px 2px 5px #666;
+}
 .footer-conten{
     position:absolute;
    bottom:0;
@@ -215,7 +226,7 @@ body.modal {
 @media only screen and (min-width:769px){
     .panel-container section{
         display: inline-block;
-        width: 33%;
+        width: 32%;
         overflow: hidden;
     }
 }

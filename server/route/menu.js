@@ -2,7 +2,9 @@ import express from 'express';
 import authChecker from '../utils/auth_checker';
 import { menuValidator, urlParamsChecker } from '../utils/validate';
 import { upload } from '../utils/helpers';
-import { createMenu, getMenu, getMenuItem, imageUpload } from '../controller/db_controller/menu';
+import {
+  createMenu, getMenu, getMenuItem, imageUpload,
+} from '../controller/db_controller/menu';
 
 const menuRouter = express.Router();
 
