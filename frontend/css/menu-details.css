@@ -68,49 +68,55 @@ header nav a:hover{
 .order-content > div{
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    margin: 10px 0;
 }
 .order-content > div > p{
     font-weight: 600;
 }
-.order-content >div + p{
+.order-content > div + p{
     line-height: 2.5rem;
+    font-weight: 600;
 }
-.order-content .order-input{
+.order-content > div + p > span{
+    text-transform: capitalize;
+}
+.order-input{
     margin: 0 ;
-    text-align: center
+    text-align: center;
+    flex: 0.5;
 }
-.order-content input{
+.order-input input{
     display: block;
     height: 30px;
-    width: 40%;
+    width: 50%;
+    margin: 10px auto 20px;
     font-size: 1.2rem;
     border-radius: 20px;
     border: 1px solid rgb(216, 216, 216);
 }
-.order-content input[type=number]::-webkit-inner-spin-button, 
-.order-content input[type=number]:focus::-webkit-inner-spin-button{
+.order-input input[type=number]::-webkit-inner-spin-button, 
+.order-input input[type=number]:focus::-webkit-inner-spin-button{
     opacity: 1;
     width: 20px;
-    height: 30px;   
+    height: 40px;   
 }
-.order-content .order-input > button{
+.order-input > button{
     position: relative;
     background-color: #009700;
     color: #fff;
-    padding: 0 10px;
-    margin-left: 10px;
+    padding: 10px;
+    margin: 0 auto;
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     font-size: 1.2rem;
     opacity: 0.9;
     cursor: pointer;
     box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.5);
 }
-.order-content .order-input > button a{
+.order-input > button a{
     color: #fff;
 }
-.order-content .order-input > button:before{
+.order-input > button:before{
     font-family: 'Font Awesome 5 Free';
     content: "\f07a";
     font-weight: 900;
@@ -118,7 +124,7 @@ header nav a:hover{
     opacity: 0.9;
     transform: translateX(-100px);
 }
-.order-content .order-input > button:hover{
+.order-input > button:hover{
     box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.5);
 }
 .order-description{
@@ -200,26 +206,22 @@ input:checked + label {
         margin-left: 20px;
     }
     .order-content > div{
-        max-width: 80%;
+        max-width: 60%;
         padding: 10px 0;
     }
-    .order-content input{
+    .order-input {
+        text-align: left;
+    }
+    .order-input input{
         width: 50%;
         height: 40px;
         font-size: 1.5rem;
         padding-left: 10px;
+        margin: 20px 0;
     }
     .order-content input[type=number]::-webkit-inner-spin-button, 
     .order-content input[type=number]:focus::-webkit-inner-spin-button{
     height: 40px;   
-    }
-    .order-content .order-input > button{
-        background-color: #009700;
-        color: #fff;
-        padding: 0 10px;
-        margin-left: 10px;
-        border: none;
-        font-size: 1.2rem;
     }
     .flex-row{
         display: flex;
@@ -234,6 +236,3 @@ input:checked + label {
         margin: 0 auto;
     }
 }
-
-
-  

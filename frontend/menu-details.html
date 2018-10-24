@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">    <link rel="stylesheet" href="./../css/reset.css">
     <link rel="stylesheet" href="./css/reuse.css">
     <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/order-details.css">
+    <link rel="stylesheet" href="./css/menu-details.css">
 </head>
 <body>
     <header>
@@ -32,14 +32,14 @@
         </div>
     </header>
     <main>
-        <div class="container">
-            <div class="order-row">
-                <div class="order-img">
-                    <img src="./images/image-8.jpg" alt="order image">
-                    <div class="order-img-search"><a href="./images/image-8.jpg"><i class="fas fa-search"></i></a></div>
+        <div id="container" class="container">
+            <div id="menuRow" class="order-row">
+                <div id="menuImg" class="order-img">
+                    <!-- <img src="./../images/image-8.jpg" alt="order image">
+                    <div class="order-img-search"><a href="./../images/image-8.jpg"><i class="fas fa-search"></i></a></div> -->
                 </div>
-                <div class="order-content">
-                    <h3>shrimps magharita</h3>
+                <div id="menuDetail" class="order-content">
+                    <!-- <h3>shrimps magharita</h3>
                     <div>
                         <p>N3,000</p>
                         <div class="star-rating">
@@ -50,15 +50,15 @@
                             <span class="fa fa-star checked unchecked"></span>
                         </div>
                     </div>
-                    <p>With basil, mozzarella, tomatoes</p>
-                    <div class="order-input">
-                        <input type="number" name="num-of-orders" value="1" min="1" max="99">
-                        <button>Add to Cart</button>
-                    </div>
+                    <p>Category: <span>rice</span></p> -->
+                </div>
+                <div id="menuInput" class="order-input">
+                    <input type="number" name="num-of-orders" value="1" min="1" max="99">
+                    <button>Add to Cart</button>
                 </div>
             </div>
-            <div class="order-description">
-                <input id="tab1" type="radio" name="tabs" checked>
+            <div id="menuDescription" class="order-description">
+                <!-- <input id="tab1" type="radio" name="tabs" checked>
                 <label for="tab1">Description</label>
                 <input id="tab2" type="radio" name="tabs">
                 <label for="tab2">Reviews</label>
@@ -70,7 +70,7 @@
                 <section id="content2">
                     <div class="flex-row">
                         <div class="review-img">
-                            <img src="./images/review_pix_1.png" alt="reviewer's image">
+                            <img src="./../images/review_pix_1.png" alt="reviewer's image">
                         </div>
                         <div class="review-info">
                             <p>Sasha Edwin</p>
@@ -84,7 +84,7 @@
                             <p>Jerky jowl pork chop tongue, kielbasa shank venison. Capicola shank pig ribeye leberkas filet mignon brisket beef kevin tenderloin porchetta. Capicola fatback </p>
                         </div>
                     </div>
-                </section>
+                </section> -->
             </div>
         </div>
     </main>
@@ -93,5 +93,6 @@
             <p>FastFoodFast &copy;2018 <span>All Rights Reserved</span></p>
         </div>
     </footer>
+    <script src="./js/getMenuDetails.js"></script>
 </body>
 </html>
