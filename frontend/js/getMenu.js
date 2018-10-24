@@ -14,9 +14,9 @@ const getMenu = () => {
       menus.forEach((menu) => {
         menuCategory[menu.category]
           ? menuCategory[menu.category]
-            .push({ food_name: menu.food_name, image: menu.image })
+            .push({ id: menu.id, food_name: menu.food_name, image: menu.image })
           : (menuCategory[menu.category] = [], menuCategory[menu.category]
-            .push({ food_name: menu.food_name, image: menu.image }));
+            .push({ id: menu.id, food_name: menu.food_name, image: menu.image }));
       });
 
       for (const menu in menuCategory) {
@@ -39,8 +39,10 @@ const getMenu = () => {
             p.textContent = menu.food_name;
             const btnContainer = createElement('div');
             const viewDetails = createElement('button');
-            const viewDetailsLink = createElement('a');
-            viewDetailsLink.textContent = 'view details';
+            viewDetails.textContent = 'view details';
+            viewDetails.addEventListener('click', () => {
+              window.location.assign(`menu-details.html?id=${menu.id}`);
+            });
             const addToCart = createElement('button');
             addToCart.textContent = 'Add To Cart';
 
@@ -49,7 +51,6 @@ const getMenu = () => {
             appendChild(imgContainer, p);
             appendChild(imgContainer, btnContainer);
             appendChild(btnContainer, viewDetails);
-            appendChild(viewDetails, viewDetailsLink);
             appendChild(btnContainer, addToCart);
           });
           appendChild(popularFood, h2);
