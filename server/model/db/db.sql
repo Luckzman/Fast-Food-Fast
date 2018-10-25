@@ -30,12 +30,19 @@ CREATE TABLE food_menus(
     modified_date TIMESTAMPTZ
 );
 
-CREATE TABLE orders(
+CREATE TABLE order_items(
     id UUID PRIMARY KEY,
     quantity_ordered INT NOT NULL,
+    created_date TIMESTAMPTZ,
+    modified_date TIMESTAMPTZ,
+    menu_id UUID NOT NULL REFERENCES food_menus (id) ON DELETE CASCADE
+);
+
+CREATE TABLE orders(
+    id UUID PRIMARY KEY,
     order_status order_status DEFAULT 'new',
     created_date TIMESTAMPTZ,
     modified_date TIMESTAMPTZ,
-    user_id UUID NOT NULL REFERENCES users (id) ON DELETE CASCADE,
-    menu_id UUID NOT NULL REFERENCES food_menus (id) ON DELETE CASCADE
+    order_items_id UUID NOT NULL REFERENCES order_items (id) ON DELETE CASCADE,
+    user_id UUID NOT NULL REFERENCES users (id) ON DELETE CASCADE
 );
