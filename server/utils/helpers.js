@@ -25,6 +25,12 @@ export const orderResponseMsg = (res, code, status, message, order) => res.statu
   order,
 });
 
+export const cartResponseMsg = (res, code, status, message, cart) => res.status(code).json({
+  status,
+  message,
+  cart,
+});
+
 const storage = multer.diskStorage({
   destination: (req, file, next) => {
     next(null, 'image/menu/');
