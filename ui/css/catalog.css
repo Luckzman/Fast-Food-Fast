@@ -51,7 +51,7 @@ main .img-container > p{
 main .img-container > div{
     position: absolute;
     top: 75%;
-    width: 60%;
+    width: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: transparent;
@@ -61,7 +61,6 @@ main .img-container > div{
 }
 main .img-container  button{
     color: #ccc;
-    box-shadow: 1px 1px 5px 2px rgba(153, 153, 153, 0.4);
     display: inline-block;
     margin: 5px auto;
     background-color: rgba(0,0,0,0.5);
@@ -97,12 +96,27 @@ main h2 {
     text-transform: uppercase;
     margin: 35px 0 0;
 }
+input[type=number]{
+    width: 35px;
+    color: #ccc;
+    background-color: rgba(0,0,0,0.5); 
+    padding: 5px 0 5px 5px;
+    border: 1px solid #ccc;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]:focus::-webkit-inner-spin-button{
+    opacity: 1;
+    width: 10px;
+    height: 26px;
+    /* margin-top: 1px;    */
+}
 
 
 @media only screen and (min-width:740px){
     .catalog{
         justify-content: flex-start;
     }
+    main .img-container input,
     main .img-container button{
         opacity: 0.8;
         transition: all .4s;
@@ -111,7 +125,8 @@ main h2 {
         opacity: 0.8;
         background-color: rgba(0,0,0,0.6);
     }
-    main .img-container:hover button:hover{
+    main .img-container:hover button:hover,
+    main .img-container:hover input:hover{
         border-radius: 15px;
         opacity: 0.9;
         background-color: rgba(0,0,0,0.8);

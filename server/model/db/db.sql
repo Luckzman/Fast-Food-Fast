@@ -18,7 +18,6 @@ CREATE TABLE users(
     created_date TIMESTAMPTZ,
     modified_date TIMESTAMPTZ
 );
-
 CREATE TABLE food_menus(
     id UUID PRIMARY KEY,
     food_name VARCHAR NOT NULL UNIQUE,
@@ -29,20 +28,13 @@ CREATE TABLE food_menus(
     created_date TIMESTAMPTZ,
     modified_date TIMESTAMPTZ
 );
-
-CREATE TABLE order_items(
-    id UUID PRIMARY KEY,
-    quantity_ordered INT NOT NULL,
-    created_date TIMESTAMPTZ,
-    modified_date TIMESTAMPTZ,
-    menu_id UUID NOT NULL REFERENCES food_menus (id) ON DELETE CASCADE
-);
-
 CREATE TABLE orders(
     id UUID PRIMARY KEY,
+    cart JSON,
+    -- quantity_ordered INT NOT NULL,
     order_status order_status DEFAULT 'new',
     created_date TIMESTAMPTZ,
     modified_date TIMESTAMPTZ,
-    order_items_id UUID NOT NULL REFERENCES order_items (id) ON DELETE CASCADE,
+    -- menu_id UUID NOT NULL REFERENCES food_menus (id) ON DELETE CASCADE,
     user_id UUID NOT NULL REFERENCES users (id) ON DELETE CASCADE
 );
