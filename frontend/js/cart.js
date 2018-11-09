@@ -30,7 +30,7 @@ const displayCart = () => {
         <td>${subTotal}</td>`;
     appendChild(cartTable, tableBody);
   });
-  console.log(Total);
+  console.log(cart);
   const calcTotal = document.querySelector('.order-content-left');
   calcTotal.innerHTML = `
     <table>

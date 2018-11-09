@@ -30,7 +30,7 @@ CREATE TABLE food_menus(
 );
 CREATE TABLE orders(
     id UUID PRIMARY KEY,
-    cart JSON,
+    cart JSON[],
     -- quantity_ordered INT NOT NULL,
     order_status order_status DEFAULT 'new',
     created_date TIMESTAMPTZ,

@@ -141,13 +141,10 @@ export const menuValidator = (req, res, next) => {
  * @param {function} next
  */
 export const placeOrderValidator = (req, res, next) => {
-  const { id, quantity_ordered } = req.body;
+  const { cart } = req.body;
 
-  if (!uuidChecker(id)) {
-    return responseMsg(res, 400, 'fail', 'order id is not valid');
-  }
-  if (!quantity_ordered || !quantity_ordered.trim()) {
-    return responseMsg(res, 400, 'fail', 'quantity ordered is required');
+  if (!cart) {
+    return responseMsg(res, 400, 'fail', 'cart item is required');
   }
 
   next();
