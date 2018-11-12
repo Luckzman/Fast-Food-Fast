@@ -5,6 +5,7 @@ CREATE DATABASE db_fastfoodfast;
 
 CREATE TYPE order_status AS ENUM ('new', 'processing', 'cancelled', 'complete');
 CREATE TYPE user_status AS ENUM ('regular', 'admin');
+CREATE TYPE state AS ENUM ('lagos', 'abuja', 'portharcourt');
 
 CREATE TABLE users(
     id UUID PRIMARY KEY,
@@ -13,10 +14,19 @@ CREATE TABLE users(
     email VARCHAR NOT NULL,
     phone VARCHAR NOT NULL,
     password VARCHAR NOT NULL,
-    location VARCHAR NOT NULL,
+    image VARCHAR,
     user_status user_status DEFAULT 'regular',
     created_date TIMESTAMPTZ,
     modified_date TIMESTAMPTZ
+);
+CREATE TABLE users_address(
+    id UUID PRIMARY KEY,
+    address VARCHAR NOT NULL,
+    city VARCHAR NOT NULL,
+    state state NOT NULL,
+    created_date TIMESTAMPTZ,
+    modified_date TIMESTAMPTZ,
+    user_id UUID NOT NULL REFERENCES users (id) ON DELETE CASCADE
 );
 CREATE TABLE food_menus(
     id UUID PRIMARY KEY,
@@ -31,10 +41,10 @@ CREATE TABLE food_menus(
 CREATE TABLE orders(
     id UUID PRIMARY KEY,
     cart JSON[],
-    -- quantity_ordered INT NOT NULL,
+    additional_info VARCHAR, 
+    -- cart content contains array of json object of food_name and quantity
     order_status order_status DEFAULT 'new',
     created_date TIMESTAMPTZ,
     modified_date TIMESTAMPTZ,
-    -- menu_id UUID NOT NULL REFERENCES food_menus (id) ON DELETE CASCADE,
     user_id UUID NOT NULL REFERENCES users (id) ON DELETE CASCADE
 );
