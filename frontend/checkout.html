@@ -29,21 +29,18 @@
         <div class="container checkout">
             <div class="order-summary">
                 <h4><i class="fa fa-shopping-cart"></i> Cart 
-                    <b>(4)</b> <span>Cost</span></h4>
-                <div>
-                    <p>Shawarma <span>N2500</span></p>
-                    <p>Suya <span>N1500</span></p>
-                    <p>Pizza <span>N4000</span></p>
-                    <p>Burger <span>N1000</span></p>
+                    <b id="cart-count"></b> <span>Cost</span></h4>
+                <div id="order-details">
+                    
                 </div><hr>
-                <h3>Total <span>9,000</span></h3>
+                <h3>Total <span id="cart-total"></span></h3>
             </div>
-            <form>
+            <form id="order-form">
                 <div class="delivery-section">
                     <h3>delivery details</h3>
                     <div class="input-container">
                         <label for="firstname">Full Name</label>
-                        <input type="text" id="firstname" placeholder="John B. Doe"><br>
+                        <input type="text" id="fullname" placeholder="John B. Doe"><br>
                     </div>
                     <div class="input-container">
                         <label for="address">Address</label>
@@ -61,13 +58,13 @@
                         <label for="city">State</label>
                         <select id="state">
                             <option>- Select A State -</option>
-                            <option>Lagos</option> <br>
-                            <option>Abuja</option> <br>
+                            <option>Lagos</option>
+                            <option>Abuja</option>
                             <option>PortHarcourt</option>
                         </select><br>
                     </div>
                     <div class="input-container">
-                        <label for="phone">Mobile Phone Number</label>
+                        <label for="phone">Phone</label>
                         <input type="text" id="phone" placeholder="070-5555-5555"><br>
                     </div> 
                 </div>
