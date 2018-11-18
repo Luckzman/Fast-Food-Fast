@@ -1,19 +1,30 @@
-const container = document.getElementById('container');
-container.className = 'container';
-const menuRow = document.getElementById('menuRow');
-menuRow.className = 'order-row';
-const menuImg = document.getElementById('menuImg');
-menuImg.className = 'order-img';
-const menuDetail = document.getElementById('menuDetail');
-menuDetail.className = 'order-content';
-const menuInput = document.getElementById('menuInput');
-menuInput.className = 'order-input';
-const menuDescription = document.getElementById('menuDescription');
-menuDescription.className = 'order-description';
-
-const appendChild = (parent, child) => parent.appendChild(child);
 
 const menuDetails = () => {
+  let cart = []; /* initialize an empty cart */
+  const cartCount = document.getElementById('cart-count'); /* get cart counter from DOM */
+  if (!sessionStorage.getItem('cart')) { /* check if localStorage is empty */
+    cartCount.textContent = 0;
+  } else {
+    cartCount.textContent = JSON.parse(sessionStorage.getItem('cart')).length;
+    cart = JSON.parse(sessionStorage.getItem('cart')); /* populate cart with localstorage items */
+  }
+
+  const displayCart = document.querySelector('.cart');
+  displayCart.addEventListener('click', () => {
+    window.location.assign('cart.html'); /* redirect to cart page */
+  });
+
+  const menuImg = document.getElementById('menuImg');
+  menuImg.className = 'order-img';
+  const menuDetail = document.getElementById('menuDetail');
+  menuDetail.className = 'order-content';
+  const menuInput = document.getElementById('menuInput');
+  menuInput.className = 'order-input';
+  const menuDescription = document.getElementById('menuDescription');
+  menuDescription.className = 'order-description';
+
+  //   const appendChild = (parent, child) => parent.appendChild(child);
+
   const menuId = window.location.href.split('?id=')[1];
   const url = `api/v1/menu/${menuId}`;
   fetch(url)
@@ -62,11 +73,14 @@ const menuDetails = () => {
                 </div>
             </div>
         </section>`;
-      appendChild(container, menuRow);
-      appendChild(menuRow, menuImg);
-      appendChild(menuRow, menuDetail);
-      appendChild(menuRow, menuInput);
-      appendChild(container, menuDescription);
+      const cartQty = document.getElementById('orderQty');
+      const orderBtn = document.getElementById('orderBtn');
+      orderBtn.addEventListener('click', () => {
+          console.log(data.menu);
+        cart.push({ quantity: cartQty.value, menu: data.menu });
+        sessionStorage.setItem('cart', JSON.stringify(cart));
+        cartCount.textContent = JSON.parse(sessionStorage.getItem('cart')).length;
+      });
     })
     .catch(error => console.log(error));
 };

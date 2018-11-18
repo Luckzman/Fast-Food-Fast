@@ -29,15 +29,15 @@ export const placeOrder = (req, res) => {
  */
 export const getAllOrder = (req, res) => {
   if (req.authData.user_status !== 'admin') {
-    return responseMsg(res, 403, 'fail', 'No permission to access this resource');
+    return responseMsg(res, 403, 'fail', 'Admin Access Only');
   }
-  const query = 'SELECT orders.id, firstname, lastname, cart, additional_info, order_status, orders.created_date FROM orders INNER JOIN users ON orders.user_id = users.id';
+  const query = 'SELECT orders.id, firstname, lastname, cart, address, city, state, additional_info, order_status, orders.created_date FROM orders INNER JOIN users ON orders.user_id = users.id INNER JOIN users_address  ON users.id = users_address.user_id';
   db.query(query)
     .then((order) => {
-      if (!order.rows[0]) {
-        return responseMsg(res, 204, 'success', 'No Order Content');
+      if (order.rows[0]) {
+        return orderResponseMsg(res, 200, 'success', 'Order Request Successful', order.rows);
       }
-      return orderResponseMsg(res, 200, 'success', 'Order Request Successful', order.rows);
+      return responseMsg(res, 200, 'success', 'Empty Order Entry');
     })
     .catch(error => res.status(404).json(error));
 };
@@ -51,34 +51,16 @@ export const getSingleOrder = (req, res) => {
   if (req.authData.user_status !== 'admin') {
     return responseMsg(res, 403, 'fail', 'Admin Access Only');
   }
-  const query = 'SELECT orders.id, firstname, lastname, cart, additional_info, order_status, orders.created_date FROM orders INNER JOIN users ON orders.user_id = users.id WHERE orders.id = $1';
+  const query = 'SELECT orders.id, firstname, lastname, cart, address, city, state, additional_info, order_status, orders.created_date FROM orders INNER JOIN users ON orders.user_id = users.id INNER JOIN users_address  ON users.id = users_address.user_id WHERE orders.id = $1';
   const value = [req.params.id];
   db.query(query, value)
     .then((order) => {
-      if (order) {
-        return orderResponseMsg(res, 200, 'success', 'Order Request Successful', order.rows[0]);
+      if (order.rows[0]) {
+        return orderResponseMsg(res, 200, 'success', 'Specific Order Request Successful', order.rows[0]);
       }
       return responseMsg(res, 200, 'success', 'Empty Order Entry');
     })
     .catch(error => res.status(404).json(error));
-};
-
-/**
- * @description This controller update order info
- * @param {object} req
- * @param {object} res
- */
-export const updateOrderInfo = (req, res) => {
-  const query = 'UPDATE orders SET additional_info = $1, modified_date = $2 WHERE id = $3 RETURNING *';
-  const values = [req.body.additional_info, new Date(), req.params.id];
-  db.query(query, values)
-    .then((order) => {
-      if (order.rows[0]) {
-        return orderResponseMsg(res, 200, 'success', 'Update order info successful', order.rows[0]);
-      }
-      return responseMsg(res, 400, 'fail', 'order does not exist');
-    })
-    .catch(error => res.status(400).json(error));
 };
 
 /**

@@ -1,7 +1,9 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const token = JSON.parse(localStorage.getItem('data'));
 
-  const cartitem = [];
+const token = JSON.parse(localStorage.getItem('data'));
+
+const cartitem = [];
+
+const cartInfo = () => {
   const cartSummary = document.getElementById('order-details'); // display cart summary
   let total = 0;
 
@@ -15,41 +17,44 @@ document.addEventListener('DOMContentLoaded', () => {
     total += cost;
     const div = document.createElement('div');
     div.innerHTML = `
-        <p>${cart.menu.food_name} (${cart.quantity}) <span>N${cost}</span></p>`;
+          <p>${cart.menu.food_name} (${cart.quantity}) <span>N${cost}</span></p>`;
     cartSummary.appendChild(div);
     cartitem.push(cartinput);
   });
-
   const cartCount = document.getElementById('cart-count');
   cartCount.textContent = `(${carts.length})`;
   const cartTotal = document.getElementById('cart-total');
   cartTotal.textContent = `N${total}`;
+};
 
-  const createOrder = document.getElementById('order-form');
-  createOrder.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const additional_info = document.getElementById('info').value;
-    const data = {
-      cart: cartitem,
-      additional_info,
-    };
-    const url = 'api/v1/orders';
-    const options = {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json; charset=utf-8',
-      },
-      body: JSON.stringify(data),
-    };
-    fetch(url, options)
-      .then(res => res.json())
-      .then((data) => {
-        alert(data.message);
-      })
-      .catch(error => console.log(error));
-  });
+const createNewOrder = (e) => {
+  e.preventDefault();
+  const additional_info = document.getElementById('info').value;
+  const data = {
+    cart: cartitem,
+    additional_info,
+  };
+  const url = 'api/v1/orders';
+  const options = {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+    body: JSON.stringify(data),
+  };
+  fetch(url, options)
+    .then(res => res.json())
+    .then((data) => {
+      alert(data.message);
+    })
+    .catch(error => console.log(error));
+};
 
+const createOrder = document.getElementById('order-form');
+createOrder.addEventListener('submit', createNewOrder);
+
+const getDeliveryInfo = () => {
   const fullName = document.getElementById('fullname');
   const address = document.getElementById('address');
   const city = document.getElementById('city');
@@ -72,4 +77,13 @@ document.addEventListener('DOMContentLoaded', () => {
       phone.value = `${data.data.phone}`;
     })
     .catch(error => console.log(error));
-});
+};
+
+
+const checkout = () => {
+  cartInfo();
+  getDeliveryInfo();
+  createOrder;
+};
+
+document.addEventListener('DOMContentLoaded', checkout);

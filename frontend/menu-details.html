@@ -22,10 +22,8 @@
                     <a href="./index.html"><li>Home</li></a>
                     <a href="./catalog.html"><li>Catalog</li></a>
                     <div class="cart">
-                        <a href="./user-order.html">
-                            <img src="./images/grey-shopping-cart-2.png" alt="shopping cart image">
-                        </a>
-                        <div class="notification"><span>4</span></div>
+                        <img src="./images/grey-shopping-cart-2.png" alt="shopping cart image">
+                        <div class="notification"><span id="cart-count"></span></div>
                     </div>
                 </ul>
             </nav>
@@ -41,8 +39,8 @@
                     
                 </div>
                 <div id="menuInput" class="order-input">
-                    <input type="number" name="num-of-orders" value="1" min="1" max="99">
-                    <button>Add to Cart</button>
+                    <input id="orderQty" type="number" name="num-of-orders" value="1" min="1" max="99">
+                    <button id="orderBtn">Add to Cart</button>
                 </div>
             </div>
             <div id="menuDescription" class="order-description">

@@ -78,6 +78,7 @@ const getMenu = () => {
             const addToCart = createElement('button');
             addToCart.textContent = 'Add To Cart';
             addToCart.addEventListener('click', () => {
+              console.log(menu);
               cart.push({ quantity: cartQty.value, menu });
               sessionStorage.setItem('cart', JSON.stringify(cart));
               cartCount.textContent = JSON.parse(sessionStorage.getItem('cart')).length;
