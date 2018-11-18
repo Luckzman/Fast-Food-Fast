@@ -30,7 +30,6 @@ export const signupValidator = (req, res, next) => {
     firstname, lastname, phone, email, password, location,
   } = req.body;
 
-  console.log(req.body);
   if (!firstname || !firstname.trim()) {
     return responseMsg(res, 400, 'fail', 'First name is required');
   }

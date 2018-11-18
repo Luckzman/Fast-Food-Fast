@@ -3,11 +3,11 @@ import order from './order';
 import auth from './auth';
 import menu from './menu';
 import user from './user';
-import cart from './cart';
+// import cart from './cart';
 
 
 const router = express.Router();
-router.use('/api/v1/cart', cart);
+// router.use('/api/v1/cart', cart);
 router.use('/api/v1/orders', order);
 router.use('/api/v1/auth', auth);
 router.use('/api/v1/menu', menu);

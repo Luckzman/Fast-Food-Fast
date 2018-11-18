@@ -3,7 +3,20 @@ const appendChild = (parent, child) => parent.appendChild(child);
 
 const getMenu = () => {
   const container = document.getElementById('container');
-  container.className = 'container top';
+  let cart = []; /* initialize an empty cart */
+  const cartCount = document.getElementById('cart-count'); /* get cart counter from DOM */
+  if (!localStorage.getItem('cart')) { /* check if localStorage is empty */
+    cartCount.textContent = 0;
+  } else {
+    cartCount.textContent = JSON.parse(localStorage.getItem('cart')).length;
+    cart = JSON.parse(localStorage.getItem('cart')); /* populate cart with localstorage items */
+  }
+
+  const displayCart = document.querySelector('.cart');
+  displayCart.addEventListener('click', () => {
+    window.location.assign('cart.html'); /* redirect to cart page */
+  });
+
   const url = '/api/v1/menu';
 
   fetch(url)
@@ -11,12 +24,24 @@ const getMenu = () => {
     .then((data) => {
       const menus = data.menu;
       const menuCategory = {};
-      menus.forEach((menu) => {
+      menus.forEach((menu) => { /* refactor data response based on category */
         menuCategory[menu.category]
           ? menuCategory[menu.category]
-            .push({ id: menu.id, food_name: menu.food_name, image: menu.image })
+            .push({
+              id: menu.id,
+              food_name: menu.food_name,
+              image: menu.image,
+              category: menu.category,
+              price: menu.price,
+            })
           : (menuCategory[menu.category] = [], menuCategory[menu.category]
-            .push({ id: menu.id, food_name: menu.food_name, image: menu.image }));
+            .push({
+              id: menu.id,
+              food_name: menu.food_name,
+              image: menu.image,
+              price: menu.price,
+              category: menu.category,
+            }));
       });
 
       for (const menu in menuCategory) {
@@ -43,14 +68,26 @@ const getMenu = () => {
             viewDetails.addEventListener('click', () => {
               window.location.assign(`menu-details.html?id=${menu.id}`);
             });
+
+            const cartQty = createElement('input');
+            cartQty.type = 'number';
+            cartQty.value = 1;
+            cartQty.min = 1;
+            cartQty.max = 99;
+
             const addToCart = createElement('button');
             addToCart.textContent = 'Add To Cart';
-
+            addToCart.addEventListener('click', () => {
+              cart.push({ quantity: cartQty.value, menu });
+              localStorage.setItem('cart', JSON.stringify(cart));
+              cartCount.textContent = JSON.parse(localStorage.getItem('cart')).length;
+            });
             appendChild(catalog, imgContainer);
             appendChild(imgContainer, img);
             appendChild(imgContainer, p);
             appendChild(imgContainer, btnContainer);
             appendChild(btnContainer, viewDetails);
+            appendChild(btnContainer, cartQty);
             appendChild(btnContainer, addToCart);
           });
           appendChild(popularFood, h2);
