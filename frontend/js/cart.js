@@ -13,7 +13,7 @@ const displayCart = () => {
     <th>Category</th>
     <th>Sub-Total</th>`;
   appendChild(cartTable, tableHeader);
-  const cart = JSON.parse(localStorage.getItem('cart'));
+  const cart = JSON.parse(sessionStorage.getItem('cart'));
   console.log(cart);
   let Total = 0;
   cart.forEach((cartItem) => {
@@ -30,7 +30,7 @@ const displayCart = () => {
         <td>${subTotal}</td>`;
     appendChild(cartTable, tableBody);
   });
-  console.log(Total);
+  console.log(cart);
   const calcTotal = document.querySelector('.order-content-left');
   calcTotal.innerHTML = `
     <table>

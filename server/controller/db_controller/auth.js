@@ -12,7 +12,7 @@ import { responseMsg, userResponseMsg } from '../../utils/helpers';
  */
 export const signup = (req, res) => {
   const {
-    firstname, lastname, phone, email, password, location,
+    firstname, lastname, phone, email, password, image,
   } = req.body;
   const user_status = req.body.user_status || 'regular';
   const query = 'SELECT * FROM users WHERE email = $1';
@@ -24,7 +24,7 @@ export const signup = (req, res) => {
       }
       bcrypt.hash(password, 8)
         .then((hash) => {
-          const query = 'INSERT INTO users VALUES($1, $2, $3, $4, $5, $6, $7, $8 , $9, $10) returning id, firstname, lastname, email, phone, user_status, location, created_date';
+          const query = 'INSERT INTO users VALUES($1, $2, $3, $4, $5, $6, $7, $8 , $9, $10) returning id, firstname, lastname, email, phone, image, user_status, created_date';
           const values = [
             uuid(),
             firstname,
@@ -32,7 +32,7 @@ export const signup = (req, res) => {
             email,
             phone,
             hash,
-            location,
+            image,
             user_status,
             new Date(),
             new Date()];
@@ -77,14 +77,5 @@ export const login = (req, res) => {
         })
         .catch(error => res.status(400).json(error));
     })
-    .catch(error => res.status(400).json(error));
-};
-
-
-export const getUsers = (req, res) => {
-  const query = 'SELECT id, firstname, lastname, email, phone, location, created_date FROM users';
-
-  db.query(query)
-    .then(users => userResponseMsg(res, 200, 'success', 'get request succesful', users.rows))
     .catch(error => res.status(400).json(error));
 };

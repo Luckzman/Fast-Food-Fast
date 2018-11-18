@@ -27,7 +27,7 @@ const isValidUpdateInput = input => updateInputRegex.test(input);
  */
 export const signupValidator = (req, res, next) => {
   const {
-    firstname, lastname, phone, email, password, location,
+    firstname, lastname, phone, email, password,
   } = req.body;
 
   if (!firstname || !firstname.trim()) {
@@ -45,9 +45,9 @@ export const signupValidator = (req, res, next) => {
   if (!password || !password.trim()) {
     return responseMsg(res, 400, 'fail', 'password is required');
   }
-  if (!location || !location.trim()) {
-    return responseMsg(res, 400, 'fail', 'password is required');
-  }
+  // if (!location || !location.trim()) {
+  //   return responseMsg(res, 400, 'fail', 'password is required');
+  // }
   if (!isValidEmail(email)) {
     return responseMsg(res, 400, 'fail', 'email is not valid');
   }
@@ -141,13 +141,10 @@ export const menuValidator = (req, res, next) => {
  * @param {function} next
  */
 export const placeOrderValidator = (req, res, next) => {
-  const { id, quantity_ordered } = req.body;
+  const { cart } = req.body;
 
-  if (!uuidChecker(id)) {
-    return responseMsg(res, 400, 'fail', 'order id is not valid');
-  }
-  if (!quantity_ordered || !quantity_ordered.trim()) {
-    return responseMsg(res, 400, 'fail', 'quantity ordered is required');
+  if (!cart) {
+    return responseMsg(res, 400, 'fail', 'cart item is required');
   }
 
   next();
