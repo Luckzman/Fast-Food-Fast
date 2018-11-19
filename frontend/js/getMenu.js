@@ -14,7 +14,11 @@ const getMenu = () => {
 
   const displayCart = document.querySelector('.cart');
   displayCart.addEventListener('click', () => {
-    window.location.assign('cart.html'); /* redirect to cart page */
+    if (cart.length < 1) {
+      alert('Cart is empty');
+    } else {
+      window.location.assign('cart.html'); /* redirect to cart page */
+    }
   });
 
   const url = '/api/v1/menu';
@@ -78,7 +82,6 @@ const getMenu = () => {
             const addToCart = createElement('button');
             addToCart.textContent = 'Add To Cart';
             addToCart.addEventListener('click', () => {
-              console.log(menu);
               cart.push({ quantity: cartQty.value, menu });
               sessionStorage.setItem('cart', JSON.stringify(cart));
               cartCount.textContent = JSON.parse(sessionStorage.getItem('cart')).length;
