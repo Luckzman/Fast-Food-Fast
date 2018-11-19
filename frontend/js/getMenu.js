@@ -16,8 +16,11 @@ const getMenu = () => {
   displayCart.addEventListener('click', () => {
     if (cart.length < 1) {
       alert('Cart is empty');
+    } if (localStorage.getItem('data')) {
+      window.location = 'cart.html'; /* redirect to cart page */
     } else {
-      window.location.assign('cart.html'); /* redirect to cart page */
+      alert('please login or sign up');
+      window.location = 'index.html#signin-modal';
     }
   });
 

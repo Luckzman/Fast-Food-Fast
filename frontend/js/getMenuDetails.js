@@ -11,7 +11,16 @@ const menuDetails = () => {
 
   const displayCart = document.querySelector('.cart');
   displayCart.addEventListener('click', () => {
-    window.location.assign('cart.html'); /* redirect to cart page */
+    // console.log(localStorage.getItem('data'));
+    if (cart.length < 1) {
+      alert('cart is empty');
+    }
+    if (localStorage.getItem('data')) {
+      window.location = 'cart.html'; /* redirect to cart page */
+    } else {
+      alert('please login or sign up');
+      window.location = 'index.html#signin-modal';
+    }
   });
 
   const menuImg = document.getElementById('menuImg');

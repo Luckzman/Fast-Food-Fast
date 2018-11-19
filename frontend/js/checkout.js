@@ -7,6 +7,13 @@ const token = JSON.parse(localStorage.getItem('data'));
 
 const cartitem = [];
 
+const logoutBtn = document.getElementById('logout');
+logoutBtn.addEventListener('click', () => {
+  sessionStorage.clear();
+  localStorage.clear();
+  window.location = 'index.html';
+});
+
 const cartInfo = () => {
   const cartSummary = document.getElementById('order-details'); // display cart summary
   let total = 0;
@@ -86,6 +93,7 @@ createOrder.addEventListener('submit', createNewOrder);
 
 
 const checkout = () => {
+  logoutBtn;
   cartInfo();
   getDeliveryInfo();
   createOrder;
