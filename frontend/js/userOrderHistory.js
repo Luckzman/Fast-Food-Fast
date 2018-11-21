@@ -12,7 +12,6 @@ const orderHistory = () => {
   cartCount.textContent = JSON.parse(sessionStorage.getItem('cart')).length;
   const url = 'api/v1/user/orders';
   const token = JSON.parse(localStorage.getItem('data'));
-  console.log(token);
   const options = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -22,9 +21,7 @@ const orderHistory = () => {
   fetch(url, options)
     .then(res => res.json())
     .then((data) => {
-      console.log(data);
       const orderHistoryTable = document.getElementById('order-history-table');
-      console.log(orderHistoryTable);
       const tableHeader = createElement('tr');
       tableHeader.innerHTML = `
         <th>order id</th>
@@ -34,7 +31,6 @@ const orderHistory = () => {
       appendChild(orderHistoryTable, tableHeader);
 
       data.order.forEach((userOrder) => {
-        console.log(userOrder);
         const tableBody = createElement('tr');
         tableBody.innerHTML = `
           <td>${userOrder.id}</td>
@@ -49,7 +45,6 @@ const orderHistory = () => {
           cartBody.innerHTML = `
             <div class="cart-title"><h2>Cart (Qty)</h2></div><div class="price-title"><h2>Price</h2></div>`;
           userOrder.cart.forEach((cartItem) => {
-            console.log(cartItem);
             const cartContent = createElement('div');
             cartContent.innerHTML = `
             <div class="cart-title"><p>${cartItem.food} (${cartItem.quantity})</p></div>

@@ -1,0 +1,120 @@
+.profile-img{
+    max-width: 250px;
+    padding: 20px;
+    margin: 30px auto 15px;
+    background: #303030;
+    color: #ccc;
+    border-radius: 15px;
+}
+.profile-img img{
+    max-width: 100%;
+    border-radius: 10px;
+}
+form{
+    max-width: 90%;
+    padding: 10px;
+    margin: 0 auto;
+}
+form h3{
+    font-size: 2rem;
+    margin:25px 0 15px;
+    color: #333;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    text-align: left;
+}
+h3 span{
+    text-transform: capitalize;
+    font-style: italic;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #b4b4b4;
+}
+h3 span a{
+    color: #00c000;
+    cursor: pointer;
+}
+.input-container{
+    margin-bottom: 10px;
+}
+.input-container label{
+    display: block;
+    margin: 10px 0 5px;
+    color: #333;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+.input-container input, textarea, select{
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    color: #333;
+    border-radius: 4px;
+    border: 1px solid #555;
+    font-family: monospace;
+}
+textarea{
+    height: 80px;
+    vertical-align: top;
+}
+input[type="submit"]{
+    width: 100%;
+    border: none;
+    padding: 10px;
+    background: #008000;
+    border-radius: 4px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    box-sizing: border-box;
+}
+.logout{
+    color: rgb(248, 248, 248);
+    background-color: #005c00c0;
+    line-height: 2.5rem;
+    font-size: 1.1rem;
+}
+.none{
+    display: none;
+}
+/* #img-input{
+    display: none;
+}
+#updateUserDetails{
+    display: none;
+} */
+
+
+@media only screen and (min-width:760px){
+    main .container{
+        max-width: 1024px;
+    }
+    .profile-img{
+        width: 25%;
+        margin-top: 75px;
+        float: right;
+        clear: both;
+    }
+    form{
+        width: 65%;
+        float: left;
+    }
+    .input-container label{
+        display: inline-block;
+        width: 25%;
+    }
+    textarea,
+    .input-container input,
+    select{
+        display: inline-block;
+        width: 70%
+    }
+    input[type="submit"]{
+        width: 70%;
+        margin-left: 26%;
+    }
+}
