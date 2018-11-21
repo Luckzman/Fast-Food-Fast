@@ -21,6 +21,9 @@ const displayCart = () => {
   appendChild(cartTable, tableHeader);
   const cart = JSON.parse(sessionStorage.getItem('cart'));
   let Total = 0;
+  const calcSubTotal = document.getElementById('subtotal');
+  const calcTotal = document.getElementById('total');
+  console.log(calcTotal);
   cart.forEach((cartItem, index) => {
     const subTotal = parseInt(cartItem.quantity, 10) * parseInt(cartItem.menu.price, 10);
     Total += subTotal;
@@ -41,23 +44,16 @@ const displayCart = () => {
       deleteBtnParent.parentNode.removeChild(deleteBtnParent);
       cart.splice(index, 1);
       sessionStorage.setItem('cart', JSON.stringify(cart));
+      Total -= subTotal;
+      calcTotal.textContent = Total;
+      calcSubTotal.textContent = Total;
     });
     appendChild(deleteColumn, deleteBtn);
     appendChild(tableBody, deleteColumn);
     appendChild(cartTable, tableBody);
   });
-  const calcTotal = document.querySelector('.order-content-left');
-  calcTotal.innerHTML = `
-    <table>
-        <tr>
-            <th>sub total</th>
-            <th>${Total}</th>
-        </tr>
-        <tr>
-            <td>total</td>
-            <td>${Total}</td>
-        </tr>
-    </table>`;
+  calcTotal.textContent = Total;
+  calcSubTotal.textContent = Total;
   const checkout = document.getElementById('checkout-btn');
   checkout.addEventListener('click', () => {
     if (cart.length < 1) {
