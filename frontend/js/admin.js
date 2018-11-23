@@ -7,6 +7,13 @@ const options = {
 const createElement = e => document.createElement(e);
 const appendChild = (Parent, child) => Parent.appendChild(child);
 
+const logoutBtn = document.querySelector('.button');
+logoutBtn.addEventListener('click', () => {
+  sessionStorage.clear();
+  localStorage.clear();
+  window.location = 'index.html';
+});
+
 const addMenu = (e) => {
   e.preventDefault();
   const food_name = document.getElementById('foodName').value;
@@ -37,13 +44,21 @@ const addMenu = (e) => {
 
 const addMenuContent = document.getElementById('addMenu').addEventListener('submit', addMenu);
 
+const editMenu = () => {
+  console.log('edit menu');
+};
+
+const deleteMenu = () => {
+  console.log('edit menu');
+};
+
 const getMenu = () => {
   const getMenuUrl = 'api/v1/menu';
   fetch(getMenuUrl)
     .then(res => res.json())
     .then((data) => {
       const menuTable = document.getElementById('menu-table');
-      const menuHeader = createElement('tr');
+      const menuHeader = createElement('thead');
       menuHeader.innerHTML = `
           <th></th>
           <th>name</th>
@@ -53,16 +68,48 @@ const getMenu = () => {
           <th>edit</th>
           <th>delete</th>`;
       appendChild(menuTable, menuHeader);
+      const menuTableBody = createElement('tbody');
       data.menu.forEach((menuItem) => {
-        const menuTableBody = createElement('tr');
-        menuTableBody.innerHTML = `
+        const menuTableRow = createElement('tr');
+        const menuImg = createElement('td');
+        const menuImgData = createElement('img');
+        menuImgData.src = menuItem.image;
+        appendChild(menuImg, menuImgData);
+        const menuName = createElement('td');
+        menuName.textContent = menuItem.food_name;
+        const menuDes = createElement('td');
+        menuDes.textContent = menuItem.description;
+        const menuPrice = createElement('td');
+        menuPrice.textContent = menuItem.price;
+        const menuCat = createElement('td');
+        menuCat.textContent = menuItem.category;
+        const menuEditBtn = createElement('td');
+        const menuEditLink = createElement('a');
+        menuEditLink.href = '#new-food-modal';
+        menuEditLink.innerHTML = '<i class="fas fa-edit"></i>';
+        menuEditLink.addEventListener('click', editMenu);
+        appendChild(menuEditBtn, menuEditLink);
+        const menuDeleteBtn = createElement('td');
+        const menuDeleteBtnIco = createElement('i');
+        menuDeleteBtnIco.className = 'fas fa-times-circle red';
+        menuDeleteBtnIco.addEventListener('click', deleteMenu);
+        appendChild(menuDeleteBtn, menuDeleteBtnIco);
+        appendChild(menuTableRow, menuImg);
+        appendChild(menuTableRow, menuName);
+        appendChild(menuTableRow, menuDes);
+        appendChild(menuTableRow, menuPrice);
+        appendChild(menuTableRow, menuCat);
+        appendChild(menuTableRow, menuEditBtn);
+        appendChild(menuTableRow, menuDeleteBtn);
+        /* menuTableBody.innerHTML = `
             <td><img src=${menuItem.image} alt=""></td>
             <td>${menuItem.food_name}</td>
             <td>${menuItem.description}</td>
             <td>${menuItem.price}</td>
             <td>${menuItem.category}</td>
             <td><a href="#new-food-modal"><i class="fas fa-edit"></i></a></td>
-            <td><i class="fas fa-times-circle red"></i></td>`;
+            <td><i class="fas fa-times-circle red"></i></td>`; */
+        appendChild(menuTableBody, menuTableRow);
         appendChild(menuTable, menuTableBody);
       });
     })
@@ -71,7 +118,6 @@ const getMenu = () => {
 
 const orderStatus = (orderId) => {
   const order_status = document.querySelector('input[name="order_status"]:checked').value;
-  console.log(order_status);
   const data = { order_status };
   const option = {
     method: 'PUT',
@@ -85,7 +131,6 @@ const orderStatus = (orderId) => {
   fetch(url, option)
     .then(res => res.json())
     .then((data) => {
-      console.log(data);
       alert(data.message);
       window.location = '#tab2';
     })
@@ -100,7 +145,6 @@ const getOrderDetails = (orderId) => {
       const {
         id, firstname, lastname, cart, additional_info, address, city, state,
       } = data.order;
-      console.log(data);
       // const orderDetials = document.getElementById('order-details');
       const username = document.getElementById('username');
       username.textContent = `${firstname} ${lastname}`;
@@ -143,7 +187,6 @@ const getOrder = () => {
           <th>Admin Action</th>`;
       appendChild(orderTable, orderHeading);
       data.order.forEach((orderItems) => {
-        console.log(orderItems);
         const {
           id, firstname, lastname, state, order_status, created_date,
         } = orderItems;
@@ -169,8 +212,43 @@ const getOrder = () => {
     .catch(error => console.log(error));
 };
 
+const getUsers = () => {
+  const url = 'api/v1/user/admin';
+  fetch(url, options)
+    .then(res => res.json())
+    .then((data) => {
+      console.log(data);
+      const userTable = document.getElementById('user-table');
+      const userTableHeader = createElement('tr');
+      userTableHeader.innerHTML = `
+        <th>image</th>
+        <th>fullname</th>
+        <th>email</th>
+        <th>phone</th>
+        <th>address</th>
+        <th>state</th>
+        <th>user Status</th>`;
+      appendChild(userTable, userTableHeader);
+      data.user.forEach((userItem) => {
+        console.log(userItem);
+        const userTableBody = createElement('tr');
+        userTableBody.innerHTML = `
+          <td><img src=${userItem.image}></td>
+          <td>${userItem.firstname} ${userItem.lastname}</td>
+          <td>${userItem.email}</td>
+          <td>${userItem.phone}</td>
+          <td>${userItem.address}, ${userItem.city}</td>
+          <td>${userItem.state}</td>
+          <td>${userItem.user_status}</td>`;
+        appendChild(userTable, userTableBody);
+      });
+    })
+    .catch(error => console.log(error));
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   addMenuContent;
   getMenu();
   getOrder();
+  getUsers();
 });

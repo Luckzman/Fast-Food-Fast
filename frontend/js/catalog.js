@@ -20,7 +20,6 @@ const getMenu = () => {
       alert('Cart is empty');
     } else {
       alert('please login or sign up');
-      window.location = 'index.html#signin-modal';
     }
   });
 

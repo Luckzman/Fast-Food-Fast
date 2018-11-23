@@ -55,3 +55,5 @@ const fileFilter = (req, file, next) => {
 };
 
 export const upload = multer({ storage, limits: 1024 * 1024 * 5, fileFilter });
+
+export const profileImg = multer({ storage, limits: 1024 * 1024 * 2, fileFilter });
