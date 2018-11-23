@@ -5,13 +5,17 @@ const options = {
     'Content-Type': 'application/json; charset=utf-8',
   },
 };
+
 const fullname = document.getElementById('fullname');
 const emailInput = document.getElementById('email');
 const phoneInput = document.getElementById('phone');
+const imageInput = document.getElementById('image');
+const profileImg = document.getElementById('profile-img');
+const profileImgContainer = document.querySelector('.profile-img');
 const addressInput = document.getElementById('address');
 const cityInput = document.getElementById('city');
 const stateInput = document.getElementById('state');
-const stateSelectOption = document.getElementById('state-input');
+// const stateSelectOption = document.getElementById('state-input');
 const stateContainer = document.getElementById('state-container');
 const imgContainer = document.getElementById('img-input');
 const updateInfoBtn = document.getElementById('updateUserDetailsBtn');
@@ -20,6 +24,12 @@ const updatedeliveryBtn = document.getElementById('updateDeliveryBtn');
 const stateInputContainer = document.getElementById('state-input-container');
 const updateInfoForm = document.getElementById('updateInfoForm');
 
+const logoutBtn = document.getElementById('logout');
+logoutBtn.addEventListener('click', () => {
+  sessionStorage.clear();
+  localStorage.clear();
+  window.location = 'index.html';
+});
 
 const updateInfoLink = document.getElementById('update-user-info');
 updateInfoLink.addEventListener('click', () => {
@@ -32,21 +42,17 @@ updateInfoLink.addEventListener('click', () => {
 updateInfoForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const url = 'api/v1/user';
-  // const data = new FormData();
-  // data.append('email', emailInput.value);
-  // data.append('phone', phoneInput.value);
-  // data.append('image', image.files[0]);
+  const data = new FormData();
+  data.append('email', emailInput.value);
+  data.append('phone', phoneInput.value);
+  data.append('image', imageInput.files[0]);
 
   const options = {
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json; charset=utf-8',
     },
-    body: JSON.stringify({
-      email: emailInput.value,
-      phone: phoneInput.value,
-    }),
+    body: data,
   };
   fetch(url, options)
     .then(res => res.json())
@@ -55,6 +61,8 @@ updateInfoForm.addEventListener('submit', (e) => {
       alert(data.message);
       emailInput.textContent = `${data.user.email}`;
       phoneInput.textContent = `${data.user.phone}`;
+      profileImg.src = `${data.user.image}`;
+      profileImg;
       emailInput.setAttribute('disabled', 'disabled');
       phoneInput.setAttribute('disabled', 'disabled');
       imgContainer.classList.add('none');
@@ -107,11 +115,18 @@ const userInfo = () => {
     .then(res => res.json())
     .then((data) => {
       const {
-        firstname, lastname, phone, email,
+        firstname, lastname, phone, email, image,
       } = data.user;
       fullname.value = `${firstname} ${lastname}`;
       emailInput.value = email;
       phoneInput.value = phone;
+      if (image) {
+        profileImg.src = image;
+        profileImgContainer.classList.remove('none');
+      } else {
+        profileImg.src = '../images/reviewer.jpg';
+        profileImgContainer.classList.remove('none');
+      }
     })
     .catch(error => console.log(error));
 };

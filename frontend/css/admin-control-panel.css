@@ -110,6 +110,11 @@ img{
     border-radius: 10px;
     vertical-align: middle;
 }
+.user img{
+    height: 60px;
+    width: 60px;
+    border-radius: 100%;
+}
 .fa-edit{
     color:#0000a5;
     cursor: pointer;

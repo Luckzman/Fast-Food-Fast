@@ -8,8 +8,6 @@ const orderHistory = () => {
     localStorage.clear();
     window.location = 'index.html';
   });
-  const cartCount = document.getElementById('cart-count');
-  cartCount.textContent = JSON.parse(sessionStorage.getItem('cart')).length;
   const url = 'api/v1/user/orders';
   const token = JSON.parse(localStorage.getItem('data'));
   const options = {
