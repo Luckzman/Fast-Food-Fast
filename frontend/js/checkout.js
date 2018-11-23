@@ -1,7 +1,18 @@
-
+const fullNameInput = document.getElementById('fullname');
+const addressInput = document.getElementById('address');
+const cityInput = document.getElementById('city');
+const stateInput = document.getElementById('state');
+const phoneInput = document.getElementById('phone');
 const token = JSON.parse(localStorage.getItem('data'));
 
 const cartitem = [];
+
+const logoutBtn = document.getElementById('logout');
+logoutBtn.addEventListener('click', () => {
+  sessionStorage.clear();
+  localStorage.clear();
+  window.location = 'index.html';
+});
 
 const cartInfo = () => {
   const cartSummary = document.getElementById('order-details'); // display cart summary
@@ -12,6 +23,7 @@ const cartInfo = () => {
     const cartinput = {
       food: cart.menu.food_name,
       quantity: cart.quantity,
+      price: cart.menu.price,
     };
     const cost = cart.quantity * cart.menu.price;
     total += cost;
@@ -27,14 +39,37 @@ const cartInfo = () => {
   cartTotal.textContent = `N${total}`;
 };
 
+const getDeliveryInfo = () => {
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const url = 'api/v1/user/delivery_info/';
+
+  fetch(url, options)
+    .then(res => res.json())
+    .then((data) => {
+      const {
+        firstname, lastname, address, city, state, phone,
+      } = data.data;
+      fullNameInput.value = `${firstname} ${lastname}`;
+      addressInput.value = `${address}`;
+      cityInput.value = `${city}`;
+      stateInput.value = `${state}`;
+      phoneInput.value = `${phone}`;
+    })
+    .catch(error => console.log(error));
+};
+
 const createNewOrder = (e) => {
   e.preventDefault();
   const additional_info = document.getElementById('info').value;
+  const url = 'api/v1/orders';
   const data = {
     cart: cartitem,
     additional_info,
   };
-  const url = 'api/v1/orders';
   const options = {
     method: 'POST',
     headers: {
@@ -43,44 +78,22 @@ const createNewOrder = (e) => {
     },
     body: JSON.stringify(data),
   };
+
   fetch(url, options)
     .then(res => res.json())
     .then((data) => {
       alert(data.message);
+      sessionStorage.clear();
+      window.location = 'catalog.html';
     })
     .catch(error => console.log(error));
 };
-
 const createOrder = document.getElementById('order-form');
 createOrder.addEventListener('submit', createNewOrder);
 
-const getDeliveryInfo = () => {
-  const fullName = document.getElementById('fullname');
-  const address = document.getElementById('address');
-  const city = document.getElementById('city');
-  //   const state = document.getElementById('state');
-  const phone = document.getElementById('phone');
-
-  const options = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-  const url = 'api/v1/user/delivery_info/';
-  fetch(url, options)
-    .then(res => res.json())
-    .then((data) => {
-      fullName.value = `${data.data.firstname} ${data.data.lastname}`;
-      address.value = `${data.data.address}`;
-      city.value = `${data.data.city}`;
-      //   state.option = `${Lagos}`;
-      phone.value = `${data.data.phone}`;
-    })
-    .catch(error => console.log(error));
-};
-
 
 const checkout = () => {
+  logoutBtn;
   cartInfo();
   getDeliveryInfo();
   createOrder;
