@@ -14,10 +14,10 @@ const getMenu = () => {
 
   const displayCart = document.querySelector('.cart');
   displayCart.addEventListener('click', () => {
-    if (cart.length < 1) {
-      alert('Cart is empty');
-    } if (localStorage.getItem('data')) {
+    if (localStorage.getItem('data') && (cart.length >= 1)) {
       window.location = 'cart.html'; /* redirect to cart page */
+    } else if (localStorage.getItem('data') && (cart.length < 1)) {
+      alert('Cart is empty');
     } else {
       alert('please login or sign up');
       window.location = 'index.html#signin-modal';

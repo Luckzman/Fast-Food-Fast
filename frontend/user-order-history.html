@@ -11,55 +11,59 @@
     <link rel="stylesheet" href="./../css/reuse.css">
     <link rel="stylesheet" href="./../css/main.css">
     <link rel="stylesheet" href="./../css/cart.css">
+    <link rel="stylesheet" href="./../css/user-order-history.css">
 </head>
 <body>
     <header>
         <div class="container">
             <div>
-                <a href="./index.html">FastFoodFast.com</a>
+                <a href="index.html">FastFoodFast.com</a>
             </div>
             <nav>
                 <ul>
-                    <a href="./user-order-history.html"><li>Order History</li></a>
                     <a href="./catalog.html"><li>Catalog</li></a>
+                    <div class="cart">
+                        <a href="./cart.html">
+                            <img src="./../images/grey-shopping-cart-2.png" alt="shopping cart image">
+                        </a>
+                        <div class="notification"><span id="cart-count"></span></div>
+                    </div>
                     <li id="logout" class="logout">LOGOUT</li>
                 </ul>
             </nav>
         </div>
     </header>
+
     <main>
         <div class="container">
-            <h1>cart orders</h1>
+            <h1>My Orders History</h1>
             <div class="table-container">
-                <table id="cart-table">
+                <table id="order-history-table">
                     
                 </table>
             </div>
-            <div class="order-calc">
-                <div class="order-content-left">
-                    <table>
-                        <tr>
-                            <th>sub total</th>
-                            <th id="subtotal"></th>
-                        </tr>
-                        <tr>
-                            <td>total</td>
-                            <td id="total"></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="order-checkout">
-                <button id="checkout-btn">proceed to checkout</button>
-            </div>
         </div>
     </main>
+
+    <!-- Add new food item form modal here -->
+    <div id="view-cart" class="overlay">
+        <a class="cancel" href="#"></a>
+        <div class="modal">
+            <a href="#tab2" class="close">X</a>
+            <div class="content" id="order-details">
+                <div id="cart-info">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <footer>
         <div class="footer-content">
             <p>FastFoodFast &copy;2018 <span>All Rights Reserved</span></p>
         </div>
     </footer>
-    <script src="js/cart.js"></script>
+    <script src="js/userOrderHistory.js"></script>
 </body>
 </html>

@@ -25,7 +25,10 @@ th{
     text-transform: uppercase;
 }
 td, th{
-    padding: 10px 20px;
+    padding: 5px 10px;
+}
+.order-calc td, .order-calc th{
+    padding: 5px 30px;
 }
 tr td:nth-child(4),
 tr th:nth-child(4){
@@ -35,6 +38,9 @@ tr td:nth-child(3){
     line-height: 1rem;
 }
 td{
+    line-height: 1.5rem;
+}
+.order-calc td{
     line-height: 3rem;
 }
 td input{
@@ -93,7 +99,7 @@ img{
 }
 button{
     padding: 10px;
-    margin: 10px 0 30px;
+    margin: 10px 0 10px;
     font-weight: 600;
     color: #005c00c0;
     border: 1px solid #005c00;
