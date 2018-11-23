@@ -23,7 +23,6 @@ const displayCart = () => {
   let Total = 0;
   const calcSubTotal = document.getElementById('subtotal');
   const calcTotal = document.getElementById('total');
-  console.log(calcTotal);
   cart.forEach((cartItem, index) => {
     const subTotal = parseInt(cartItem.quantity, 10) * parseInt(cartItem.menu.price, 10);
     Total += subTotal;

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FastFoodFast</title>
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">    <link rel="stylesheet" href="./../css/reset.css">
+    <link rel="stylesheet" href="./../css/reuse.css">
+    <link rel="stylesheet" href="./../css/main.css">
+    <link rel="stylesheet" href="./../css/user-profile.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div>
+                <a href="./../index.html">FastFoodFast.com</a>
+            </div>
+            <nav>
+                <ul>
+                    <a href="./../index.html"><li>Home</li></a>
+                    <a href="./catalog.html"><li>Catalog</li></a>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container checkout">
+            <div class="profile-img">
+                <img src="../images/reviewer.jpg" alt="profile image">
+            </div>
+            <form>
+                <div class="delivery-section">
+                    <h3>user details</h3>
+                    <div class="input-container">
+                        <label for="firstname">Full Name</label>
+                        <input type="text" id="firstname"><br>
+                    </div>
+                    <div class="input-container">
+                        <label for="email">Email</label>
+                        <input type="email" id="email"><br>
+                    </div>
+                    <div class="input-container">
+                        <label for="phone">Mobile Phone Number</label>
+                        <input type="text" id="phone"><br>
+                    </div> 
+                    <div class="input-container">
+                        <label for="image">Profile Image</label>
+                        <input type="file" id="image"><br>
+                    </div> 
+                    <input type="submit" value="Update User Details">
+                </div>
+            </form>
+            
+            <form>
+                <div>
+                    <h3>Delivery Details</h3>
+            
+                    <div class="input-container">
+                        <label for="address">Address</label>
+                        <textarea type="text" id="address" placeholder="5, xyz street,..."></textarea><br>
+                    </div>
+                    <div class="input-container">
+                        <label for="city">City</label>
+                        <input type="city" id="city" placeholder="aguda"><br>
+                    </div>
+                    <div class="input-container">
+                        <label for="lga">L.G.A.</label>
+                        <input type="text" id="lga" placeholder="surulere"><br>
+                    </div>
+                    <div class="input-container">
+                        <label for="state">State</label>
+                        <select type="text" id="state">
+                            <option value="lagos">Lagos</option>
+                            <option value="portharcourt">Port Harcourt</option>
+                            <option value="abuja">Abuja</option>
+                        </select>
+                    </div> 
+                </div>
+                <input type="submit" value="Submit Details">
+            </form>
+            
+        </div>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <p>FastFoodFast &copy;2018 <span>All Rights Reserved</span></p>
+        </div>
+    </footer>
+</body>
+</html>
