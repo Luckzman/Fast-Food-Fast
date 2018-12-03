@@ -38,6 +38,10 @@ CREATE TABLE food_menus(
     created_date TIMESTAMPTZ,
     modified_date TIMESTAMPTZ
 );
+CREATE TABLE reviews(
+    id UUID PRIMARY KEY,
+    
+)
 CREATE TABLE orders(
     id UUID PRIMARY KEY,
     cart JSON[],

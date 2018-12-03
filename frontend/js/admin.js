@@ -6,6 +6,16 @@ const options = {
 };
 const createElement = e => document.createElement(e);
 const appendChild = (Parent, child) => Parent.appendChild(child);
+const updateFood_name = document.getElementById('update-foodName');
+const updateDescription = document.getElementById('update-description');
+const updatePrice = document.getElementById('update-price');
+const updateCategory = document.getElementById('update-category');
+const modalImage = document.getElementById('modal-img');
+const updateImage = document.getElementById('modal-img');
+const updateMenu = document.getElementById('updateMenu');
+const updateImgBtn = document.getElementById('updateImg');
+const updateImgInput = document.getElementById('file-input');
+const updateImgForm = document.getElementById('updateMenuImg');
 
 const logoutBtn = document.querySelector('.button');
 logoutBtn.addEventListener('click', () => {
@@ -14,6 +24,14 @@ logoutBtn.addEventListener('click', () => {
   window.location = 'index.html';
 });
 
+const loadImage = (event) => {
+  const reader = new FileReader();
+  reader.onload = () => {
+    updateImage.src = reader.result;
+  };
+  reader.readAsDataURL(event.target.files[0]);
+};
+
 const addMenu = (e) => {
   e.preventDefault();
   const food_name = document.getElementById('foodName').value;
@@ -21,7 +39,6 @@ const addMenu = (e) => {
   const price = document.getElementById('price').value;
   const category = document.getElementById('category').value;
   const image = document.getElementById('image');
-
   const url = 'api/v1/menu';
   const data = new FormData();
   data.append('food_name', food_name);
@@ -44,14 +61,34 @@ const addMenu = (e) => {
 
 const addMenuContent = document.getElementById('addMenu').addEventListener('submit', addMenu);
 
-const editMenu = () => {
-  console.log('edit menu');
+
+// const editMenu = () => {
+//   console.log('edit menu');
+// };
+/*
+const menuDelete = (id) => {
+  const url = `api/v1/menu/${id}`;
+  // const data = { id };
+  const options = {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+    // body: JSON.stringify(data),
+  };
+  fetch(url, options)
+    .then(res => res.json())
+    .then((data) => {
+      console.log(data);
+      alert(data.message);
+      const deleteBtnParent = deleteBtn.parentElement.parentElement;
+      deleteBtnParent.parentNode.removeChild(deleteBtnParent);
+    })
+    .catch(error => console.log(error));
 };
 
-const deleteMenu = () => {
-  console.log('edit menu');
-};
-
+ */
 const getMenu = () => {
   const getMenuUrl = 'api/v1/menu';
   fetch(getMenuUrl)
@@ -72,8 +109,43 @@ const getMenu = () => {
       data.menu.forEach((menuItem) => {
         const menuTableRow = createElement('tr');
         const menuImg = createElement('td');
+        // const menuImgLabel = createElement('label');
+        // menuImgLabel.setAttribute('for', 'file-input');
         const menuImgData = createElement('img');
         menuImgData.src = menuItem.image;
+        // menuImgData.href = '#update-menu-img-modal';
+        menuImgData.addEventListener('click', () => {
+          window.location = '#update-menu-img-modal';
+          modalImage.src = menuItem.image;
+          // updateImgInput.addEventListener('onchange', () => {
+          //   updateImage.src = window.URL.createObjectURL(updateImgInput.files[0]);
+          // });
+          updateImage.addEventListener('click', () => {
+            // updateImage.src = window.URL.createObjectURL(updateImgInput.files[0]);
+            updateImgBtn.classList.remove('none');
+            updateImgForm.addEventListener('submit', (e) => {
+              e.preventDefault();
+              const data = new FormData();
+              data.append('image', updateImgInput.files[0]);
+              const url = `api/v1/menu/${menuItem.id}/img`;
+              const options = {
+                method: 'PUT',
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+                body: data,
+              };
+              fetch(url, options)
+                .then(res => res.json())
+                .then((data) => {
+                  alert(data.message);
+                  window.location.reload();
+                  window.location = '#content1';
+                })
+                .catch(error => console.log(error));
+            });
+          });
+        });
         appendChild(menuImg, menuImgData);
         const menuName = createElement('td');
         menuName.textContent = menuItem.food_name;
@@ -85,14 +157,69 @@ const getMenu = () => {
         menuCat.textContent = menuItem.category;
         const menuEditBtn = createElement('td');
         const menuEditLink = createElement('a');
-        menuEditLink.href = '#new-food-modal';
         menuEditLink.innerHTML = '<i class="fas fa-edit"></i>';
-        menuEditLink.addEventListener('click', editMenu);
+
+        /* Add functionality to update menu button */
+        menuEditLink.addEventListener('click', () => {
+          window.location = '#update-menu-modal';
+          updateFood_name.value = menuItem.food_name;
+          updateDescription.value = menuItem.description;
+          updatePrice.value = menuItem.price;
+          updateCategory.selectedOptions[0].text = menuItem.category;
+          updateMenu.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const url = `api/v1/menu/${menuItem.id}`;
+            const data = {
+              food_name: updateFood_name.value,
+              description: updateDescription.value,
+              price: updatePrice.value,
+              category: updateCategory.options[updateCategory.selectedIndex].text,
+            };
+            const options = {
+              method: 'PUT',
+              headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json; charset=utf-8',
+              },
+              body: JSON.stringify(data),
+            };
+            fetch(url, options)
+              .then(res => res.json())
+              .then((data) => {
+                console.log(data);
+                window.location.reload();
+                alert(data.message);
+                window.location = '#content1';
+                menuName.textContent = data.menu.food_name;
+                menuDes.textContent = data.menu.description;
+                menuPrice.textContent = data.menu.price;
+                menuCat.textContent = data.menu.category;
+              })
+              .catch(error => console.log(error));
+          });
+        });
         appendChild(menuEditBtn, menuEditLink);
         const menuDeleteBtn = createElement('td');
         const menuDeleteBtnIco = createElement('i');
         menuDeleteBtnIco.className = 'fas fa-times-circle red';
-        menuDeleteBtnIco.addEventListener('click', deleteMenu);
+        menuDeleteBtnIco.addEventListener('click', () => {
+          const url = `api/v1/menu/${menuItem.id}`;
+          const options = {
+            method: 'DELETE',
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json; charset=utf-8',
+            },
+          };
+          fetch(url, options)
+            .then(res => res.json())
+            .then((data) => {
+              alert(data.message);
+              const deleteBtnParent = menuDeleteBtnIco.parentElement.parentElement;
+              deleteBtnParent.parentNode.removeChild(deleteBtnParent);
+            })
+            .catch(error => console.log(error));
+        });
         appendChild(menuDeleteBtn, menuDeleteBtnIco);
         appendChild(menuTableRow, menuImg);
         appendChild(menuTableRow, menuName);
@@ -101,14 +228,6 @@ const getMenu = () => {
         appendChild(menuTableRow, menuCat);
         appendChild(menuTableRow, menuEditBtn);
         appendChild(menuTableRow, menuDeleteBtn);
-        /* menuTableBody.innerHTML = `
-            <td><img src=${menuItem.image} alt=""></td>
-            <td>${menuItem.food_name}</td>
-            <td>${menuItem.description}</td>
-            <td>${menuItem.price}</td>
-            <td>${menuItem.category}</td>
-            <td><a href="#new-food-modal"><i class="fas fa-edit"></i></a></td>
-            <td><i class="fas fa-times-circle red"></i></td>`; */
         appendChild(menuTableBody, menuTableRow);
         appendChild(menuTable, menuTableBody);
       });
@@ -145,7 +264,6 @@ const getOrderDetails = (orderId) => {
       const {
         id, firstname, lastname, cart, additional_info, address, city, state,
       } = data.order;
-      // const orderDetials = document.getElementById('order-details');
       const username = document.getElementById('username');
       username.textContent = `${firstname} ${lastname}`;
       const cartInfo = document.getElementById('cart-info');
@@ -217,7 +335,6 @@ const getUsers = () => {
   fetch(url, options)
     .then(res => res.json())
     .then((data) => {
-      console.log(data);
       const userTable = document.getElementById('user-table');
       const userTableHeader = createElement('tr');
       userTableHeader.innerHTML = `
@@ -230,7 +347,6 @@ const getUsers = () => {
         <th>user Status</th>`;
       appendChild(userTable, userTableHeader);
       data.user.forEach((userItem) => {
-        console.log(userItem);
         const userTableBody = createElement('tr');
         userTableBody.innerHTML = `
           <td><img src=${userItem.image}></td>
@@ -248,6 +364,7 @@ const getUsers = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   addMenuContent;
+  // updateMenuForm;
   getMenu();
   getOrder();
   getUsers();

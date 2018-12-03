@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/reuse.css">
     <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/admin-control-panel.css">
+    <link rel="stylesheet" href="./css/admin.css">
 </head>
 <body>
     <header>
@@ -61,51 +61,7 @@
                         <h2>Users</h2>
                         <div class="user">
                             <table id="user-table">
-                                <!-- <tr>
-                                    <th>image</th>
-                                    <th>fullname</th>
-                                    <th>email</th>
-                                    <th>phone</th>
-                                    <th>address</th>
-                                    <th>state</th>
-                                    <th>user Status</th>
-                                </tr>
-                                <tr>
-                                    <td>Adekoya Tolu</td>
-                                    <td>Fried Meat</td>
-                                    <td>Lagos</td>
-                                    <td>1</td>
-                                    <td>3,000</td>
-                                    <td>1:30pm 12/3/2018</td>
-                                    <td><i class="fas fa-check green"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>Femi</td>
-                                    <td>Ofada Rice</td>
-                                    <td>Abeokuta</td>
-                                    <td>4</td>
-                                    <td>15000</td>
-                                    <td>2:45pm 7/8/2018</td>
-                                    <td><i class="fas fa-check green"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>Femi</td>
-                                    <td>Ofada Rice</td>
-                                    <td>Abeokuta</td>
-                                    <td>4</td>
-                                    <td>15000</td>
-                                    <td>2:45pm 7/8/2018</td>
-                                    <td><i class="fas fa-minus-circle red"></i></td>
-                                </tr>
-                                <tr>
-                                    <td>Femi</td>
-                                    <td>Ofada Rice</td>
-                                    <td>Abeokuta</td>
-                                    <td>4</td>
-                                    <td>15000</td>
-                                    <td>2:45pm 7/8/2018</td>
-                                    <td><i class="fas fa-check green"></i></td>
-                                </tr> -->
+                                
                             </table>
                         </div>
                     </article>
@@ -134,14 +90,57 @@
                         <option>Extra</option>
                     </select>
                     <input id="image" type="file"  placeholder="Image">
-                    
-                    <input type="submit" value="submit">
+                    <input id="createMenu" type="submit" value="submit">
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Add new food item form modal here -->
+    <!-- Update Food Menu item form modal here -->
+    <div id="update-menu-img-modal" class="overlay">
+        <a class="cancel" href="#"></a>
+        <div class="modal">
+            <a href="" class="close">X</a>
+            <div class="content">
+                <form id="updateMenuImg">
+                    <h3>click on image to update it</h3>
+                    <label for='file-input'>
+                        <img id="modal-img" alt="">
+                    </label>
+                    <!-- <input type='file' id='file-input' class='none' > -->
+                    <input type='file' id='file-input' class='none' onchange="loadImage(event)">
+                    <input id="updateImg" type="submit" value="Update Image" class="none" >
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Food Menu item form modal here -->
+    <div id="update-menu-modal" class="overlay">
+        <a class="cancel" href="#"></a>
+        <div class="modal">
+            <a href="" class="close">X</a>
+            <div class="content">
+                <form id="updateMenu">
+                    <input id="update-foodName" type="text"  placeholder="Food Name">
+                    <textarea id="update-description" placeholder="Food Description"></textarea>
+                    <input id="update-price" type="number" min="1" placeholder="Price">
+                    <select id="update-category">
+                        <option>-- Select Food Category --</option>
+                        <option>Rice</option>
+                        <option>Swallow</option>
+                        <option>Sandwiches</option>
+                        <option>Salad</option>
+                        <option>Pastas</option>
+                        <option>Extra</option>
+                    </select>
+                    <input type="submit" value="Update Menu">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update order status form modal here -->
     <div id="accept/delete-modal" class="overlay">
         <a class="cancel" href="#"></a>
         <div class="modal">
