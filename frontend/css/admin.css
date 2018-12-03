@@ -103,17 +103,40 @@ td button{
     border-radius: 4px;
     cursor: pointer;
 }
-img{
+#updateMenuImg h3{
+    font-weight: 600;
+    padding: 0px 0px 15px;
+    text-align: center;
+    color: #555;
+    font-style: italic;
+}
+#menu-table tbody label{
+    background: none;
+    border: none;
+    width: 50px;
+    height: 50px;
+    padding: 5px 5px 5px;
+}
+#modal-img{
+    max-width: 280px !important;
+    max-height: 280px !important;
+    object-fit: cover;
+    border-radius: 10px;
+}
+#menu-table img{
     height: 50px;
     width: 50px;
     object-fit: cover;
     border-radius: 10px;
     vertical-align: middle;
+    cursor: pointer;
 }
 .user img{
     height: 60px;
     width: 60px;
     border-radius: 100%;
+    vertical-align: middle;
+    object-fit: cover;
 }
 .fa-edit{
     color:#0000a5;

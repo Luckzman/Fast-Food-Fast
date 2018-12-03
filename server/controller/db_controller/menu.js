@@ -80,23 +80,67 @@ export const getMenuItem = (req, res) => {
 };
 
 /**
+ * @description This controller update a specific menu
+ * @param {object} req
+ * @param {object} res
+ * @returns {function} responseMsg
+ */
+export const updateMenu = (req, res) => {
+  if (req.authData.user_status !== 'admin') {
+    return responseMsg(res, 403, 'fail', 'admin access only');
+  }
+  const { id } = req.params;
+  const {
+    food_name, description, price, category,
+  } = req.body;
+  const query = 'UPDATE food_menus SET food_name = $1, description = $2, price = $3, category = $4 WHERE id = $5 RETURNING *';
+  const value = [food_name, description, price, category, id];
+  db.query(query, value)
+    .then(menu => menuResponseMsg(res, 200, 'success', 'menu update successful', menu.rows[0]))
+    .catch(error => res.status(400).json(error));
+};
+
+/**
  * @description This controller update the image of a specific menu
  * @param {object} req
  * @param {object} res
  * @returns {function} responseMsg
  */
-export const imageUpload = (req, res) => {
+export const updateMenuImg = (req, res) => {
   if (req.authData.user_status !== 'admin') {
     return responseMsg(res, 403, 'fail', 'admin access only');
   }
-  const { id } = req.body;
   if (!req.file) {
     return responseMsg(res, 400, 'fail', 'No image uploaded');
   }
   const image = `${req.file.destination}${req.file.filename}`;
   const query = 'UPDATE food_menus SET image = $1 WHERE id = $2 RETURNING *';
-  const value = [image, id];
+  const value = [image, req.params.id];
   db.query(query, value)
     .then(menuImage => responseMsg(res, 200, 'success', 'file upload successful', menuImage.rows[0]))
+    .catch(error => res.status(400).json(error));
+};
+
+
+/**
+ * @description This controller delete a specific menu
+ * @param {object} req
+ * @param {object} res
+ * @returns {function} responseMsg
+ */
+export const deleteMenu = (req, res) => {
+  if (req.authData.user_status !== 'admin') {
+    return responseMsg(res, 403, 'fail', 'admin access only');
+  }
+  const { id } = req.params;
+  const query = 'DELETE FROM food_menus WHERE id = $1';
+  const value = [id];
+  db.query(query, value)
+    .then((menu) => {
+      if (menu.rowCount < 1) {
+        return responseMsg(res, 200, 'fail', 'menu item does not exist');
+      }
+      return responseMsg(res, 200, 'success', 'menu item successfully deleted');
+    })
     .catch(error => res.status(400).json(error));
 };

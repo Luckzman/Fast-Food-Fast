@@ -14,8 +14,8 @@ const profileImg = document.getElementById('profile-img');
 const profileImgContainer = document.querySelector('.profile-img');
 const addressInput = document.getElementById('address');
 const cityInput = document.getElementById('city');
-const stateInput = document.getElementById('state');
-// const stateSelectOption = document.getElementById('state-input');
+// const stateInput = document.getElementById('state');
+const stateSelectOption = document.getElementById('state-input');
 const stateContainer = document.getElementById('state-container');
 const imgContainer = document.getElementById('img-input');
 const updateInfoBtn = document.getElementById('updateUserDetailsBtn');
@@ -75,8 +75,9 @@ const updateDeliveryLink = document.getElementById('updateDeliveryLink');
 updateDeliveryLink.addEventListener('click', () => {
   addressInput.removeAttribute('disabled');
   cityInput.removeAttribute('disabled');
+  stateSelectOption.removeAttribute('disabled');
   stateContainer.classList.remove('none');
-  if (!addressInput.value && !cityInput.value && !stateInput.value) {
+  if (!addressInput.value && !cityInput.value && !stateSelectOption.value) {
     stateInputContainer.classList.add('none');
     deliveryBtn.classList.remove('none');
   } else {
@@ -97,7 +98,7 @@ updatedeliveryBtn.addEventListener('click', (e) => {
     body: JSON.stringify({
       address: addressInput.value,
       city: cityInput.value,
-      // state: stateSelectOption.options[2].value,
+      state: stateSelectOption.selectedOptions[2].value,
     }),
   };
   fetch(url, options)
@@ -124,7 +125,7 @@ const userInfo = () => {
         profileImg.src = image;
         profileImgContainer.classList.remove('none');
       } else {
-        profileImg.src = '../images/reviewer.jpg';
+        profileImg.src = '../images/people-placeholder.png';
         profileImgContainer.classList.remove('none');
       }
     })
@@ -141,7 +142,7 @@ const userDeliveryInfo = () => {
       } = data.data;
       addressInput.value = address;
       cityInput.value = city;
-      stateInput.value = state;
+      stateSelectOption.selectedOptions[0].text = state;
     })
     .catch(error => console.log(error));
 };

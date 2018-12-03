@@ -12,14 +12,12 @@ const menuDetails = () => {
   const displayCart = document.querySelector('.cart');
   displayCart.addEventListener('click', () => {
     // console.log(localStorage.getItem('data'));
-    if (cart.length < 1) {
+    if ((cart.length < 1) && (localStorage.getItem('data'))) {
       alert('cart is empty');
-    }
-    if (localStorage.getItem('data')) {
+    } else if ((cart.length > 0) && (localStorage.getItem('data'))) {
       window.location = 'cart.html'; /* redirect to cart page */
     } else {
       alert('please login or sign up');
-      window.location = 'index.html#signin-modal';
     }
   });
 

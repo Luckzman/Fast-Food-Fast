@@ -63,7 +63,7 @@ const loginUser = (e) => {
       localStorage.setItem('data', JSON.stringify(data.token));
       if (data.user_status === 'admin') {
         alert('Admin login successful');
-        window.location = '../admin-control-panel.html';
+        window.location = '../admin.html';
         return window.location;
       } alert(message);
       window.location = '/catalog.html';
