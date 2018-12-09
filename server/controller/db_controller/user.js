@@ -1,5 +1,8 @@
+import cloudinary from 'cloudinary';
 import db from '../../model/db/config';
-import { responseMsg, orderResponseMsg, userResponseMsg } from '../../utils/helpers';
+import { responseMsg, orderResponseMsg, userResponseMsg, cloudinaryData } from '../../utils/helpers';
+
+cloudinary.config(cloudinaryData);
 
 /**
  * @description This controller to get user order history
@@ -59,12 +62,13 @@ export const updateUser = (req, res) => {
   if (!req.file) {
     return responseMsg(res, 400, 'fail', 'No image uploaded');
   }
-  console.log(req.file);
-  const image = `${req.file.destination}${req.file.filename}`;
-  const query = 'UPDATE users SET email = $1, phone = $2, image = $3, modified_date = $4 WHERE id = $5 RETURNING id, firstname, lastname, email, phone, image, modified_date, created_date';
-  const values = [email, phone, image, new Date(), req.authData.id];
-
-  db.query(query, values)
-    .then(user => userResponseMsg(res, 200, 'success', 'update request succesful', user.rows[0]))
-    .catch(error => res.status(400).json(error));
+  cloudinary.uploader.upload(req.file.path, (result) => {
+    const image = result.secure_url;
+    const query = 'UPDATE users SET email = $1, phone = $2, image = $3, modified_date = $4 WHERE id = $5 RETURNING id, firstname, lastname, email, phone, image, modified_date, created_date';
+    const values = [email, phone, image, new Date(), req.authData.id];
+  
+    db.query(query, values)
+      .then(user => userResponseMsg(res, 200, 'success', 'update request succesful', user.rows[0]))
+      .catch(error => res.status(400).json(error));
+  });
 };

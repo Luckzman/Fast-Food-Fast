@@ -40,13 +40,16 @@ CREATE TABLE food_menus(
 );
 CREATE TABLE reviews(
     id UUID PRIMARY KEY,
-    
-)
+    review VARCHAR NOT NULL,
+    rating INT NOT NULL,
+    created_date TIMESTAMPTZ,
+    food_menus_id UUID NOT NULL REFERENCES food_menus (id) ON DELETE CASCADE,
+    user_id UUID NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+);
 CREATE TABLE orders(
     id UUID PRIMARY KEY,
     cart JSON[],
-    additional_info VARCHAR, 
-    -- cart content contains array of json object of food_name and quantity
+    additional_info VARCHAR,
     order_status order_status DEFAULT 'new',
     created_date TIMESTAMPTZ,
     modified_date TIMESTAMPTZ,
