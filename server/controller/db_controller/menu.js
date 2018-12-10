@@ -181,3 +181,18 @@ export const createMenuReview = (req, res) => {
     })
     .catch(error => res.status(404).json(error));
 };
+
+
+/**
+ * @description This controller view reviews added to a specific menu
+ * @param {object} req
+ * @param {object} res
+ * @returns {function} responseMsg
+ */
+export const getMenuReviews = (req, res) => {
+  const query = 'SELECT * FROM reviews WHERE food_menus_id = $1';
+  const value = [req.params.id];
+  db.query(query, value)
+    .then(reviews => responseMsg(res, 200, 'success', 'user can only add review once', reviews.rows))
+    .catch(error => res.status(404).json(error));
+};
