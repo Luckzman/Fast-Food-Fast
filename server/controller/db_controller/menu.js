@@ -1,6 +1,15 @@
 import uuid from 'uuid';
+import cloudinary from 'cloudinary';
 import db from '../../model/db/config';
-import { responseMsg, menuResponseMsg } from '../../utils/helpers';
+import { responseMsg, menuResponseMsg, cloudinaryData } from '../../utils/helpers';
+
+/* cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+}); */
+
+cloudinary.config(cloudinaryData);
 
 /**
  * @description This controller create Menu Items
@@ -18,7 +27,6 @@ export const createMenu = (req, res) => {
   if (!req.file) {
     return responseMsg(res, 400, 'fail', 'No image uploaded');
   }
-  const image = `${req.file.destination}${req.file.filename}`;
   const query = 'SELECT * FROM food_menus WHERE food_name = $1';
   const value = [req.body.food_name];
   db.query(query, value)
@@ -26,19 +34,22 @@ export const createMenu = (req, res) => {
       if (menu.rows[0]) {
         return responseMsg(res, 400, 'fail', 'Menu is already created');
       }
-      const query2 = 'INSERT INTO food_menus(id, food_name, description, category, price, image, created_date,modified_date) VALUES($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *';
-      const values = [
-        uuid(),
-        food_name,
-        description,
-        category,
-        price,
-        image,
-        new Date(),
-        new Date()];
-      db.query(query2, values)
-        .then(menuItem => menuResponseMsg(res, 201, 'success', 'menu created', menuItem.rows[0]))
-        .catch(error => res.status(400).json({ error }));
+      cloudinary.uploader.upload(req.file.path, (result) => {
+        const image = result.secure_url;
+        const query2 = 'INSERT INTO food_menus(id, food_name, description, category, price, image, created_date,modified_date) VALUES($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *';
+        const values = [
+          uuid(),
+          food_name,
+          description,
+          category,
+          price,
+          image,
+          new Date(),
+          new Date()];
+        db.query(query2, values)
+          .then(menuItem => menuResponseMsg(res, 201, 'success', 'menu created', menuItem.rows[0]))
+          .catch(error => res.status(400).json({ error }));
+      });
     })
     .catch(error => res.status(404).json(error));
 };
@@ -113,12 +124,14 @@ export const updateMenuImg = (req, res) => {
   if (!req.file) {
     return responseMsg(res, 400, 'fail', 'No image uploaded');
   }
-  const image = `${req.file.destination}${req.file.filename}`;
-  const query = 'UPDATE food_menus SET image = $1 WHERE id = $2 RETURNING *';
-  const value = [image, req.params.id];
-  db.query(query, value)
-    .then(menuImage => responseMsg(res, 200, 'success', 'file upload successful', menuImage.rows[0]))
-    .catch(error => res.status(400).json(error));
+  cloudinary.uploader.upload(req.file.path, (result) => {
+    const image = result.secure_url;
+    const query = 'UPDATE food_menus SET image = $1 WHERE id = $2 RETURNING *';
+    const value = [image, req.params.id];
+    db.query(query, value)
+      .then(menuImage => responseMsg(res, 200, 'success', 'file upload successful', menuImage.rows[0]))
+      .catch(error => res.status(400).json(error));
+  });
 };
 
 
@@ -143,4 +156,43 @@ export const deleteMenu = (req, res) => {
       return responseMsg(res, 200, 'success', 'menu item successfully deleted');
     })
     .catch(error => res.status(400).json(error));
+};
+
+/**
+ * @description This controller add review to a specific menu
+ * @param {object} req
+ * @param {object} res
+ * @returns {function} responseMsg
+ */
+export const createMenuReview = (req, res) => {
+  const query = 'SELECT * FROM reviews WHERE food_menus_id = $1 AND user_id = $2';
+  const value = [req.params.id, req.authData.id];
+  db.query(query, value)
+    .then((menuReviews) => {
+      if (menuReviews.rowCount > 0) {
+        return responseMsg(res, 400, 'fail', 'user can only add review once');
+      }
+      const { review, rating } = req.body;
+      const query = 'INSERT INTO reviews(id, review, rating, food_menus_id, user_id) VALUES($1, $2, $3, $4, $5) RETURNING *';
+      const value = [uuid(), review, rating, req.params.id, req.authData.id];
+      db.query(query, value)
+        .then(reviews => responseMsg(res, 201, 'success', 'review successfully added', reviews.rows[0]))
+        .catch(error => res.status(400).json(error));
+    })
+    .catch(error => res.status(404).json(error));
+};
+
+
+/**
+ * @description This controller view reviews added to a specific menu
+ * @param {object} req
+ * @param {object} res
+ * @returns {function} responseMsg
+ */
+export const getMenuReviews = (req, res) => {
+  const query = 'SELECT * FROM reviews WHERE food_menus_id = $1';
+  const value = [req.params.id];
+  db.query(query, value)
+    .then(reviews => responseMsg(res, 200, 'success', 'user can only add review once', reviews.rows))
+    .catch(error => res.status(404).json(error));
 };

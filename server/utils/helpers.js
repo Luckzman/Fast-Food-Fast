@@ -1,5 +1,5 @@
 import multer from 'multer';
-
+// import cloudinary from 'cloudinary';
 
 export const responseMsg = (res, code, status, message, data) => res.status(code).json({
   status,
@@ -32,11 +32,8 @@ export const cartResponseMsg = (res, code, status, message, cart) => res.status(
 });
 
 const storage = multer.diskStorage({
-  destination: (req, file, next) => {
-    next(null, 'image/menu/');
-  },
   filename: (req, file, next) => {
-    next(null, `${Date.now()}-${file.originalname}`);
+    next(null, `${file.originalname}`);
   },
 });
 
@@ -57,3 +54,9 @@ const fileFilter = (req, file, next) => {
 export const upload = multer({ storage, limits: 1024 * 1024 * 5, fileFilter });
 
 export const profileImg = multer({ storage, limits: 1024 * 1024 * 2, fileFilter });
+
+export const cloudinaryData = {
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+};

@@ -135,6 +135,31 @@ export const menuValidator = (req, res, next) => {
 };
 
 /**
+ * @description This function validate reviews input fields
+ * @param {object} req
+ * @param {object} res
+ * @param {function} next
+ */
+export const reviewsValidator = (req, res, next) => {
+  const { review, rating } = req.body;
+
+  if (!review || !review.trim()) {
+    return responseMsg(res, 400, 'fail', 'Review is required');
+  }
+  if (!rating || !rating.trim()) {
+    return responseMsg(res, 400, 'fail', 'Rating is required');
+  }
+  if (!numChecker(rating)) {
+    return responseMsg(res, 400, 'fail', 'rating must be a number');
+  }
+  if (rating < 0 || rating > 10) {
+    return responseMsg(res, 400, 'fail', 'rating must be between 0 and 10');
+  }
+
+  next();
+};
+
+/**
  *@description This function validate order input fields
  * @param {object} req
  * @param {object} res
