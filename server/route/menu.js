@@ -3,7 +3,14 @@ import authChecker from '../utils/auth_checker';
 import { menuValidator, urlParamsChecker, reviewsValidator } from '../utils/validate';
 import { upload } from '../utils/helpers';
 import {
-  createMenu, getMenu, getMenuItem, updateMenu, updateMenuImg, deleteMenu, createMenuReview,
+  createMenu,
+  getMenu,
+  getMenuItem,
+  updateMenu,
+  updateMenuImg,
+  deleteMenu,
+  createMenuReview,
+  getMenuReviews,
 } from '../controller/db_controller/menu';
 
 const menuRouter = express.Router();
