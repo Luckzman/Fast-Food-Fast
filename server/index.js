@@ -13,11 +13,12 @@ const swaggerDoc = require('../swagger.json');
  */
 const app = express();
 app.use('/image/menu', express.static(path.join(__dirname, '../image/menu/')));
+app.use(express.static(path.join(__dirname, '../frontend')));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger('dev'));
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.options('*', cors());
 app.use('/', router);
 app.use('/api/v1/doc', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 app.use('*', (req, res) => responseMsg(res, 404, 'fail', 'wrong url entered'));
