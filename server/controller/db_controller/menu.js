@@ -1,15 +1,7 @@
 import uuid from 'uuid';
 import cloudinary from 'cloudinary';
 import db from '../../model/db/config';
-import { responseMsg, menuResponseMsg, cloudinaryData } from '../../utils/helpers';
-
-/* cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
-}); */
-
-cloudinary.config(cloudinaryData);
+import { responseMsg, menuResponseMsg } from '../../utils/helpers';
 
 /**
  * @description This controller create Menu Items
@@ -19,39 +11,23 @@ cloudinary.config(cloudinaryData);
  */
 export const createMenu = (req, res) => {
   const {
-    food_name, description, category, price,
+    food_name, description, category, price, image,
   } = req.body;
   if (req.authData.user_status !== 'admin') {
     return responseMsg(res, 403, 'fail', 'admin access only');
   }
-  if (!req.file) {
-    return responseMsg(res, 400, 'fail', 'No image uploaded');
-  }
   const query = 'SELECT * FROM food_menus WHERE food_name = $1';
   const value = [req.body.food_name];
-  db.query(query, value)
-    .then((menu) => {
-      if (menu.rows[0]) {
-        return responseMsg(res, 400, 'fail', 'Menu is already created');
-      }
-      cloudinary.uploader.upload(req.file.path, (result) => {
-        const image = result.secure_url;
-        const query2 = 'INSERT INTO food_menus(id, food_name, description, category, price, image, created_date,modified_date) VALUES($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *';
-        const values = [
-          uuid(),
-          food_name,
-          description,
-          category,
-          price,
-          image,
-          new Date(),
-          new Date()];
-        db.query(query2, values)
-          .then(menuItem => menuResponseMsg(res, 201, 'success', 'menu created', menuItem.rows[0]))
-          .catch(error => res.status(400).json({ error }));
-      });
-    })
-    .catch(error => res.status(404).json(error));
+  db.query(query, value).then((menu) => {
+    if (menu.rows[0]) {
+      return responseMsg(res, 400, 'fail', 'Menu is already created');
+    }
+    const query2 = 'INSERT INTO food_menus(id, food_name, description, category, price, image, created_date,modified_date) VALUES($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *';
+    const values = [uuid(), food_name, description, category, price, image, new Date(), new Date()];
+    db.query(query2, values)
+      .then(menuItem => menuResponseMsg(res, 201, 'success', 'menu created', menuItem.rows[0]))
+      .catch(error => res.status(400).json({ error }));
+  });
 };
 
 /**
@@ -134,7 +110,6 @@ export const updateMenuImg = (req, res) => {
   });
 };
 
-
 /**
  * @description This controller delete a specific menu
  * @param {object} req
@@ -182,7 +157,6 @@ export const createMenuReview = (req, res) => {
     .catch(error => res.status(404).json(error));
 };
 
-
 /**
  * @description This controller view reviews added to a specific menu
  * @param {object} req
@@ -190,7 +164,7 @@ export const createMenuReview = (req, res) => {
  * @returns {function} responseMsg
  */
 export const getMenuReviews = (req, res) => {
-  const query = 'SELECT * FROM reviews WHERE food_menus_id = $1';
+  const query = 'SELECT users.image, users.firstname, users.lastname, reviews.rating, reviews.review, menus.id FROM reviews INNER JOIN users ON reviews.user_id = users.id INNER JOIN food_menus ON reviews.food_menus_id = food_menus.id WHERE freviews.food_menus_id = $1';
   const value = [req.params.id];
   db.query(query, value)
     .then(reviews => responseMsg(res, 200, 'success', 'user can only add review once', reviews.rows))

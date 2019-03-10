@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FastFoodFast</title>
     <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">    <link rel="stylesheet" href="./../css/reset.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link rel="stylesheet" href="./../css/reset.css">
     <link rel="stylesheet" href="./../css/reuse.css">
     <link rel="stylesheet" href="./../css/main.css">
     <link rel="stylesheet" href="./../css/menu-details.css">
@@ -68,6 +69,30 @@
                     <p>Sem sed ac risus fringilla quis phasellus, vel et odio inceptos lorem wisi sapien. Leo quam justo, mauris non ante nec netus, condimentum nullam fusce.</p>
                 </section>
                 <section id="content2">
+                    <div class="add_review">
+                        <button id="addReview"><i class="fas fa-pen"></i> Add Review</button>
+                        <form action="">
+                            <div>
+                                <label for="review">Review</label>
+                                <textarea name="review" id="review" cols="50" rows="10"></textarea>
+                            </div>
+                            <div>
+                                <label for="rating">Rating</label>
+                                <input type="text" id="rating" name="rating" class="rating-input">
+                                <div class="outer-stars">
+                                    <div class="inner-stars"></div>
+                                </div>
+                                <!-- <div class="star-rating" id="rating">
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked unchecked"></span>
+                                    <span class="fa fa-star checked unchecked"></span>
+                                </div> -->
+                            </div>
+                            <input type="submit" value="submit">
+                        </form>
+                    </div><hr>
                     <div class="flex-row">
                         <div class="review-img">
                             <img src="./../images/review_pix_1.png" alt="reviewer's image">
@@ -79,7 +104,7 @@
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked checked"></span>
+                                <span class="fa fa-star checked unchecked"></span>
                             </div>
                             <p>Jerky jowl pork chop tongue, kielbasa shank venison. Capicola shank pig ribeye leberkas filet mignon brisket beef kevin tenderloin porchetta. Capicola fatback </p>
                         </div>
@@ -93,5 +118,6 @@
             <p>FastFoodFast &copy;2018 <span>All Rights Reserved</span></p>
         </div>
     </footer>
+    <script src=""></script>
 </body>
 </html>

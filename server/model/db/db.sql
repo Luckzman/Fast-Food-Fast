@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS db_fastfoodfast;
 CREATE DATABASE db_fastfoodfast;
 
-\c db_fastfoodfast;
+ db_fastfoodfast;
 
 CREATE TYPE order_status AS ENUM ('new', 'processing', 'cancelled', 'complete');
 CREATE TYPE user_status AS ENUM ('regular', 'admin');
@@ -44,7 +44,7 @@ CREATE TABLE reviews(
     rating INT NOT NULL,
     created_date TIMESTAMPTZ,
     food_menus_id UUID NOT NULL REFERENCES food_menus (id) ON DELETE CASCADE,
-    user_id UUID NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+    user_id UUID NOT NULL REFERENCES users (id) ON DELETE CASCADE
 );
 CREATE TABLE orders(
     id UUID PRIMARY KEY,

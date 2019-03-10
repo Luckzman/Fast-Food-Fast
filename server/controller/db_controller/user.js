@@ -1,6 +1,11 @@
 import cloudinary from 'cloudinary';
 import db from '../../model/db/config';
-import { responseMsg, orderResponseMsg, userResponseMsg, cloudinaryData } from '../../utils/helpers';
+import {
+  responseMsg,
+  orderResponseMsg,
+  userResponseMsg,
+  cloudinaryData,
+} from '../../utils/helpers';
 
 cloudinary.config(cloudinaryData);
 
@@ -17,7 +22,13 @@ export const getUserOrderHistory = (req, res) => {
       if (!order.rows[0]) {
         return responseMsg(res, 200, 'fail', 'No order has been placed');
       }
-      return orderResponseMsg(res, 200, 'success', 'User Order History Request Successful', order.rows);
+      return orderResponseMsg(
+        res,
+        200,
+        'success',
+        'User Order History Request Successful',
+        order.rows,
+      );
     })
     .catch(error => res.status(404).json(error));
 };
@@ -66,7 +77,6 @@ export const updateUser = (req, res) => {
     const image = result.secure_url;
     const query = 'UPDATE users SET email = $1, phone = $2, image = $3, modified_date = $4 WHERE id = $5 RETURNING id, firstname, lastname, email, phone, image, modified_date, created_date';
     const values = [email, phone, image, new Date(), req.authData.id];
-  
     db.query(query, values)
       .then(user => userResponseMsg(res, 200, 'success', 'update request succesful', user.rows[0]))
       .catch(error => res.status(400).json(error));
