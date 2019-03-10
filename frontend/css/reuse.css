@@ -47,6 +47,32 @@ nav .cart .notification{
 a{
     color: #f1f1f1;
 }
+.outer-stars{
+    position: relative;
+    display: inline-block;   
+}
+.outer-stars::before{
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 400;
+    content: "\f005 \f005 \f005 \f005 \f005";
+    font-size: 1.2rem;
+}
+.inner-stars{
+position: absolute;
+top: 0;
+left: 0;  
+color: #ffa500;
+}
+.inner-stars::before{
+font-family: 'Font Awesome 5 Free';
+font-weight: 900;
+content: "\f005 \f005";
+font-size: 1.2rem;
+}
+.checked{
+    color: #ffa500;
+}
+
 .checked{
     color: orange;
 }

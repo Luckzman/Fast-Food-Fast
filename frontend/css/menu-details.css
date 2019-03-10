@@ -190,7 +190,45 @@ input:checked + label {
 #tab2:checked ~ #content2 {
     display: block;
 }
-
+#content2 button{
+    padding: 10px 20px 10px 10px;
+    font-size: 1rem;
+    color: #008000;
+    border: solid 1px #008000;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px 2px #5f5f5f;
+    margin: 10px 0 30px;
+    cursor: pointer;
+}
+.add_review input[type='submit']{
+    display: block;
+    padding: 10px;
+    background-color: #008000;
+    color: #fff;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+.add_review button i{
+    padding: 0 10px;
+}
+.add_review div{
+    margin-bottom: 20px;
+}
+.add_review div label{
+    padding-top: 0px;
+    padding-right: 20px;
+    vertical-align: top;
+}
+.add_review div .star-rating{
+    display: inline-block;
+}
+#content2 .rating-input{
+    display: inline-block;
+    width: 50px;
+    padding: 10px;
+    border: 1px solid #aaa;
+    margin-right: 20px;
+}
 /* Implement Responsive Design Here! */
 @media only screen and (min-width: 760px){
     .order-row{
